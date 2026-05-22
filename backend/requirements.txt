@@ -9,7 +9,8 @@ motor==3.4.0
 # ── Search ────────────────────────────────────────────────
 elasticsearch==9.4.0
 
-# ── Google AI ─────────────────────────────────────────────
+# ── Google AI + ADK ───────────────────────────────────────
+google-adk==1.33.0
 google-genai==1.75.0
 google-auth==2.53.0
 google-api-python-client==2.196.0
@@ -20,3 +21,4 @@ python-dotenv==1.0.1
 httpx==0.28.1
 websockets==15.0.1
 requests==2.34.2
+mcp==1.27.1

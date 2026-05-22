@@ -3,10 +3,7 @@ services:
     name: google-hackathon
     runtime: python
     rootDir: backend
-    buildCommand: >
-      pip install --upgrade pip &&
-      pip install --prefer-binary --no-deps google-adk==1.33.0 &&
-      pip install --prefer-binary -r requirements.txt
+    buildCommand: pip install --upgrade pip && pip install --prefer-binary -r requirements.txt
     startCommand: uvicorn main:app --host 0.0.0.0 --port $PORT
     envVars:
       - key: PYTHON_VERSION
