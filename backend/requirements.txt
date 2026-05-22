@@ -1,24 +1,28 @@
 # ── Web server ────────────────────────────────────────────
-fastapi==0.136.1
-uvicorn[standard]==0.47.0
+fastapi>=0.111.0
+uvicorn[standard]>=0.30.0
+
+# Pin starlette <1.0 — google-adk 1.33.0 requires starlette<1,>=0.49.1
+# Without this pin, pip picks starlette 1.0.1 which breaks google-adk
+starlette>=0.49.1,<1.0.0
 
 # ── Database ──────────────────────────────────────────────
-pymongo==4.7.2
-motor==3.4.0
+pymongo>=4.7.0
+motor>=3.4.0
 
 # ── Search ────────────────────────────────────────────────
-elasticsearch==9.4.0
+elasticsearch>=8.13.0
 
 # ── Google AI + ADK ───────────────────────────────────────
-google-adk==1.33.0
-google-genai==1.75.0
-google-auth==2.53.0
-google-api-python-client==2.196.0
+google-adk>=1.30.0
+google-genai>=0.8.0
+google-auth>=2.0.0
+google-api-python-client>=2.100.0
 
 # ── Utilities ─────────────────────────────────────────────
-pydantic==2.13.4
-python-dotenv==1.0.1
-httpx==0.28.1
-websockets==15.0.1
-requests==2.34.2
-mcp==1.27.1
+pydantic>=2.0.0
+python-dotenv>=1.0.0
+httpx>=0.27.0
+websockets>=13.0,<16.0
+requests>=2.31.0
+mcp>=1.24.0
