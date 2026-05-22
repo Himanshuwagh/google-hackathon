@@ -38,7 +38,7 @@ app.add_middleware(
         "http://127.0.0.1:5175",
         "https://your-frontend-domain.com",
     ],
-    allow_origin_regex=r"^http://(localhost|127\.0\.0\.1):\d+$",
+    allow_origin_regex=r"^http://(localhost|127\.0\.0\.1):\d+$|^https://.*\.vercel\.app$",
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
