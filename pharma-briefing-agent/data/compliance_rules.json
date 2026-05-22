@@ -1,0 +1,66 @@
+[
+    {
+        "_id": "ucpmp_2024_s4_1",
+        "rule_id": "ucpmp_2024_s4_1",
+        "source": "UCPMP 2024 - Government of India, Dept of Pharmaceuticals",
+        "rule_text": "All promotional claims must be accurate, balanced, fair, objective and unambiguous and must be based on current evidence.",
+        "category": "general_claims",
+        "severity": "blocker"
+    },
+    {
+        "_id": "ucpmp_2024_s4_2",
+        "rule_id": "ucpmp_2024_s4_2",
+        "source": "UCPMP 2024 - Government of India, Dept of Pharmaceuticals",
+        "rule_text": "Claims about side effects must be presented in a fair and balanced manner, and should not minimize or omit relevant safety information.",
+        "category": "safety_claims",
+        "severity": "blocker"
+    },
+    {
+        "_id": "ucpmp_2024_s4_3",
+        "rule_id": "ucpmp_2024_s4_3",
+        "source": "UCPMP 2024 - Government of India, Dept of Pharmaceuticals",
+        "rule_text": "The word 'safe' must not be used without qualification. No drug is universally safe. Claims of safety must be accompanied by context and evidence of the specific population studied.",
+        "category": "safety_claims",
+        "severity": "blocker"
+    },
+    {
+        "_id": "ucpmp_2024_s4_4",
+        "rule_id": "ucpmp_2024_s4_4",
+        "source": "UCPMP 2024 - Government of India, Dept of Pharmaceuticals",
+        "rule_text": "Comparative claims against competitor products are prohibited unless supported by head-to-head clinical trial data published in a peer-reviewed journal.",
+        "category": "comparative_claims",
+        "severity": "blocker"
+    },
+    {
+        "_id": "ucpmp_2024_s5_1",
+        "rule_id": "ucpmp_2024_s5_1",
+        "source": "UCPMP 2024 - Government of India, Dept of Pharmaceuticals",
+        "rule_text": "No gifts, pecuniary advantages or benefits in kind may be offered or given to healthcare professionals. This includes travel, hospitality, cash, and any items of monetary value.",
+        "category": "gifts_hospitality",
+        "severity": "blocker"
+    },
+    {
+        "_id": "ucpmp_2024_s5_2",
+        "rule_id": "ucpmp_2024_s5_2",
+        "source": "UCPMP 2024 - Government of India, Dept of Pharmaceuticals",
+        "rule_text": "Free samples of drugs may only be provided to healthcare professionals who are qualified to prescribe such drugs, and must be marked 'Physician Sample - Not for Sale'.",
+        "category": "samples",
+        "severity": "warning"
+    },
+    {
+        "_id": "ucpmp_2024_s6_1",
+        "rule_id": "ucpmp_2024_s6_1",
+        "source": "UCPMP 2024 - Government of India, Dept of Pharmaceuticals",
+        "rule_text": "All promotional material must include: the brand name, generic name (INN), name of each active ingredient, approved indications, dosage and administration, side effects, contraindications, warnings, and the name and address of the manufacturer.",
+        "category": "labelling",
+        "severity": "blocker"
+    },
+    {
+        "_id": "ucpmp_2024_s7_1",
+        "rule_id": "ucpmp_2024_s7_1",
+        "source": "UCPMP 2024 - Government of India, Dept of Pharmaceuticals",
+        "rule_text": "Promotional claims must not use the term 'new' for any product that has been available in the market for more than 12 months.",
+        "category": "general_claims",
+        "severity": "warning"
+    }
+]

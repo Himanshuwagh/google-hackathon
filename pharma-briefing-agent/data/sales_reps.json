@@ -1,0 +1,26 @@
+[
+    {
+        "_id": "rep_rakesh_sharma",
+        "name": "Rakesh Sharma",
+        "email": "rakesh.sharma@pharmaco.in",
+        "google_calendar_id": "rakesh@pharmaco.in",
+        "territory": "Mumbai West",
+        "preferred_brief_length": "concise"
+    },
+    {
+        "_id": "rep_priya_nair",
+        "name": "Priya Nair",
+        "email": "priya.nair@pharmaco.in",
+        "google_calendar_id": "priya@pharmaco.in",
+        "territory": "Bangalore South",
+        "preferred_brief_length": "detailed"
+    },
+    {
+        "_id": "rep_arjun_desai",
+        "name": "Arjun Desai",
+        "email": "arjun.desai@pharmaco.in",
+        "google_calendar_id": "arjun@pharmaco.in",
+        "territory": "Delhi NCR",
+        "preferred_brief_length": "concise"
+    }
+]

@@ -1,0 +1,163 @@
+[
+    {
+        "_id": "brief_mtg001_example",
+        "meeting_id": "mtg_001",
+        "hcp_id": "hcp_ananya_mehta",
+        "rep_id": "rep_rakesh_sharma",
+        "generated_at": "2025-06-09T02:14:00Z",
+        "compliance_loops": 2,
+        "compliance_status": "passed",
+        "talking_points": [
+            "Dr. Mehta, Lisinopril's proven efficacy in the ALLHAT trial demonstrated sustained systolic BP reduction of 10mmHg over 8 weeks in a diverse patient population.",
+            "For heart failure patients post-MI, the SAVE trial showed ACE inhibitor therapy reduced cardiovascular mortality by 21% over 3.5 years (p=0.019) vs placebo.",
+            "Regarding cost-sensitive patients - Lisinopril is on the NLEM and our patient assistance program offers a 30% co-pay reduction for eligible patients.",
+            "A recent study (PMID: 38291045, J Hypertension, 2024) confirmed renal protective benefits in Indian diabetic hypertensive patients.",
+            "Once-daily dosing supports adherence - simplified regimen showed 15% higher compliance rates vs twice-daily alternatives in real-world Indian data."
+        ],
+        "supporting_evidence": [
+            {"source": "PubMed", "pmid": "38291045", "relevance": "Renal protection in Indian population"},
+            {"source": "ClinicalTrials", "nctId": "NCT05123456", "relevance": "India patient population"},
+            {"source": "OpenFDA", "drug_label": "Lisinopril", "relevance": "Official prescribing info"}
+        ],
+        "draft_email_subject": "Meeting Prep: Lisinopril Discussion - Dr. Ananya Mehta, June 10",
+        "draft_email_body": "Dear Dr. Mehta,\n\nThank you for taking the time to meet on June 10th at Kokilaben Hospital. I look forward to discussing how Lisinopril 10mg may benefit your hypertension and heart failure patients.\n\nI will bring updated clinical evidence including recent Indian-population renal outcome data and info about our patient assistance program.\n\nWarm regards,\nRakesh Sharma\nMedical Representative - PharmaCo India\nrakesh.sharma@pharmaco.in",
+        "calendar_event_id": null,
+        "gmail_draft_id": null
+    },
+    {
+        "_id": "brief_mtg_demo_multi_001_example",
+        "meeting_id": "mtg_demo_multi_001",
+        "hcp_id": "hcp_ananya_mehta",
+        "rep_id": "rep_rakesh_sharma",
+        "generated_at": "2025-06-09T03:10:00Z",
+        "compliance_loops": 1,
+        "compliance_status": "passed",
+        "drug_sections": [
+            {
+                "drug_id": "drug_lisinopril_10mg",
+                "drug_name": "Lisinopril 10mg",
+                "key_talking_points": [
+                    {
+                        "point": "For Dr. Mehta's diabetic hypertensive patients, cite the 2024 Indian multicenter study where Lisinopril 10mg reduced urinary albumin excretion by 34% vs placebo over 18 months (p<0.001).",
+                        "source": {
+                            "type": "InternalDoc",
+                            "doc_id": "cd_002",
+                            "title": "Cardivex India Trial Summary — EUCLID Renal Protection Data"
+                        },
+                        "specific_numbers": ["n=680", "34% reduction", "p<0.001", "18 months"]
+                    },
+                    {
+                        "point": "Address BP control with the ALLHAT evidence base: Lisinopril demonstrated sustained systolic BP reduction of 10mmHg over 8 weeks in a large outcomes trial population.",
+                        "source": {
+                            "type": "InternalDoc",
+                            "doc_id": "cd_001",
+                            "title": "Cardivex (Lisinopril 10mg) — Full Product Datasheet"
+                        },
+                        "specific_numbers": ["n=33,357", "10mmHg", "8 weeks"]
+                    },
+                    {
+                        "point": "For affordability concerns, position the patient assistance program factually: eligible BPL card holders can receive a 30% co-pay reduction.",
+                        "source": {
+                            "type": "CompetitiveIntel",
+                            "doc_id": "ci_001",
+                            "title": "Generic Lisinopril (Cipla/Sun/Lupin)"
+                        },
+                        "specific_numbers": ["30% co-pay reduction"]
+                    }
+                ],
+                "known_objections_responses": [
+                    {
+                        "objection": "prefers generic brands",
+                        "response": "Acknowledge that many generics share the same molecule, then differentiate with the India-focused renal evidence package, patient support, and education materials rather than claiming molecule superiority.",
+                        "competitive_context": "Generic manufacturers compete mainly on price and usually do not provide comparable physician education or patient support programs.",
+                        "sources": [
+                            {
+                                "type": "CompetitiveIntel",
+                                "doc_id": "ci_001",
+                                "title": "Generic Lisinopril (Cipla/Sun/Lupin)"
+                            }
+                        ]
+                    },
+                    {
+                        "objection": "cost-sensitive patients",
+                        "response": "Lead with eligibility and access: discuss the patient assistance program and keep the clinical conversation tied to evidence that matters for her diabetic hypertensive population.",
+                        "competitive_context": "Cardivex is priced above lowest-cost generics, so access support should be positioned transparently.",
+                        "sources": [
+                            {
+                                "type": "CompetitiveIntel",
+                                "doc_id": "ci_001",
+                                "title": "Generic Lisinopril (Cipla/Sun/Lupin)"
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "drug_id": "drug_amlodipine_5mg",
+                "drug_name": "Amlodipine 5mg",
+                "key_talking_points": [
+                    {
+                        "point": "Use Amlodipine as the second detail for patients needing additional BP control: the 5mg dose is associated with 12-15mmHg systolic BP reduction and 24-hour control due to its 30-50 hour half-life.",
+                        "source": {
+                            "type": "InternalDoc",
+                            "doc_id": "cd_003",
+                            "title": "Renova (Amlodipine 5mg) — Full Product Datasheet"
+                        },
+                        "specific_numbers": ["12-15mmHg", "5mg", "24-hour control", "30-50 hour half-life"]
+                    },
+                    {
+                        "point": "When discussing outcome evidence, ASCOT-BPLA reported a 23% reduction in fatal and non-fatal stroke and a 16% reduction in total cardiovascular events with amlodipine-based therapy vs atenolol-based therapy.",
+                        "source": {
+                            "type": "InternalDoc",
+                            "doc_id": "cd_004",
+                            "title": "Renova HF Outcomes Summary — ASCOT-BPLA South Asian Subgroup"
+                        },
+                        "specific_numbers": ["n=19,257", "23% reduction", "16% reduction"]
+                    },
+                    {
+                        "point": "For Indian/South Asian relevance, the ASCOT-BPLA South Asian subgroup analysis reported a 28% relative risk reduction in major adverse cardiac events.",
+                        "source": {
+                            "type": "InternalDoc",
+                            "doc_id": "cd_004",
+                            "title": "Renova HF Outcomes Summary — ASCOT-BPLA South Asian Subgroup"
+                        },
+                        "specific_numbers": ["n=1,240", "28% relative risk reduction"]
+                    }
+                ],
+                "known_objections_responses": [
+                    {
+                        "objection": "prefers generic brands",
+                        "response": "Keep the response evidence-led: acknowledge generic amlodipine availability, then focus on Renova's evidence package, 24-hour BP control message, and support materials.",
+                        "competitive_context": "The CCB market is commoditized, so the useful differentiator is evidence and support rather than unsupported superiority claims.",
+                        "sources": [
+                            {
+                                "type": "InternalDoc",
+                                "doc_id": "cd_003",
+                                "title": "Renova (Amlodipine 5mg) — Full Product Datasheet"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "cross_drug_notes": [
+            "Open with Lisinopril because the meeting objective centers on cost concerns and renal safety follow-up from the last visit.",
+            "Transition to Amlodipine only after confirming where Dr. Mehta sees uncontrolled BP or mixed cardiac patients who may need a CCB option.",
+            "Avoid presenting samples as an inducement; keep sample handling as a workflow reminder after the evidence discussion."
+        ],
+        "rep_workflow_notes": {
+            "objective": "Address cost concerns and position hypertension portfolio for mixed cardiac patients",
+            "sample_reminders": [
+                "If samples are provided, limit to 10 Lisinopril 10mg physician samples for a qualified prescriber, confirm packaging is marked 'Physician Sample - Not for Sale', and obtain mandatory documentation/signature."
+            ],
+            "follow_up_reminders": [
+                "Bring renal safety data for diabetic hypertensive patients.",
+                "Clarify patient assistance program eligibility criteria."
+            ]
+        },
+        "draft_email_subject": "Meeting Prep: Hypertension Portfolio Discussion - Dr. Ananya Mehta",
+        "draft_email_body": "Dear Dr. Mehta,\n\nThank you for meeting with me at Kokilaben Hospital. I look forward to discussing evidence relevant to your hypertensive and diabetic hypertensive patients, including renal outcome data and access considerations.\n\nI will also bring the follow-up information you requested on renal safety data and patient assistance program eligibility. If appropriate, I can complete the required documentation for physician samples in line with standard compliance requirements.\n\nWarm regards,\nRakesh Sharma\nMedical Representative - PharmaCo India\nrakesh.sharma@pharmaco.in",
+        "calendar_event_id": null,
+        "gmail_draft_id": null
+    }
+]

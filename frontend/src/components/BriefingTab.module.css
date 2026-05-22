@@ -1,0 +1,502 @@
+.briefingTab {
+  padding: 32px;
+  overflow-y: auto;
+  height: 100%;
+  padding-bottom: 120px;
+  transition: padding-right 200ms ease;
+}
+
+.briefingTab.chatOpen {
+  padding-right: 452px;
+}
+
+.stateMessage {
+  padding: 32px;
+  font-size: 18px;
+  color: var(--text-secondary);
+}
+
+.content {
+  max-width: 1000px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 48px;
+  padding-bottom: 64px;
+}
+
+.section {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.sectionHeader {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+}
+
+.sectionLabel {
+  font-size: 15px;
+  text-transform: uppercase;
+  color: var(--text-tertiary);
+  letter-spacing: 0.08em;
+  font-weight: 500;
+}
+
+.complianceNote {
+  font-size: 17px;
+  color: var(--status-ready);
+}
+
+/* Chips */
+.chipRow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.chip {
+  background-color: var(--bg-secondary);
+  font-size: 15px;
+  color: var(--text-secondary);
+  padding: 4px 8px;
+  border-radius: 4px;
+}
+
+.emptyPanel,
+.summaryBox {
+  background-color: var(--bg-card);
+  border: 1px solid var(--border-light);
+  border-radius: 6px;
+  color: var(--text-secondary);
+  font-size: 18px;
+  line-height: 1.6;
+  padding: 16px 20px;
+  white-space: pre-wrap;
+}
+
+/* Talking Points */
+.pointCard {
+  background-color: var(--bg-card);
+  border: 1px solid var(--border-light);
+  border-radius: 8px;
+  padding: 16px 24px;
+  display: flex;
+  gap: 16px;
+  box-shadow: var(--shadow-card);
+}
+
+.pointNumber {
+  font-size: 42px;
+  color: var(--border);
+  line-height: 1;
+  padding-top: 2px;
+}
+
+.pointContent {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.pointLabel {
+  color: var(--text-tertiary);
+  font-size: 14px;
+  font-weight: 500;
+  text-transform: uppercase;
+}
+
+.pointText {
+  font-size: 20px;
+  font-weight: 500;
+  color: var(--text-primary);
+  line-height: 1.5;
+}
+
+.pointSource {
+  font-size: 15px;
+  color: var(--text-tertiary);
+}
+
+.sourceLink {
+  font-size: 17px;
+  font-style: italic;
+  color: var(--text-secondary);
+  text-decoration: underline;
+  text-decoration-color: transparent;
+  transition: text-decoration-color 150ms ease;
+}
+
+.sourceLink:hover {
+  text-decoration-color: var(--text-secondary);
+}
+
+/* Objection Box */
+.objectionBox {
+  border: 1px dashed var(--status-processing);
+  background-color: var(--status-processing-bg);
+  padding: 16px 24px;
+  border-radius: 4px;
+  font-size: 19px;
+  color: var(--text-primary);
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+/* Action Strip */
+.actionStrip {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.actionChip {
+  background-color: var(--status-ready-bg);
+  color: var(--status-ready);
+  font-size: 15px;
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-weight: 500;
+}
+
+/* Evidence Grid */
+.evidenceGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 16px;
+}
+
+.evidenceCard {
+  background-color: var(--bg-card);
+  border: 1px solid var(--border-light);
+  border-radius: 4px;
+  padding: 12px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  transition: border-color 150ms ease, box-shadow 150ms ease;
+}
+
+.evidenceCard:hover {
+  border-color: var(--border);
+  box-shadow: var(--shadow-card);
+}
+
+.evidenceTitle {
+  font-size: 16px;
+  font-weight: 500;
+  color: var(--text-primary);
+}
+
+.evidenceSub {
+  font-size: 15px;
+  color: var(--text-secondary);
+}
+
+.evidenceDesc {
+  font-size: 16px;
+  color: var(--text-primary);
+  margin-top: 4px;
+}
+
+.evidenceMeta {
+  font-size: 15px;
+  color: var(--text-tertiary);
+  margin-top: auto;
+}
+
+/* Inline Tool Trace (Doctor Context) */
+.traceDetails {
+  background-color: var(--bg-card);
+  border: 1px solid var(--border-light);
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.traceSummary {
+  list-style: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 16px;
+  background-color: var(--bg-secondary);
+  user-select: none;
+}
+
+.traceDetails summary::-webkit-details-marker {
+  display: none;
+}
+
+.traceChevron {
+  width: 10px;
+  height: 10px;
+  border-right: 2px solid var(--text-tertiary);
+  border-bottom: 2px solid var(--text-tertiary);
+  transform: rotate(-45deg);
+  transition: transform 140ms ease;
+}
+
+.traceDetails[open] .traceChevron {
+  transform: rotate(45deg);
+}
+
+.traceSummaryText {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.traceSummaryHint {
+  margin-left: auto;
+  font-size: 13px;
+  color: var(--text-tertiary);
+}
+
+.traceInlinePanel {
+  padding: 0;
+}
+
+.closeBtn {
+  background: none;
+  border: none;
+  font-size: 24px;
+  color: var(--text-secondary);
+  cursor: pointer;
+  line-height: 1;
+}
+
+.closeBtn:hover {
+  color: var(--text-primary);
+}
+
+
+/* Minimal Ask Bar (Search-like) */
+.askBarContainer {
+  position: fixed;
+  left: var(--sidebar-width, 300px);
+  right: 176px;
+  bottom: 0;
+  padding: 20px 32px 24px;
+  display: flex;
+  justify-content: center;
+  background: linear-gradient(transparent, var(--bg-primary) 32%);
+  z-index: 10;
+  pointer-events: none;
+}
+
+.askForm {
+  display: flex;
+  background-color: var(--bg-card);
+  border-radius: 40px;
+  box-shadow: var(--shadow-elevated);
+  width: 100%;
+  max-width: 600px;
+  height: 56px;
+  overflow: hidden;
+  border: 1px solid var(--border-light);
+  align-items: stretch;
+  pointer-events: auto;
+}
+
+.askInput {
+  flex: 1;
+  border: none;
+  background: transparent;
+  padding: 0 24px;
+  font-family: inherit;
+  font-size: 16px;
+  color: var(--text-primary);
+  outline: none;
+}
+
+.askInput::placeholder {
+  color: var(--text-tertiary);
+}
+
+.askSubmitBtn {
+  background-color: var(--bg-dark);
+  color: var(--text-inverse);
+  width: 64px;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 0 40px 40px 0;
+  transition: background-color 0.2s;
+}
+
+.askSubmitBtn:hover:not(:disabled) {
+  background-color: var(--text-primary);
+}
+
+.askSubmitBtn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.askChatDock {
+  position: fixed;
+  top: 70px;
+  right: 0;
+  bottom: 0;
+  width: 420px;
+  background-color: var(--bg-card);
+  border-left: 1px solid var(--border);
+  box-shadow: -8px 0 28px rgba(26,25,22,0.12);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  z-index: 900;
+}
+
+.chatHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 16px;
+  padding: 20px 20px 16px;
+  border-bottom: 1px solid var(--border-light);
+  background-color: var(--bg-secondary);
+}
+
+.chatHeader h3 {
+  margin: 0;
+  font-size: 16px;
+  color: var(--text-primary);
+}
+
+.chatHeader p {
+  color: var(--text-secondary);
+  font-size: 13px;
+  margin-top: 2px;
+}
+
+.chatHeaderActions {
+  align-items: center;
+  display: flex;
+  gap: 8px;
+}
+
+.clearChatBtn {
+  color: var(--text-secondary);
+  font-size: 13px;
+  font-weight: 500;
+  padding: 4px 8px;
+}
+
+.clearChatBtn:hover {
+  color: var(--text-primary);
+}
+
+.chatMessages {
+  flex: 1;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  overflow-y: auto;
+}
+
+.messagePair {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.questionBlock {
+  background-color: var(--bg-secondary);
+  padding: 14px;
+  border-radius: 8px;
+  align-self: flex-end;
+  max-width: 88%;
+}
+
+.qLabel {
+  font-size: 12px;
+  text-transform: uppercase;
+  color: var(--text-tertiary);
+  margin-bottom: 4px;
+}
+
+.qText {
+  font-size: 16px;
+  color: var(--text-primary);
+}
+
+.answerBlock {
+  background-color: var(--bg-primary);
+  padding: 14px;
+  border-radius: 8px;
+  border: 1px solid var(--border-light);
+  align-self: flex-start;
+  max-width: 94%;
+}
+
+.aText {
+  font-size: 16px;
+  color: var(--text-primary);
+  line-height: 1.6;
+  white-space: pre-wrap;
+}
+
+.errorText {
+  color: var(--status-failed);
+}
+
+.sourcesLine {
+  font-size: 13px;
+  color: var(--text-tertiary);
+  margin-top: 12px;
+  border-top: 1px solid var(--border-light);
+  padding-top: 8px;
+}
+
+.thinkingText {
+  color: var(--text-tertiary);
+  font-style: italic;
+  font-size: 14px;
+  align-self: flex-start;
+}
+
+.emptyChat {
+  background-color: var(--bg-primary);
+  border: 1px solid var(--border-light);
+  border-radius: 8px;
+  color: var(--text-secondary);
+  font-size: 15px;
+  line-height: 1.5;
+  padding: 14px;
+}
+
+.chatDockInput {
+  background: linear-gradient(transparent, var(--bg-card) 28%);
+  padding: 18px 16px 20px;
+}
+
+.chatDockInput .askForm {
+  max-width: none;
+  width: 100%;
+}
+
+@media (max-width: 1199px) {
+  .askBarContainer {
+    left: 0;
+    right: 0;
+    padding-left: 20px;
+    padding-right: 144px;
+  }
+
+  .briefingTab.chatOpen {
+    padding-right: 32px;
+  }
+
+  .askChatDock {
+    width: min(420px, 100vw);
+  }
+}

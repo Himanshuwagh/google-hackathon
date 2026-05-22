@@ -1,0 +1,233 @@
+.sidebar {
+  width: var(--sidebar-width, 300px);
+  min-width: 260px;
+  max-width: 430px;
+  background-color: var(--bg-secondary);
+  border-right: 1px solid var(--border);
+  display: flex;
+  flex-direction: column;
+  flex-shrink: 0;
+  height: 100%;
+  position: relative;
+}
+
+.header {
+  padding: 24px 18px 16px;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: start;
+  column-gap: 14px;
+  row-gap: 6px;
+  border-bottom: 1px solid var(--border-light);
+}
+
+.headerCopy {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  min-width: 0;
+}
+
+.headerLabel {
+  font-size: 15px;
+  text-transform: uppercase;
+  color: var(--text-tertiary);
+  letter-spacing: 0.08em;
+  font-weight: 700;
+  line-height: 1.25;
+  overflow-wrap: anywhere;
+}
+
+.headerDate {
+  color: var(--text-secondary);
+  font-size: 15px;
+  line-height: 1.2;
+}
+
+.badge {
+  align-self: start;
+  background-color: var(--bg-card);
+  border: 1px solid var(--border-light);
+  border-radius: 999px;
+  color: var(--text-secondary);
+  font-size: 13px;
+  font-weight: 700;
+  line-height: 1;
+  padding: 7px 9px;
+  white-space: nowrap;
+}
+
+.meetingList {
+  flex: 1;
+  overflow-y: auto;
+}
+
+.emptyState,
+.errorState {
+  padding: 16px;
+  color: var(--text-secondary);
+  font-size: 15px;
+}
+
+.errorState {
+  color: var(--status-failed);
+}
+
+.meetingItem {
+  padding: 14px 18px;
+  cursor: pointer;
+  border-left: 2px solid transparent;
+  transition: background-color 150ms ease;
+}
+
+.meetingItem:hover {
+  background-color: rgba(255, 255, 255, 0.3);
+}
+
+.meetingItem.active {
+  border-left-color: var(--accent);
+  background-color: var(--bg-card);
+}
+
+.meetingHeader {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  margin-bottom: 6px;
+}
+
+.statusDot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  margin-top: 7px;
+}
+
+.status-ready { background-color: var(--status-ready); }
+.status-processing { background-color: var(--status-processing); }
+.status-waiting { background-color: var(--status-waiting); }
+.status-failed { background-color: var(--status-failed); }
+
+.doctorName {
+  font-size: 17px;
+  font-weight: 500;
+  color: var(--text-primary);
+  line-height: 1.25;
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+.meetingDetails {
+  font-size: 16px;
+  color: var(--text-secondary);
+  margin-left: 18px;
+  margin-bottom: 2px;
+  line-height: 1.35;
+  overflow-wrap: anywhere;
+}
+
+.hospital {
+  font-size: 15px;
+  color: var(--text-tertiary);
+  margin-left: 18px;
+  line-height: 1.4;
+  overflow-wrap: anywhere;
+}
+
+.separator {
+  height: 2px;
+  background-color: var(--border-light);
+  margin: 16px;
+}
+
+.addBtn {
+  align-items: center;
+  background: var(--bg-card);
+  border: 1px solid var(--border-light);
+  border-radius: 999px;
+  box-shadow: var(--shadow-card);
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+  margin: 0 18px 24px;
+  min-height: 42px;
+  text-align: center;
+  font-size: 16px;
+  color: var(--text-primary);
+  font-weight: 700;
+  padding: 0 16px;
+  transition: border-color 150ms ease, box-shadow 150ms ease, transform 150ms ease;
+}
+
+.addBtn span {
+  align-items: center;
+  background: var(--status-ready);
+  border-radius: 50%;
+  color: var(--text-inverse);
+  display: flex;
+  font-size: 18px;
+  height: 22px;
+  justify-content: center;
+  line-height: 1;
+  width: 22px;
+}
+
+.addBtn:hover {
+  border-color: var(--border);
+  box-shadow: var(--shadow-elevated);
+  transform: translateY(-1px);
+}
+
+.resizeHandle {
+  bottom: 0;
+  cursor: col-resize;
+  position: absolute;
+  right: -5px;
+  top: 0;
+  width: 10px;
+  z-index: 20;
+}
+
+.resizeHandle::after {
+  background-color: transparent;
+  bottom: 0;
+  content: '';
+  position: absolute;
+  right: 4px;
+  top: 0;
+  transition: background-color 150ms ease;
+  width: 2px;
+}
+
+.resizeHandle:hover::after,
+.resizeHandle:focus-visible::after {
+  background-color: var(--accent);
+}
+
+@media (max-width: 1199px) {
+  .sidebar {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    min-width: 0;
+    max-width: none;
+    height: auto;
+    max-height: 60vh;
+    border-right: none;
+    border-top: 1px solid var(--border);
+    transform: translateY(100%);
+    transition: transform 300ms ease;
+    z-index: 10;
+  }
+
+  .resizeHandle {
+    display: none;
+  }
+  
+  .sidebar.open {
+    transform: translateY(0);
+  }
+}

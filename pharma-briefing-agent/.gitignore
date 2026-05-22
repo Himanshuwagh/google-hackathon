@@ -1,0 +1,10 @@
+.env
+__pycache__/
+*.pyc
+token.json
+credentials.json
+.vscode/
+.idea/
+*.egg-info/
+dist/
+build/

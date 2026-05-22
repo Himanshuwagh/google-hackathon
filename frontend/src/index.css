@@ -1,0 +1,82 @@
+:root {
+  /* Backgrounds */
+  --bg-primary: #F7F5F0;      /* warm off-white — not blinding white */
+  --bg-secondary: #EFECE5;    /* slightly deeper warm grey */
+  --bg-card: #FAFAF7;         /* card surfaces */
+  --bg-dark: #1A1916;         /* dark panel (sidebar, agent log) */
+
+  /* Text */
+  --text-primary: #1A1916;    /* near-black, warm */
+  --text-secondary: #6B6860;  /* muted body text */
+  --text-tertiary: #9E9B94;   /* labels, timestamps */
+  --text-inverse: #F7F5F0;    /* text on dark backgrounds */
+
+  /* Status colours — muted, not garish */
+  --status-ready: #2D6A4F;       /* deep forest green */
+  --status-ready-bg: #D8EDDF;
+  --status-processing: #7B5E00;  /* amber-brown */
+  --status-processing-bg: #FDF0C0;
+  --status-failed: #8B2E2E;      /* deep red */
+  --status-failed-bg: #F5DADA;
+  --status-waiting: #4A4A4A;
+  --status-waiting-bg: #E8E8E5;
+
+  /* Accent */
+  --accent: #2D5A8E;          /* slate blue — trustworthy, not flashy */
+  --accent-light: #E8F0F8;
+
+  /* Borders */
+  --border: #DDD9CF;
+  --border-light: #E8E5DC;
+
+  /* Agent log specific */
+  --log-bg: #141412;
+  --log-text: #C8C4B8;
+  --log-accent: #6FCF97;      /* green terminal output */
+  --log-warn: #F2C94C;
+  --log-error: #EB5757;
+
+  /* Shadows */
+  --shadow-card: 0 1px 3px rgba(26,25,22,0.06), 0 1px 2px rgba(26,25,22,0.04);
+  --shadow-elevated: 0 4px 12px rgba(26,25,22,0.08);
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'DM Sans', sans-serif;
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3, h4, h5, h6, .serif {
+  font-family: 'DM Serif Display', serif;
+  font-weight: 400;
+}
+
+.mono {
+  font-family: 'JetBrains Mono', monospace;
+}
+
+button {
+  cursor: pointer;
+  border: none;
+  background: none;
+  font-family: inherit;
+  color: inherit;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+ul, ol {
+  list-style: none;
+}

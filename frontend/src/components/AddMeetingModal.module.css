@@ -1,0 +1,239 @@
+.overlay {
+  align-items: center;
+  background: rgba(26, 25, 22, 0.34);
+  display: flex;
+  inset: 0;
+  justify-content: center;
+  padding: 32px;
+  position: fixed;
+  z-index: 2000;
+}
+
+.modal {
+  background: var(--bg-card);
+  border: 1px solid var(--border-light);
+  border-radius: 8px;
+  box-shadow: 0 24px 80px rgba(26, 25, 22, 0.22);
+  max-height: min(820px, calc(100vh - 64px));
+  overflow-y: auto;
+  width: min(620px, 100%);
+}
+
+.header {
+  align-items: flex-start;
+  background: var(--bg-secondary);
+  border-bottom: 1px solid var(--border-light);
+  display: flex;
+  justify-content: space-between;
+  padding: 24px 28px 20px;
+}
+
+.eyebrow {
+  color: var(--text-tertiary);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.header h2 {
+  color: var(--text-primary);
+  font-size: 30px;
+  line-height: 1.1;
+  margin-top: 4px;
+}
+
+.closeBtn {
+  color: var(--text-secondary);
+  font-size: 26px;
+  line-height: 1;
+  padding: 2px 4px;
+}
+
+.closeBtn:hover {
+  color: var(--text-primary);
+}
+
+.errorBanner,
+.loadingState {
+  margin: 20px 28px 0;
+}
+
+.errorBanner {
+  background: var(--status-failed-bg);
+  border: 1px solid rgba(139, 46, 46, 0.22);
+  border-radius: 8px;
+  color: var(--status-failed);
+  font-size: 15px;
+  padding: 12px 14px;
+}
+
+.loadingState {
+  color: var(--text-secondary);
+  font-size: 16px;
+  padding: 24px 0 28px;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 24px 28px 28px;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
+
+.field span {
+  color: var(--text-primary);
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.field input,
+.field select {
+  background: var(--bg-primary);
+  border: 1px solid var(--border-light);
+  border-radius: 8px;
+  color: var(--text-primary);
+  font: inherit;
+  font-size: 16px;
+  min-height: 46px;
+  outline: none;
+  padding: 0 13px;
+  transition: border-color 150ms ease, box-shadow 150ms ease;
+  width: 100%;
+}
+
+.field select {
+  appearance: auto;
+}
+
+.field input:focus,
+.field select:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px rgba(45, 90, 142, 0.12);
+}
+
+.field em {
+  color: var(--status-failed);
+  font-size: 13px;
+  font-style: normal;
+}
+
+.contextCard {
+  background: var(--bg-primary);
+  border: 1px solid var(--border-light);
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  margin-top: -6px;
+  padding: 12px 14px;
+}
+
+.contextCard strong {
+  color: var(--text-primary);
+  font-size: 15px;
+}
+
+.contextCard span {
+  color: var(--text-secondary);
+  font-size: 14px;
+}
+
+.inlineGrid {
+  display: grid;
+  gap: 14px;
+  grid-template-columns: 1fr 1fr;
+}
+
+.durationRow {
+  display: grid;
+  gap: 8px;
+  grid-template-columns: repeat(6, 1fr);
+}
+
+.durationBtn {
+  background: var(--bg-primary);
+  border: 1px solid var(--border-light);
+  border-radius: 8px;
+  color: var(--text-secondary);
+  font-size: 14px;
+  font-weight: 700;
+  min-height: 40px;
+  transition: background-color 150ms ease, border-color 150ms ease, color 150ms ease;
+}
+
+.durationBtn:hover:not(:disabled),
+.durationActive {
+  background: var(--accent-light);
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+.footer {
+  align-items: center;
+  border-top: 1px solid var(--border-light);
+  display: flex;
+  gap: 12px;
+  justify-content: flex-end;
+  margin-top: 6px;
+  padding-top: 18px;
+}
+
+.secondaryBtn,
+.primaryBtn {
+  border-radius: 999px;
+  font-size: 15px;
+  font-weight: 700;
+  min-height: 44px;
+  padding: 0 18px;
+}
+
+.secondaryBtn {
+  color: var(--text-secondary);
+}
+
+.secondaryBtn:hover:not(:disabled) {
+  color: var(--text-primary);
+}
+
+.primaryBtn {
+  background: var(--status-ready);
+  color: var(--text-inverse);
+  min-width: 128px;
+}
+
+.primaryBtn:disabled,
+.secondaryBtn:disabled,
+.durationBtn:disabled,
+.field input:disabled,
+.field select:disabled {
+  cursor: not-allowed;
+  opacity: 0.58;
+}
+
+@media (max-width: 640px) {
+  .overlay {
+    align-items: flex-end;
+    padding: 0;
+  }
+
+  .modal {
+    border-radius: 8px 8px 0 0;
+    max-height: 92vh;
+    width: 100%;
+  }
+
+  .inlineGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .durationRow {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}

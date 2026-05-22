@@ -1,0 +1,23 @@
+[
+    {
+        "doc_type": "competitor_brief",
+        "drug_id": "drug_lisinopril_10mg",
+        "tags": ["lisinopril", "ace-inhibitor", "competitive-intel"],
+        "title": "Competitive Intelligence - ACE Inhibitor Market India",
+        "content": "COMPETITIVE LANDSCAPE: ACE Inhibitors in India (2024-25). Market leader: Generic Enalapril (40% market share by volume) due to lowest price point (Rs 1.5/tablet). Lisinopril generic competition: 15+ manufacturers including Cipla, Sun Pharma, Lupin, Dr Reddy's. Price range: Rs 2-8 per tablet depending on brand. Our differentiation vs competitors: (1) Once-daily dosing (Enalapril is twice-daily). (2) Patient assistance program — 30% co-pay reduction for BPL card holders. (3) Stronger diabetic nephropathy data (EUCLID trial). (4) Physician education program with CME credits. Key threat: ARBs (Losartan, Telmisartan) gaining market share due to no-cough advantage. ARB market growing at 12% CAGR vs ACE inhibitor 4% CAGR. Counter-strategy: Position Lisinopril on outcomes data + renal protection + cost advantage vs ARBs."
+    },
+    {
+        "doc_type": "competitor_brief",
+        "drug_id": "drug_metformin_500mg",
+        "tags": ["metformin", "biguanide", "competitive-intel"],
+        "title": "Competitive Intelligence - Diabetes First-Line Market India",
+        "content": "COMPETITIVE LANDSCAPE: Metformin Market in India (2024-25). Metformin is the undisputed first-line therapy — 90%+ of T2DM patients start on Metformin. Over 100 manufacturers in India. Price: Rs 0.50-3 per 500mg tablet. Key competition is NOT other molecules but other Metformin brands. Major competitors: Glycomet (USV), Glucophage (Merck), Obimet (Zydus). Our differentiation: (1) Extended-release formulation with better GI tolerability. (2) Combination packs with DPP-4 inhibitors. (3) Patient compliance program with pill organizer kits. (4) Doctor education on CV outcomes (UKPDS 34 data). Emerging threats: SGLT2 inhibitors (Dapagliflozin) showing CV and renal benefits. Some endocrinologists starting SGLT2 as first-line in high-CV-risk patients. Counter: Metformin's 60-year safety record, lowest cost, ICMR guideline first-line status."
+    },
+    {
+        "doc_type": "competitor_brief",
+        "drug_id": "drug_amlodipine_5mg",
+        "tags": ["amlodipine", "calcium-channel-blocker", "competitive-intel"],
+        "title": "Competitive Intelligence - CCB Market India",
+        "content": "COMPETITIVE LANDSCAPE: Calcium Channel Blockers in India (2024-25). Amlodipine dominates the CCB market with 75%+ share. Major competitors: Amlong (Micro Labs), Amlokind (Mankind), Stamlo (Dr Reddy's). Price: Rs 1.5-6 per 5mg tablet. Highly commoditized. Our differentiation: (1) Brand trust and physician loyalty program. (2) ALLHAT + ASCOT data positioning for evidence-based prescribing. (3) Combination with ACE inhibitor — reduces edema while adding renal benefit. Key threat: Cilnidipine gaining share — marketed as 'no edema CCB' (N+L type). Cilnidipine growing at 25% CAGR. Heavily promoted by Ajanta, Glenmark. Counter: Cilnidipine has limited long-term outcomes data vs Amlodipine's ALLHAT evidence."
+    }
+]

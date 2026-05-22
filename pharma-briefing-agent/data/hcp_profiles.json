@@ -1,0 +1,287 @@
+[
+    {
+        "_id": "hcp_ananya_mehta",
+        "name": "Dr. Ananya Mehta",
+        "specialty": "Cardiology",
+        "hospital": "Kokilaben Dhirubhai Ambani Hospital",
+        "city": "Mumbai",
+        "preferred_language": "English",
+        "prescribing_focus": [
+            "hypertension",
+            "heart failure"
+        ],
+        "known_objections": [
+            "prefers generic brands",
+            "cost-sensitive patients"
+        ],
+        "last_visited": "2025-03-15",
+        "relationship_score": 7
+    },
+    {
+        "_id": "hcp_vikram_patel",
+        "name": "Dr. Vikram Patel",
+        "specialty": "Cardiology",
+        "hospital": "Fortis Hospital Mulund",
+        "city": "Mumbai",
+        "preferred_language": "Hindi",
+        "prescribing_focus": [
+            "coronary artery disease",
+            "hypertension",
+            "dyslipidemia"
+        ],
+        "known_objections": [
+            "wants large-scale Indian trial data",
+            "skeptical of branded generics"
+        ],
+        "last_visited": "2025-04-20",
+        "relationship_score": 5
+    },
+    {
+        "_id": "hcp_sunita_reddy",
+        "name": "Dr. Sunita Reddy",
+        "specialty": "Endocrinology",
+        "hospital": "Manipal Hospital Bangalore",
+        "city": "Bangalore",
+        "preferred_language": "English",
+        "prescribing_focus": [
+            "type 2 diabetes",
+            "diabetic nephropathy",
+            "thyroid disorders"
+        ],
+        "known_objections": [
+            "insists on HbA1c reduction data",
+            "prefers combination therapy"
+        ],
+        "last_visited": "2025-02-28",
+        "relationship_score": 8
+    },
+    {
+        "_id": "hcp_rajesh_kumar",
+        "name": "Dr. Rajesh Kumar",
+        "specialty": "Nephrology",
+        "hospital": "AIIMS New Delhi",
+        "city": "New Delhi",
+        "preferred_language": "English",
+        "prescribing_focus": [
+            "chronic kidney disease",
+            "diabetic nephropathy",
+            "hypertension in CKD"
+        ],
+        "known_objections": [
+            "needs renal dosing adjustment data",
+            "cautious about hyperkalemia risk"
+        ],
+        "last_visited": "2025-01-10",
+        "relationship_score": 6
+    },
+    {
+        "_id": "hcp_meera_iyer",
+        "name": "Dr. Meera Iyer",
+        "specialty": "General Medicine",
+        "hospital": "Apollo Hospitals Chennai",
+        "city": "Chennai",
+        "preferred_language": "English",
+        "prescribing_focus": [
+            "hypertension",
+            "type 2 diabetes",
+            "metabolic syndrome"
+        ],
+        "known_objections": [
+            "wants simple once-daily regimens",
+            "price-conscious for rural patients"
+        ],
+        "last_visited": "2025-05-01",
+        "relationship_score": 9
+    },
+    {
+        "_id": "hcp_amit_singh",
+        "name": "Dr. Amit Singh",
+        "specialty": "Cardiology",
+        "hospital": "Jupiter Hospital Pune",
+        "city": "Pune",
+        "preferred_language": "English",
+        "prescribing_focus": [
+            "hypertension",
+            "dyslipidemia"
+        ],
+        "known_objections": [
+            "prefers newer ARBs",
+            "concerns over cost"
+        ],
+        "last_visited": "2025-05-10",
+        "relationship_score": 6
+    },
+    {
+        "_id": "hcp_neha_gupta",
+        "name": "Dr. Neha Gupta",
+        "specialty": "Endocrinology",
+        "hospital": "Apollo Hospitals Hyderabad",
+        "city": "Hyderabad",
+        "preferred_language": "English",
+        "prescribing_focus": [
+            "type 2 diabetes",
+            "obesity"
+        ],
+        "known_objections": [
+            "needs cardiovascular safety data"
+        ],
+        "last_visited": "2025-04-15",
+        "relationship_score": 8
+    },
+    {
+        "_id": "hcp_ramesh_iyer",
+        "name": "Dr. Ramesh Iyer",
+        "specialty": "General Medicine",
+        "hospital": "Global Hospitals Chennai",
+        "city": "Chennai",
+        "preferred_language": "English",
+        "prescribing_focus": [
+            "metabolic syndrome",
+            "hypertension"
+        ],
+        "known_objections": [
+            "wants patient compliance materials"
+        ],
+        "last_visited": "2025-03-20",
+        "relationship_score": 7
+    },
+    {
+        "_id": "hcp_kavita_reddy",
+        "name": "Dr. Kavita Reddy",
+        "specialty": "Nephrology",
+        "hospital": "KIMS Secunderabad",
+        "city": "Hyderabad",
+        "preferred_language": "English",
+        "prescribing_focus": [
+            "chronic kidney disease"
+        ],
+        "known_objections": [
+            "hyperkalemia risk with ACEi"
+        ],
+        "last_visited": "2025-05-01",
+        "relationship_score": 5
+    },
+    {
+        "_id": "hcp_suresh_joshi",
+        "name": "Dr. Suresh Joshi",
+        "specialty": "Cardiology",
+        "hospital": "Deenanath Mangeshkar Pune",
+        "city": "Pune",
+        "preferred_language": "Marathi",
+        "prescribing_focus": [
+            "heart failure",
+            "hypertension"
+        ],
+        "known_objections": [
+            "prefers native language materials"
+        ],
+        "last_visited": "2025-02-14",
+        "relationship_score": 9
+    },
+    {
+        "_id": "hcp_sarah_chen",
+        "name": "Dr. Sarah Chen",
+        "specialty": "Medical Oncology",
+        "hospital": "Tata Memorial Centre",
+        "city": "Mumbai",
+        "preferred_language": "English",
+        "prescribing_focus": [
+            "EGFR-mutated NSCLC",
+            "clinical trial enrollment",
+            "precision oncology"
+        ],
+        "known_objections": [
+            "rejects marketing language — demands peer-reviewed data",
+            "requires P-values and confidence intervals for all efficacy claims",
+            "skeptical of oral TKIs without head-to-head IV comparison"
+        ],
+        "preferred_brief_style": "scientific_deep_dive",
+        "last_visited": "2026-05-04",
+        "relationship_score": 6
+    },
+    {
+        "_id": "hcp_marcus_thorne",
+        "name": "Dr. Marcus Thorne",
+        "specialty": "Primary Care / Family Medicine",
+        "hospital": "Lilavati Hospital",
+        "city": "Mumbai",
+        "preferred_language": "English",
+        "prescribing_focus": [
+            "type 2 diabetes",
+            "obesity",
+            "hypertension",
+            "high-volume chronic disease management"
+        ],
+        "known_objections": [
+            "extremely time-constrained — max 5 minutes per rep visit",
+            "patients resist injectables",
+            "needs simple dosing and PAP paperwork pre-filled"
+        ],
+        "preferred_brief_style": "three_bullet_summary",
+        "last_visited": "2026-05-04",
+        "relationship_score": 7
+    },
+    {
+        "_id": "hcp_emily_rodriguez",
+        "name": "Dr. Emily Rodriguez",
+        "specialty": "Endocrinology",
+        "hospital": "Manipal Hospital",
+        "city": "Bangalore",
+        "preferred_language": "English",
+        "prescribing_focus": [
+            "type 2 diabetes",
+            "GLP-1 therapy",
+            "obesity management"
+        ],
+        "known_objections": [
+            "currently prescribes MetaboMax to ~80% of eligible T2DM patients",
+            "values oral convenience over injectable efficacy",
+            "nurses influence formulary preference toward MetaboMax"
+        ],
+        "preferred_brief_style": "objection_handling",
+        "last_visited": "2026-05-06",
+        "relationship_score": 5
+    },
+    {
+        "_id": "hcp_james_wilson",
+        "name": "Dr. James Wilson",
+        "specialty": "Cardiology",
+        "hospital": "Max Super Speciality Hospital",
+        "city": "New Delhi",
+        "preferred_language": "English",
+        "prescribing_focus": [
+            "ASCVD risk reduction",
+            "heart failure with preserved EF",
+            "diabetic cardiomyopathy"
+        ],
+        "known_objections": [
+            "highly risk-averse — prioritizes safety over efficacy",
+            "concerned about GLP-1 GI adverse events and pancreatitis signals",
+            "requires explicit GI management and titration protocols before prescribing"
+        ],
+        "preferred_brief_style": "safety_focused",
+        "last_visited": "2026-05-05",
+        "relationship_score": 4
+    },
+    {
+        "_id": "hcp_michael_foster",
+        "name": "Dr. Michael Foster",
+        "specialty": "Medical Oncology",
+        "hospital": "Fortis Memorial Research Institute",
+        "city": "Gurgaon",
+        "preferred_language": "English",
+        "prescribing_focus": [
+            "community NSCLC",
+            "palliative-quality regimens",
+            "IV chemotherapy familiarity"
+        ],
+        "known_objections": [
+            "long-standing VenaChemo prescriber — trusts infusion-center monitoring",
+            "worried oral OncoTarget reduces visit adherence visibility",
+            "concerned about rash management without infusion-suite nursing support"
+        ],
+        "preferred_brief_style": "quality_of_life_comparison",
+        "last_visited": "2026-05-07",
+        "relationship_score": 5
+    }
+]

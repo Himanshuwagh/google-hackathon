@@ -1,0 +1,138 @@
+[
+    {
+        "doc_id": "cd_001",
+        "doc_type": "datasheet",
+        "drug_id": "drug_lisinopril_10mg",
+        "therapeutic_area": "cardiology",
+        "title": "Cardivex (Lisinopril 10mg) — Full Product Datasheet",
+        "content": "Cardivex (Lisinopril 10mg) is a once-daily ACE inhibitor indicated for hypertension, chronic heart failure post-MI, and diabetic nephropathy. In the landmark ALLHAT trial (n=33,357), Lisinopril demonstrated sustained systolic BP reduction of 10mmHg over 8 weeks with a favorable safety profile. Cardivex offers the convenience of once-daily dosing, improving patient adherence by 15% compared to twice-daily ACE inhibitors in real-world Indian data. Common side effects include dry cough (5-10%), dizziness (5%), and headache (5%); serious adverse events such as angioedema occur in less than 1% of patients.",
+        "tags": [
+            "lisinopril",
+            "ace-inhibitor",
+            "hypertension",
+            "heart-failure",
+            "datasheet"
+        ]
+    },
+    {
+        "doc_id": "cd_002",
+        "doc_type": "trial_summary",
+        "drug_id": "drug_lisinopril_10mg",
+        "therapeutic_area": "cardiology",
+        "title": "Cardivex India Trial Summary — EUCLID Renal Protection Data",
+        "content": "A 2024 multicenter study across 12 Indian hospitals (PMID: 38291045) confirmed Cardivex's renal protective benefits in 680 diabetic hypertensive patients over 18 months. Patients on Lisinopril 10mg showed a 34% reduction in urinary albumin excretion vs placebo (p<0.001), with significantly slower eGFR decline in the treatment arm. Subgroup analysis showed particular efficacy in South Asian patients with baseline eGFR 45-60 mL/min, a population historically underrepresented in Western trials. The trial supports Cardivex as a preferred ACE inhibitor for Indian patients with comorbid diabetes and early-stage nephropathy.",
+        "tags": [
+            "lisinopril",
+            "ace-inhibitor",
+            "renal-protection",
+            "india-trial",
+            "nephropathy"
+        ]
+    },
+    {
+        "doc_id": "cd_003",
+        "doc_type": "datasheet",
+        "drug_id": "drug_amlodipine_5mg",
+        "therapeutic_area": "cardiology",
+        "title": "Renova (Amlodipine 5mg) — Full Product Datasheet",
+        "content": "Renova (Amlodipine 5mg) is a long-acting dihydropyridine calcium channel blocker indicated for hypertension, chronic stable angina, and vasospastic angina. The ALLHAT trial demonstrated systolic BP reduction of 12-15mmHg at the 5mg dose, with true 24-hour blood pressure control due to its 30-50 hour half-life. Renova requires no dose adjustment in renal impairment, making it suitable for patients with comorbid CKD. Dose-dependent peripheral edema (2-10%) is the most common side effect; combination with an ACE inhibitor reduces edema incidence while providing additive BP lowering.",
+        "tags": [
+            "amlodipine",
+            "calcium-channel-blocker",
+            "hypertension",
+            "angina",
+            "datasheet"
+        ]
+    },
+    {
+        "doc_id": "cd_004",
+        "doc_type": "trial_summary",
+        "drug_id": "drug_amlodipine_5mg",
+        "therapeutic_area": "cardiology",
+        "title": "Renova HF Outcomes Summary — ASCOT-BPLA South Asian Subgroup",
+        "content": "In the ASCOT-BPLA trial (n=19,257), amlodipine-based therapy reduced fatal and non-fatal stroke by 23% and total cardiovascular events by 16% compared to atenolol-based therapy. The South Asian subgroup analysis (n=1,240) showed even greater benefit, with a 28% relative risk reduction in major adverse cardiac events. Renova's combination with Cardivex (Lisinopril) demonstrated superior BP control with reduced peripheral edema rates (3.1% vs 8.7% for Amlodipine alone). This combination is particularly relevant for Indian cardiologists managing patients with resistant hypertension requiring dual-agent therapy.",
+        "tags": [
+            "amlodipine",
+            "calcium-channel-blocker",
+            "heart-failure",
+            "ASCOT",
+            "south-asian"
+        ]
+    },
+    {
+        "doc_id": "cd_005",
+        "doc_type": "field_sop",
+        "drug_id": "drug_lisinopril_10mg",
+        "therapeutic_area": "cardiology",
+        "title": "Physician Sample Handling SOP — Lisinopril 10mg",
+        "content": "Physician samples for Lisinopril 10mg may be provided only to healthcare professionals who are qualified to prescribe the medicine. Each sample pack must be clearly marked 'Physician Sample - Not for Sale'. Representatives must record the drug name, quantity, batch details, recipient prescriber, date, and mandatory acknowledgement/signature in the sample distribution log. Samples must never be positioned as gifts, rewards, hospitality, or inducements to prescribe. For the Dr. Ananya Mehta June portfolio visit, the planned sample quantity is 10 packs of Lisinopril 10mg, subject to normal documentation and compliance checks.",
+        "tags": [
+            "lisinopril",
+            "physician-samples",
+            "field-sop",
+            "compliance",
+            "sample-log"
+        ]
+    },
+    {
+        "doc_id": "cd_cardioglyde_001",
+        "doc_type": "datasheet",
+        "drug_id": "drug_cardioglyde",
+        "therapeutic_area": "metabolics",
+        "title": "CardioGlyde (Glydepeptide) — GLP-1 Product Datasheet",
+        "content": "CardioGlyde is a once-weekly subcutaneous GLP-1 receptor agonist for type 2 diabetes, weight management in adults with T2DM and obesity, and cardiovascular risk reduction in T2DM with established ASCVD. Storage: 2-8°C cold chain until first use; may be kept at room temperature up to 30°C for 28 days after first puncture. Key efficacy: HbA1c reduction 1.8% at 40 weeks; mean weight loss 6.8 kg at 52 weeks. Key safety: GI events manageable with 4-week titration (nausea 18%, discontinuation 4.2%). Differentiators vs oral MetaboMax: superior weight loss, stronger MACE reduction (26% in SURPASS-CARDIO), weekly vs daily dosing.",
+        "tags": [
+            "cardioglyde",
+            "glp-1",
+            "datasheet",
+            "metabolics",
+            "cardiology"
+        ]
+    },
+    {
+        "doc_id": "cd_cardioglyde_002",
+        "doc_type": "trial_summary",
+        "drug_id": "drug_cardioglyde",
+        "therapeutic_area": "metabolics",
+        "title": "SURPASS-CARDIO — CardioGlyde Cardiovascular Outcomes Trial Summary",
+        "content": "SURPASS-CARDIO randomized 9,840 adults with T2DM and established ASCVD to CardioGlyde vs standard of care. Primary endpoint MACE (CV death, non-fatal MI, non-fatal stroke): HR 0.74 (95% CI 0.61-0.89), p=0.002. Secondary: weight loss 6.8 kg vs 1.2 kg (p<0.001). GI management: dose escalation 0.25 mg x4 weeks then 0.5 mg; nausea peak week 4-6 then declines. Positioning vs MetaboMax: efficacy and CV outcomes trump oral convenience for non-responders and high-risk ASCVD patients.",
+        "tags": [
+            "cardioglyde",
+            "surpass-cardio",
+            "mace",
+            "trial",
+            "cardiology"
+        ]
+    },
+    {
+        "doc_id": "cd_oncotarget_001",
+        "doc_type": "datasheet",
+        "drug_id": "drug_oncotarget",
+        "therapeutic_area": "oncology",
+        "title": "OncoTarget (Targotinib) — EGFR TKI Product Datasheet",
+        "content": "OncoTarget is an oral once-daily EGFR tyrosine kinase inhibitor for locally advanced or metastatic NSCLC with EGFR exon 19 deletion or L858R mutation. Median PFS 18.9 months vs 10.4 months with platinum chemotherapy (HR 0.46, p<0.001). ORR 76% vs 31%. No infusion center required. Rash: Grade 3+ in 8.2%; dose modification per protocol. Differentiators vs VenaChemo IV: superior PFS, markedly lower Grade 3+ neuropathy and fatigue, improved patient-reported quality of life.",
+        "tags": [
+            "oncotarget",
+            "egfr",
+            "datasheet",
+            "oncology",
+            "nsclc"
+        ]
+    },
+    {
+        "doc_id": "cd_oncotarget_002",
+        "doc_type": "trial_summary",
+        "drug_id": "drug_oncotarget",
+        "therapeutic_area": "oncology",
+        "title": "ONCO-STAR Phase III — OncoTarget vs Chemotherapy Full Statistical Summary",
+        "content": "ONCO-STAR (n=512): OncoTarget vs platinum doublet in treatment-naive EGFR+ NSCLC. Primary endpoint PFS: 18.9 vs 10.4 months, HR 0.46 (95% CI 0.35-0.60), p<0.001. Subgroup exon 19 deletion: median PFS 20.1 months (HR 0.44, p<0.001); L858R: 17.4 months (HR 0.48, p<0.001). ORR 76% vs 31% (p<0.001). QOL: FACT-L +8.4 vs chemotherapy arm at week 24. For academic KOLs: emphasize mutation-subgroup hazard ratios; for community oncologists: emphasize toxicity and infusion-burden reduction vs VenaChemo.",
+        "tags": [
+            "oncotarget",
+            "onco-star",
+            "pfs",
+            "egfr",
+            "trial",
+            "subgroup"
+        ]
+    }
+]

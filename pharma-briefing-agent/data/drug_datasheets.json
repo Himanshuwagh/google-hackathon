@@ -1,0 +1,23 @@
+[
+    {
+        "doc_type": "drug_datasheet",
+        "drug_id": "drug_lisinopril_10mg",
+        "tags": ["lisinopril", "ace-inhibitor", "cardiology", "nephrology"],
+        "title": "Lisinopril 10mg — Product Datasheet",
+        "content": "LISINOPRIL TABLETS USP 10mg. Generic Name: Lisinopril. Drug Class: ACE Inhibitor. Mechanism: Inhibits angiotensin-converting enzyme, reducing angiotensin II formation, leading to decreased aldosterone secretion, vasodilation, and reduced blood pressure. Indications: (1) Hypertension - may be used alone or with other antihypertensives. (2) Heart Failure - adjunctive therapy with diuretics and digitalis. (3) Acute Myocardial Infarction - hemodynamically stable patients within 24 hours. (4) Diabetic Nephropathy - reduction of urinary albumin excretion in Type 1 and Type 2 diabetics. Dosage: Initial 10mg once daily. May titrate to 20-40mg/day. Max 80mg/day. Renal impairment: CrCl 10-30 mL/min start at 5mg; CrCl <10 start at 2.5mg. Contraindications: Hypersensitivity to ACE inhibitors, history of angioedema, bilateral renal artery stenosis, pregnancy (Category D). Warnings: Hyperkalemia risk especially with K-sparing diuretics. Monitor renal function and serum potassium. Risk of angioedema higher in Black patients. Common side effects: Cough (5-10%), dizziness (5%), headache (5%), hypotension (1-3%). Serious: Angioedema (<1%), acute renal failure, hyperkalemia. Key trials: ALLHAT (2002), ATLAS (1999), GISSI-3 (1994), EUCLID (1997). Storage: 20-25C. Protect from moisture."
+    },
+    {
+        "doc_type": "drug_datasheet",
+        "drug_id": "drug_metformin_500mg",
+        "tags": ["metformin", "biguanide", "endocrinology", "diabetes"],
+        "title": "Metformin Hydrochloride 500mg — Product Datasheet",
+        "content": "METFORMIN HYDROCHLORIDE TABLETS 500mg. Generic Name: Metformin HCl. Drug Class: Biguanide. Mechanism: Decreases hepatic glucose production, decreases intestinal absorption of glucose, improves insulin sensitivity by increasing peripheral glucose uptake and utilization. Indications: (1) Type 2 Diabetes Mellitus as monotherapy or combination. (2) First-line per ADA/EASD/ICMR guidelines. Dosage: Initial 500mg twice daily with meals. Titrate by 500mg weekly. Max 2550mg/day. Renal: Contraindicated if eGFR <30. Caution eGFR 30-45. Contraindications: eGFR <30, metabolic acidosis, diabetic ketoacidosis, severe hepatic impairment, excessive alcohol intake, use of iodinated contrast (hold 48h). Warnings: Lactic acidosis - rare but potentially fatal. Risk increases with renal impairment, hepatic disease, sepsis, dehydration. Monitor B12 levels long-term. Common side effects: GI symptoms (diarrhea 20-30%, nausea 10-15%, abdominal pain, metallic taste). Key trials: UKPDS 34 (1998), DPP (2002). Storage: 20-25C. Protect from light."
+    },
+    {
+        "doc_type": "drug_datasheet",
+        "drug_id": "drug_amlodipine_5mg",
+        "tags": ["amlodipine", "calcium-channel-blocker", "cardiology"],
+        "title": "Amlodipine Besylate 5mg — Product Datasheet",
+        "content": "AMLODIPINE BESYLATE TABLETS 5mg. Generic Name: Amlodipine. Drug Class: Calcium Channel Blocker (Dihydropyridine). Mechanism: Inhibits calcium ion influx across cell membranes selectively, with greater effect on vascular smooth muscle than cardiac muscle. Indications: (1) Hypertension. (2) Chronic stable angina. (3) Vasospastic (Prinzmetal) angina. Dosage: Initial 5mg once daily. May increase to 10mg. Elderly/hepatic impairment: start 2.5mg. No renal dose adjustment required. Contraindications: Severe aortic stenosis, cardiogenic shock, unstable angina (other than Prinzmetal). Warnings: Worsening angina or acute MI can develop on starting, especially with severe obstructive CAD. Peripheral edema (dose-dependent 2-10%). Common side effects: Edema (2-10%), dizziness (1-3%), flushing (1-3%), palpitations (1-4%), fatigue. Key trials: ALLHAT (2002), ASCOT-BPLA (2005), CAMELOT (2004). Storage: 15-30C. Dispense in tight containers."
+    }
+]

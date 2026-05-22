@@ -1,0 +1,565 @@
+.overlay {
+  position: fixed;
+  top: 70px;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(26, 25, 22, 0.35);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  z-index: 40;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 18px 24px;
+  overflow: auto;
+  animation: fadeIn 0.16s ease-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideDown {
+  from { opacity: 0; transform: translateY(-12px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.calendarContainer {
+  position: relative;
+  width: min(1180px, 100%);
+  max-height: calc(100vh - 106px);
+  background-color: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  box-shadow: 0 18px 50px rgba(26, 25, 22, 0.2);
+  padding: 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  animation: slideDown 0.2s ease-out forwards;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 18px;
+}
+
+.headerLeft {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  min-width: 0;
+}
+
+.currentDateBox {
+  width: 64px;
+  height: 70px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background-color: var(--bg-primary);
+  flex: 0 0 auto;
+}
+
+.currentMonthName {
+  font-size: 12px;
+  color: var(--text-secondary);
+  font-weight: 700;
+  line-height: 1;
+}
+
+.currentDayNum {
+  font-size: 28px;
+  line-height: 1.15;
+  color: var(--accent);
+  font-weight: 700;
+}
+
+.currentWeekday {
+  font-size: 10px;
+  line-height: 1;
+  color: var(--text-tertiary);
+  font-weight: 800;
+}
+
+.monthSelector {
+  min-width: 0;
+}
+
+.eyebrow {
+  display: block;
+  font-size: 12px;
+  color: var(--text-tertiary);
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin-bottom: 2px;
+}
+
+.monthSelector h2 {
+  font-size: 28px;
+  line-height: 1.1;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin: 0;
+  font-family: 'DM Sans', sans-serif;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.headerRight {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.iconButton,
+.closeButton {
+  width: 38px;
+  height: 38px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-secondary);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  background-color: var(--bg-primary);
+}
+
+.iconButton:hover,
+.closeButton:hover {
+  color: var(--text-primary);
+  background-color: var(--bg-secondary);
+}
+
+.navGroup {
+  display: flex;
+  align-items: center;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  overflow: hidden;
+  background-color: var(--bg-primary);
+}
+
+.navGroup .iconButton {
+  border: none;
+  border-radius: 0;
+  background-color: transparent;
+}
+
+.todayButton {
+  height: 38px;
+  min-width: 68px;
+  padding: 0 14px;
+  border-left: 1px solid var(--border);
+  border-right: 1px solid var(--border);
+  color: var(--text-primary);
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.todayButton:hover {
+  background-color: var(--bg-secondary);
+}
+
+.viewSwitch {
+  display: inline-grid;
+  grid-template-columns: repeat(3, minmax(62px, 1fr));
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  overflow: hidden;
+  background-color: var(--bg-primary);
+}
+
+.viewButton {
+  height: 38px;
+  padding: 0 12px;
+  color: var(--text-secondary);
+  font-size: 14px;
+  font-weight: 700;
+  border-right: 1px solid var(--border);
+}
+
+.viewButton:last-child {
+  border-right: none;
+}
+
+.viewButton:hover {
+  background-color: var(--bg-secondary);
+  color: var(--text-primary);
+}
+
+.viewButtonActive {
+  color: var(--text-inverse);
+  background-color: var(--accent);
+}
+
+.viewButtonActive:hover {
+  color: var(--text-inverse);
+  background-color: var(--accent);
+}
+
+.gridContainer {
+  flex: 1;
+  min-height: 0;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  overflow: hidden;
+  background-color: var(--bg-primary);
+}
+
+.daysHeader {
+  display: grid;
+  grid-template-columns: repeat(7, minmax(0, 1fr));
+  height: 38px;
+  border-bottom: 1px solid var(--border);
+  background-color: var(--bg-secondary);
+}
+
+.dayHeaderCell {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-secondary);
+  font-size: 13px;
+  font-weight: 700;
+  border-right: 1px solid var(--border);
+}
+
+.dayHeaderCell:last-child {
+  border-right: none;
+}
+
+.daysGrid {
+  display: grid;
+  grid-template-columns: repeat(7, minmax(0, 1fr));
+  grid-template-rows: repeat(6, minmax(82px, 1fr));
+  height: min(66vh, 600px);
+}
+
+.weekGrid {
+  display: grid;
+  grid-template-columns: repeat(7, minmax(0, 1fr));
+  height: min(42vh, 320px);
+}
+
+.weekHeader {
+  display: grid;
+  grid-template-columns: repeat(7, minmax(0, 1fr));
+  min-height: 46px;
+  border-bottom: 1px solid var(--border);
+  background-color: var(--bg-secondary);
+}
+
+.weekHeaderCell {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  border-right: 1px solid var(--border);
+  color: var(--text-secondary);
+  font-size: 13px;
+  font-weight: 800;
+}
+
+.weekHeaderCell:last-child {
+  border-right: none;
+}
+
+.weekHeaderCell strong {
+  color: var(--text-primary);
+  font-size: 16px;
+}
+
+.dayCell {
+  min-width: 0;
+  min-height: 0;
+  border-right: 1px solid var(--border-light);
+  border-bottom: 1px solid var(--border-light);
+  padding: 8px;
+  cursor: pointer;
+  transition: background-color 0.16s, box-shadow 0.16s;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  text-align: left;
+  background-color: var(--bg-card);
+  overflow: hidden;
+}
+
+.dayCell:nth-child(7n) {
+  border-right: none;
+}
+
+.dayCell:hover {
+  background-color: #ffffff;
+  box-shadow: inset 0 0 0 1px rgba(45, 90, 142, 0.18);
+}
+
+.selectedDay {
+  background-color: var(--accent-light);
+  box-shadow: inset 0 0 0 2px var(--accent);
+}
+
+.notCurrentMonth {
+  background-color: var(--bg-secondary);
+}
+
+.notCurrentMonth .dayNumber {
+  color: var(--text-tertiary);
+}
+
+.dayNumberContainer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  flex: 0 0 auto;
+}
+
+.dayNumber {
+  width: 28px;
+  height: 28px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 999px;
+  color: var(--text-primary);
+  font-size: 14px;
+  font-weight: 800;
+}
+
+.todayNumber {
+  background-color: var(--accent);
+  color: var(--text-inverse);
+}
+
+.meetingCount {
+  min-width: 22px;
+  height: 22px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 999px;
+  background-color: var(--bg-secondary);
+  color: var(--text-secondary);
+  font-size: 12px;
+  font-weight: 800;
+}
+
+.eventsContainer {
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  overflow: hidden;
+}
+
+.eventPill {
+  min-width: 0;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 0 7px;
+  border-radius: 4px;
+  background-color: #e6eff8;
+  color: var(--accent);
+  font-size: 12px;
+  line-height: 1;
+  font-weight: 700;
+  overflow: hidden;
+}
+
+.compactEventPill {
+  height: 28px;
+}
+
+.eventTitle {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.eventTime {
+  flex: 0 0 auto;
+  color: var(--text-secondary);
+  font-size: 11px;
+  font-weight: 800;
+}
+
+.moreEvents {
+  color: var(--text-secondary);
+  font-size: 12px;
+  font-weight: 700;
+  padding-left: 2px;
+}
+
+.dayAgenda {
+  min-height: min(42vh, 360px);
+  display: grid;
+  grid-template-columns: 104px minmax(0, 1fr);
+}
+
+.agendaDateRail {
+  border-right: 1px solid var(--border);
+  background-color: var(--bg-secondary);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  color: var(--text-secondary);
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+.agendaDateRail strong {
+  color: var(--accent);
+  font-size: 44px;
+  line-height: 1;
+}
+
+.agendaList {
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  overflow: auto;
+}
+
+.agendaItem {
+  width: 100%;
+  min-height: 70px;
+  display: grid;
+  grid-template-columns: 92px minmax(0, 1fr);
+  gap: 14px;
+  align-items: center;
+  padding: 12px 14px;
+  border: 1px solid var(--border-light);
+  border-radius: 6px;
+  background-color: var(--bg-card);
+  text-align: left;
+}
+
+.agendaItem:hover {
+  border-color: var(--accent);
+  background-color: #ffffff;
+}
+
+.agendaTime {
+  color: var(--accent);
+  font-size: 14px;
+  font-weight: 800;
+}
+
+.agendaContent {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.agendaContent strong {
+  color: var(--text-primary);
+  font-size: 16px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.agendaContent span {
+  color: var(--text-secondary);
+  font-size: 13px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.emptyAgenda {
+  height: 100%;
+  min-height: 180px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-secondary);
+  font-size: 15px;
+  border: 1px dashed var(--border);
+  border-radius: 6px;
+}
+
+@media (max-width: 900px) {
+  .overlay {
+    padding: 12px;
+  }
+
+  .calendarContainer {
+    max-height: calc(100vh - 94px);
+    padding: 14px;
+  }
+
+  .header {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .headerRight,
+  .navGroup,
+  .viewSwitch {
+    width: 100%;
+  }
+
+  .viewSwitch {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .closeButton {
+    position: absolute;
+    top: 14px;
+    right: 14px;
+  }
+
+  .monthSelector h2 {
+    font-size: 22px;
+    padding-right: 42px;
+  }
+
+  .daysGrid {
+    height: 62vh;
+    grid-template-rows: repeat(6, minmax(72px, 1fr));
+  }
+
+  .dayCell {
+    padding: 6px;
+  }
+
+  .eventPill {
+    height: 8px;
+    padding: 0;
+  }
+
+  .eventPill span {
+    display: none;
+  }
+
+  .dayAgenda {
+    grid-template-columns: 1fr;
+  }
+
+  .agendaDateRail {
+    min-height: 74px;
+    border-right: none;
+    border-bottom: 1px solid var(--border);
+  }
+}

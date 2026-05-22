@@ -1,0 +1,1375 @@
+[
+    {
+        "_id": "mtg_rakesh_001",
+        "rep_id": "rep_rakesh_sharma",
+        "hcp_id": "hcp_ananya_mehta",
+        "drug_ids": [
+            "drug_cardioglyde"
+        ],
+        "detailing_sequence": [
+            "drug_cardioglyde"
+        ],
+        "objective": "Detail cardioglyde and address objection: 'prefers generic brands'",
+        "planned_samples": [
+            {
+                "drug_id": "drug_cardioglyde",
+                "quantity": 5
+            }
+        ],
+        "pending_action_items": [
+            "Share recent clinical trial summaries for cardioglyde",
+            "Follow up on patient feedback on samples"
+        ],
+        "meeting_date": "2026-05-01T10:00:00Z",
+        "location": "Kokilaben Dhirubhai Ambani Hospital, Mumbai - OPD Consultation Room",
+        "duration_mins": 25,
+        "status": "scheduled",
+        "agent_triggered": false,
+        "briefing_id": null,
+        "created_at": "2026-05-18T17:48:07.189790Z"
+    },
+    {
+        "_id": "mtg_rakesh_002",
+        "rep_id": "rep_rakesh_sharma",
+        "hcp_id": "hcp_vikram_patel",
+        "drug_ids": [
+            "drug_oncotarget"
+        ],
+        "detailing_sequence": [
+            "drug_oncotarget"
+        ],
+        "objective": "Detail oncotarget and address objection: 'wants large-scale Indian trial data'",
+        "planned_samples": [
+            {
+                "drug_id": "drug_oncotarget",
+                "quantity": 10
+            }
+        ],
+        "pending_action_items": [
+            "Share recent clinical trial summaries for oncotarget",
+            "Follow up on patient feedback on samples"
+        ],
+        "meeting_date": "2026-05-04T10:00:00Z",
+        "location": "Fortis Hospital Mulund, Mumbai - OPD Consultation Room",
+        "duration_mins": 20,
+        "status": "scheduled",
+        "agent_triggered": false,
+        "briefing_id": null,
+        "created_at": "2026-05-18T17:48:07.189967Z"
+    },
+    {
+        "_id": "mtg_rakesh_003",
+        "rep_id": "rep_rakesh_sharma",
+        "hcp_id": "hcp_sarah_chen",
+        "drug_ids": [
+            "drug_oncotarget",
+            "drug_cardioglyde"
+        ],
+        "detailing_sequence": [
+            "drug_oncotarget",
+            "drug_cardioglyde"
+        ],
+        "objective": "Detail oncotarget, cardioglyde and address objection: 'rejects marketing language \u2014 demands peer-reviewed data'",
+        "planned_samples": [
+            {
+                "drug_id": "drug_oncotarget",
+                "quantity": 10
+            },
+            {
+                "drug_id": "drug_cardioglyde",
+                "quantity": 10
+            }
+        ],
+        "pending_action_items": [
+            "Share recent clinical trial summaries for oncotarget, cardioglyde",
+            "Follow up on patient feedback on samples"
+        ],
+        "meeting_date": "2026-05-05T10:00:00Z",
+        "location": "Tata Memorial Centre, Mumbai - OPD Consultation Room",
+        "duration_mins": 20,
+        "status": "scheduled",
+        "agent_triggered": false,
+        "briefing_id": null,
+        "created_at": "2026-05-18T17:48:07.189979Z"
+    },
+    {
+        "_id": "mtg_rakesh_004",
+        "rep_id": "rep_rakesh_sharma",
+        "hcp_id": "hcp_marcus_thorne",
+        "drug_ids": [
+            "drug_amlodipine_5mg"
+        ],
+        "detailing_sequence": [
+            "drug_amlodipine_5mg"
+        ],
+        "objective": "Detail amlodipine 5mg and address objection: 'extremely time-constrained \u2014 max 5 minutes per rep visit'",
+        "planned_samples": [
+            {
+                "drug_id": "drug_amlodipine_5mg",
+                "quantity": 10
+            }
+        ],
+        "pending_action_items": [
+            "Share recent clinical trial summaries for amlodipine 5mg",
+            "Follow up on patient feedback on samples"
+        ],
+        "meeting_date": "2026-05-06T10:00:00Z",
+        "location": "Lilavati Hospital, Mumbai - OPD Consultation Room",
+        "duration_mins": 30,
+        "status": "scheduled",
+        "agent_triggered": false,
+        "briefing_id": null,
+        "created_at": "2026-05-18T17:48:07.189992Z"
+    },
+    {
+        "_id": "mtg_rakesh_005",
+        "rep_id": "rep_rakesh_sharma",
+        "hcp_id": "hcp_ananya_mehta",
+        "drug_ids": [
+            "drug_oncotarget",
+            "drug_cardioglyde"
+        ],
+        "detailing_sequence": [
+            "drug_oncotarget",
+            "drug_cardioglyde"
+        ],
+        "objective": "Detail oncotarget, cardioglyde and address objection: 'prefers generic brands'",
+        "planned_samples": [
+            {
+                "drug_id": "drug_oncotarget",
+                "quantity": 5
+            },
+            {
+                "drug_id": "drug_cardioglyde",
+                "quantity": 5
+            }
+        ],
+        "pending_action_items": [
+            "Share recent clinical trial summaries for oncotarget, cardioglyde",
+            "Follow up on patient feedback on samples"
+        ],
+        "meeting_date": "2026-05-07T10:00:00Z",
+        "location": "Kokilaben Dhirubhai Ambani Hospital, Mumbai - OPD Consultation Room",
+        "duration_mins": 30,
+        "status": "scheduled",
+        "agent_triggered": false,
+        "briefing_id": null,
+        "created_at": "2026-05-18T17:48:07.190000Z"
+    },
+    {
+        "_id": "mtg_rakesh_006",
+        "rep_id": "rep_rakesh_sharma",
+        "hcp_id": "hcp_vikram_patel",
+        "drug_ids": [
+            "drug_metformin_500mg",
+            "drug_lisinopril_10mg"
+        ],
+        "detailing_sequence": [
+            "drug_metformin_500mg",
+            "drug_lisinopril_10mg"
+        ],
+        "objective": "Detail metformin 500mg, lisinopril 10mg and address objection: 'wants large-scale Indian trial data'",
+        "planned_samples": [
+            {
+                "drug_id": "drug_metformin_500mg",
+                "quantity": 10
+            },
+            {
+                "drug_id": "drug_lisinopril_10mg",
+                "quantity": 10
+            }
+        ],
+        "pending_action_items": [
+            "Share recent clinical trial summaries for metformin 500mg, lisinopril 10mg",
+            "Follow up on patient feedback on samples"
+        ],
+        "meeting_date": "2026-05-08T10:00:00Z",
+        "location": "Fortis Hospital Mulund, Mumbai - OPD Consultation Room",
+        "duration_mins": 20,
+        "status": "scheduled",
+        "agent_triggered": false,
+        "briefing_id": null,
+        "created_at": "2026-05-18T17:48:07.190009Z"
+    },
+    {
+        "_id": "mtg_rakesh_007",
+        "rep_id": "rep_rakesh_sharma",
+        "hcp_id": "hcp_sarah_chen",
+        "drug_ids": [
+            "drug_oncotarget",
+            "drug_amlodipine_5mg"
+        ],
+        "detailing_sequence": [
+            "drug_oncotarget",
+            "drug_amlodipine_5mg"
+        ],
+        "objective": "Detail oncotarget, amlodipine 5mg and address objection: 'rejects marketing language \u2014 demands peer-reviewed data'",
+        "planned_samples": [
+            {
+                "drug_id": "drug_oncotarget",
+                "quantity": 5
+            },
+            {
+                "drug_id": "drug_amlodipine_5mg",
+                "quantity": 10
+            }
+        ],
+        "pending_action_items": [
+            "Share recent clinical trial summaries for oncotarget, amlodipine 5mg",
+            "Follow up on patient feedback on samples"
+        ],
+        "meeting_date": "2026-05-11T10:00:00Z",
+        "location": "Tata Memorial Centre, Mumbai - OPD Consultation Room",
+        "duration_mins": 25,
+        "status": "scheduled",
+        "agent_triggered": false,
+        "briefing_id": null,
+        "created_at": "2026-05-18T17:48:07.190019Z"
+    },
+    {
+        "_id": "mtg_rakesh_008",
+        "rep_id": "rep_rakesh_sharma",
+        "hcp_id": "hcp_marcus_thorne",
+        "drug_ids": [
+            "drug_cardioglyde"
+        ],
+        "detailing_sequence": [
+            "drug_cardioglyde"
+        ],
+        "objective": "Detail cardioglyde and address objection: 'extremely time-constrained \u2014 max 5 minutes per rep visit'",
+        "planned_samples": [
+            {
+                "drug_id": "drug_cardioglyde",
+                "quantity": 5
+            }
+        ],
+        "pending_action_items": [
+            "Share recent clinical trial summaries for cardioglyde",
+            "Follow up on patient feedback on samples"
+        ],
+        "meeting_date": "2026-05-12T10:00:00Z",
+        "location": "Lilavati Hospital, Mumbai - OPD Consultation Room",
+        "duration_mins": 25,
+        "status": "scheduled",
+        "agent_triggered": false,
+        "briefing_id": null,
+        "created_at": "2026-05-18T17:48:07.190029Z"
+    },
+    {
+        "_id": "mtg_rakesh_009",
+        "rep_id": "rep_rakesh_sharma",
+        "hcp_id": "hcp_ananya_mehta",
+        "drug_ids": [
+            "drug_amlodipine_5mg",
+            "drug_cardioglyde"
+        ],
+        "detailing_sequence": [
+            "drug_amlodipine_5mg",
+            "drug_cardioglyde"
+        ],
+        "objective": "Detail amlodipine 5mg, cardioglyde and address objection: 'prefers generic brands'",
+        "planned_samples": [
+            {
+                "drug_id": "drug_amlodipine_5mg",
+                "quantity": 5
+            },
+            {
+                "drug_id": "drug_cardioglyde",
+                "quantity": 10
+            }
+        ],
+        "pending_action_items": [
+            "Share recent clinical trial summaries for amlodipine 5mg, cardioglyde",
+            "Follow up on patient feedback on samples"
+        ],
+        "meeting_date": "2026-05-13T10:00:00Z",
+        "location": "Kokilaben Dhirubhai Ambani Hospital, Mumbai - OPD Consultation Room",
+        "duration_mins": 20,
+        "status": "scheduled",
+        "agent_triggered": false,
+        "briefing_id": null,
+        "created_at": "2026-05-18T17:48:07.190036Z"
+    },
+    {
+        "_id": "mtg_rakesh_010",
+        "rep_id": "rep_rakesh_sharma",
+        "hcp_id": "hcp_vikram_patel",
+        "drug_ids": [
+            "drug_cardioglyde",
+            "drug_lisinopril_10mg"
+        ],
+        "detailing_sequence": [
+            "drug_cardioglyde",
+            "drug_lisinopril_10mg"
+        ],
+        "objective": "Detail cardioglyde, lisinopril 10mg and address objection: 'wants large-scale Indian trial data'",
+        "planned_samples": [
+            {
+                "drug_id": "drug_cardioglyde",
+                "quantity": 5
+            },
+            {
+                "drug_id": "drug_lisinopril_10mg",
+                "quantity": 10
+            }
+        ],
+        "pending_action_items": [
+            "Share recent clinical trial summaries for cardioglyde, lisinopril 10mg",
+            "Follow up on patient feedback on samples"
+        ],
+        "meeting_date": "2026-05-14T10:00:00Z",
+        "location": "Fortis Hospital Mulund, Mumbai - OPD Consultation Room",
+        "duration_mins": 25,
+        "status": "scheduled",
+        "agent_triggered": false,
+        "briefing_id": null,
+        "created_at": "2026-05-18T17:48:07.190044Z"
+    },
+    {
+        "_id": "mtg_rakesh_011",
+        "rep_id": "rep_rakesh_sharma",
+        "hcp_id": "hcp_sarah_chen",
+        "drug_ids": [
+            "drug_oncotarget"
+        ],
+        "detailing_sequence": [
+            "drug_oncotarget"
+        ],
+        "objective": "Detail oncotarget and address objection: 'rejects marketing language \u2014 demands peer-reviewed data'",
+        "planned_samples": [
+            {
+                "drug_id": "drug_oncotarget",
+                "quantity": 5
+            }
+        ],
+        "pending_action_items": [
+            "Share recent clinical trial summaries for oncotarget",
+            "Follow up on patient feedback on samples"
+        ],
+        "meeting_date": "2026-05-15T10:00:00Z",
+        "location": "Tata Memorial Centre, Mumbai - OPD Consultation Room",
+        "duration_mins": 30,
+        "status": "scheduled",
+        "agent_triggered": false,
+        "briefing_id": null,
+        "created_at": "2026-05-18T17:48:07.190050Z"
+    },
+    {
+        "_id": "mtg_rakesh_012",
+        "rep_id": "rep_rakesh_sharma",
+        "hcp_id": "hcp_marcus_thorne",
+        "drug_ids": [
+            "drug_cardioglyde",
+            "drug_lisinopril_10mg"
+        ],
+        "detailing_sequence": [
+            "drug_cardioglyde",
+            "drug_lisinopril_10mg"
+        ],
+        "objective": "Detail cardioglyde, lisinopril 10mg and address objection: 'extremely time-constrained \u2014 max 5 minutes per rep visit'",
+        "planned_samples": [
+            {
+                "drug_id": "drug_cardioglyde",
+                "quantity": 10
+            },
+            {
+                "drug_id": "drug_lisinopril_10mg",
+                "quantity": 10
+            }
+        ],
+        "pending_action_items": [
+            "Share recent clinical trial summaries for cardioglyde, lisinopril 10mg",
+            "Follow up on patient feedback on samples"
+        ],
+        "meeting_date": "2026-05-18T10:00:00Z",
+        "location": "Lilavati Hospital, Mumbai - OPD Consultation Room",
+        "duration_mins": 30,
+        "status": "scheduled",
+        "agent_triggered": false,
+        "briefing_id": null,
+        "created_at": "2026-05-18T17:48:07.190057Z"
+    },
+    {
+        "_id": "mtg_rakesh_013",
+        "rep_id": "rep_rakesh_sharma",
+        "hcp_id": "hcp_ananya_mehta",
+        "drug_ids": [
+            "drug_metformin_500mg"
+        ],
+        "detailing_sequence": [
+            "drug_metformin_500mg"
+        ],
+        "objective": "Detail metformin 500mg and address objection: 'prefers generic brands'",
+        "planned_samples": [
+            {
+                "drug_id": "drug_metformin_500mg",
+                "quantity": 10
+            }
+        ],
+        "pending_action_items": [
+            "Share recent clinical trial summaries for metformin 500mg",
+            "Follow up on patient feedback on samples"
+        ],
+        "meeting_date": "2026-05-19T10:00:00Z",
+        "location": "Kokilaben Dhirubhai Ambani Hospital, Mumbai - OPD Consultation Room",
+        "duration_mins": 25,
+        "status": "scheduled",
+        "agent_triggered": false,
+        "briefing_id": null,
+        "created_at": "2026-05-18T17:48:07.190064Z"
+    },
+    {
+        "_id": "mtg_rakesh_014",
+        "rep_id": "rep_rakesh_sharma",
+        "hcp_id": "hcp_vikram_patel",
+        "drug_ids": [
+            "drug_amlodipine_5mg"
+        ],
+        "detailing_sequence": [
+            "drug_amlodipine_5mg"
+        ],
+        "objective": "Detail amlodipine 5mg and address objection: 'wants large-scale Indian trial data'",
+        "planned_samples": [
+            {
+                "drug_id": "drug_amlodipine_5mg",
+                "quantity": 10
+            }
+        ],
+        "pending_action_items": [
+            "Share recent clinical trial summaries for amlodipine 5mg",
+            "Follow up on patient feedback on samples"
+        ],
+        "meeting_date": "2026-05-20T10:00:00Z",
+        "location": "Fortis Hospital Mulund, Mumbai - OPD Consultation Room",
+        "duration_mins": 30,
+        "status": "scheduled",
+        "agent_triggered": false,
+        "briefing_id": null,
+        "created_at": "2026-05-18T17:48:07.190070Z"
+    },
+    {
+        "_id": "mtg_rakesh_015",
+        "rep_id": "rep_rakesh_sharma",
+        "hcp_id": "hcp_sarah_chen",
+        "drug_ids": [
+            "drug_metformin_500mg",
+            "drug_cardioglyde"
+        ],
+        "detailing_sequence": [
+            "drug_metformin_500mg",
+            "drug_cardioglyde"
+        ],
+        "objective": "Detail metformin 500mg, cardioglyde and address objection: 'rejects marketing language \u2014 demands peer-reviewed data'",
+        "planned_samples": [
+            {
+                "drug_id": "drug_metformin_500mg",
+                "quantity": 5
+            },
+            {
+                "drug_id": "drug_cardioglyde",
+                "quantity": 5
+            }
+        ],
+        "pending_action_items": [
+            "Share recent clinical trial summaries for metformin 500mg, cardioglyde",
+            "Follow up on patient feedback on samples"
+        ],
+        "meeting_date": "2026-05-21T10:00:00Z",
+        "location": "Tata Memorial Centre, Mumbai - OPD Consultation Room",
+        "duration_mins": 25,
+        "status": "scheduled",
+        "agent_triggered": false,
+        "briefing_id": null,
+        "created_at": "2026-05-18T17:48:07.190080Z"
+    },
+    {
+        "_id": "mtg_rakesh_016",
+        "rep_id": "rep_rakesh_sharma",
+        "hcp_id": "hcp_marcus_thorne",
+        "drug_ids": [
+            "drug_oncotarget"
+        ],
+        "detailing_sequence": [
+            "drug_oncotarget"
+        ],
+        "objective": "Detail oncotarget and address objection: 'extremely time-constrained \u2014 max 5 minutes per rep visit'",
+        "planned_samples": [
+            {
+                "drug_id": "drug_oncotarget",
+                "quantity": 10
+            }
+        ],
+        "pending_action_items": [
+            "Share recent clinical trial summaries for oncotarget",
+            "Follow up on patient feedback on samples"
+        ],
+        "meeting_date": "2026-05-22T10:00:00Z",
+        "location": "Lilavati Hospital, Mumbai - OPD Consultation Room",
+        "duration_mins": 25,
+        "status": "scheduled",
+        "agent_triggered": false,
+        "briefing_id": null,
+        "created_at": "2026-05-18T17:48:07.190086Z"
+    },
+    {
+        "_id": "mtg_rakesh_017",
+        "rep_id": "rep_rakesh_sharma",
+        "hcp_id": "hcp_ananya_mehta",
+        "drug_ids": [
+            "drug_cardioglyde"
+        ],
+        "detailing_sequence": [
+            "drug_cardioglyde"
+        ],
+        "objective": "Detail cardioglyde and address objection: 'prefers generic brands'",
+        "planned_samples": [
+            {
+                "drug_id": "drug_cardioglyde",
+                "quantity": 10
+            }
+        ],
+        "pending_action_items": [
+            "Share recent clinical trial summaries for cardioglyde",
+            "Follow up on patient feedback on samples"
+        ],
+        "meeting_date": "2026-05-25T10:00:00Z",
+        "location": "Kokilaben Dhirubhai Ambani Hospital, Mumbai - OPD Consultation Room",
+        "duration_mins": 30,
+        "status": "scheduled",
+        "agent_triggered": false,
+        "briefing_id": null,
+        "created_at": "2026-05-18T17:48:07.190093Z"
+    },
+    {
+        "_id": "mtg_rakesh_018",
+        "rep_id": "rep_rakesh_sharma",
+        "hcp_id": "hcp_vikram_patel",
+        "drug_ids": [
+            "drug_cardioglyde",
+            "drug_oncotarget"
+        ],
+        "detailing_sequence": [
+            "drug_cardioglyde",
+            "drug_oncotarget"
+        ],
+        "objective": "Detail cardioglyde, oncotarget and address objection: 'wants large-scale Indian trial data'",
+        "planned_samples": [
+            {
+                "drug_id": "drug_cardioglyde",
+                "quantity": 5
+            },
+            {
+                "drug_id": "drug_oncotarget",
+                "quantity": 5
+            }
+        ],
+        "pending_action_items": [
+            "Share recent clinical trial summaries for cardioglyde, oncotarget",
+            "Follow up on patient feedback on samples"
+        ],
+        "meeting_date": "2026-05-26T10:00:00Z",
+        "location": "Fortis Hospital Mulund, Mumbai - OPD Consultation Room",
+        "duration_mins": 25,
+        "status": "scheduled",
+        "agent_triggered": false,
+        "briefing_id": null,
+        "created_at": "2026-05-18T17:48:07.190100Z"
+    },
+    {
+        "_id": "mtg_rakesh_019",
+        "rep_id": "rep_rakesh_sharma",
+        "hcp_id": "hcp_sarah_chen",
+        "drug_ids": [
+            "drug_lisinopril_10mg"
+        ],
+        "detailing_sequence": [
+            "drug_lisinopril_10mg"
+        ],
+        "objective": "Detail lisinopril 10mg and address objection: 'rejects marketing language \u2014 demands peer-reviewed data'",
+        "planned_samples": [
+            {
+                "drug_id": "drug_lisinopril_10mg",
+                "quantity": 10
+            }
+        ],
+        "pending_action_items": [
+            "Share recent clinical trial summaries for lisinopril 10mg",
+            "Follow up on patient feedback on samples"
+        ],
+        "meeting_date": "2026-05-27T10:00:00Z",
+        "location": "Tata Memorial Centre, Mumbai - OPD Consultation Room",
+        "duration_mins": 20,
+        "status": "scheduled",
+        "agent_triggered": false,
+        "briefing_id": null,
+        "created_at": "2026-05-18T17:48:07.190106Z"
+    },
+    {
+        "_id": "mtg_rakesh_020",
+        "rep_id": "rep_rakesh_sharma",
+        "hcp_id": "hcp_marcus_thorne",
+        "drug_ids": [
+            "drug_oncotarget",
+            "drug_lisinopril_10mg"
+        ],
+        "detailing_sequence": [
+            "drug_oncotarget",
+            "drug_lisinopril_10mg"
+        ],
+        "objective": "Detail oncotarget, lisinopril 10mg and address objection: 'extremely time-constrained \u2014 max 5 minutes per rep visit'",
+        "planned_samples": [
+            {
+                "drug_id": "drug_oncotarget",
+                "quantity": 10
+            },
+            {
+                "drug_id": "drug_lisinopril_10mg",
+                "quantity": 5
+            }
+        ],
+        "pending_action_items": [
+            "Share recent clinical trial summaries for oncotarget, lisinopril 10mg",
+            "Follow up on patient feedback on samples"
+        ],
+        "meeting_date": "2026-05-28T10:00:00Z",
+        "location": "Lilavati Hospital, Mumbai - OPD Consultation Room",
+        "duration_mins": 25,
+        "status": "scheduled",
+        "agent_triggered": false,
+        "briefing_id": null,
+        "created_at": "2026-05-18T17:48:07.190113Z"
+    },
+    {
+        "_id": "mtg_rakesh_021",
+        "rep_id": "rep_rakesh_sharma",
+        "hcp_id": "hcp_ananya_mehta",
+        "drug_ids": [
+            "drug_cardioglyde",
+            "drug_metformin_500mg"
+        ],
+        "detailing_sequence": [
+            "drug_cardioglyde",
+            "drug_metformin_500mg"
+        ],
+        "objective": "Detail cardioglyde, metformin 500mg and address objection: 'prefers generic brands'",
+        "planned_samples": [
+            {
+                "drug_id": "drug_cardioglyde",
+                "quantity": 5
+            },
+            {
+                "drug_id": "drug_metformin_500mg",
+                "quantity": 5
+            }
+        ],
+        "pending_action_items": [
+            "Share recent clinical trial summaries for cardioglyde, metformin 500mg",
+            "Follow up on patient feedback on samples"
+        ],
+        "meeting_date": "2026-05-29T10:00:00Z",
+        "location": "Kokilaben Dhirubhai Ambani Hospital, Mumbai - OPD Consultation Room",
+        "duration_mins": 20,
+        "status": "scheduled",
+        "agent_triggered": false,
+        "briefing_id": null,
+        "created_at": "2026-05-18T17:48:07.190119Z"
+    },
+    {
+        "_id": "mtg_rakesh_022",
+        "rep_id": "rep_rakesh_sharma",
+        "hcp_id": "hcp_vikram_patel",
+        "drug_ids": [
+            "drug_amlodipine_5mg"
+        ],
+        "detailing_sequence": [
+            "drug_amlodipine_5mg"
+        ],
+        "objective": "Detail amlodipine 5mg and address objection: 'wants large-scale Indian trial data'",
+        "planned_samples": [
+            {
+                "drug_id": "drug_amlodipine_5mg",
+                "quantity": 10
+            }
+        ],
+        "pending_action_items": [
+            "Share recent clinical trial summaries for amlodipine 5mg",
+            "Follow up on patient feedback on samples"
+        ],
+        "meeting_date": "2026-06-01T10:00:00Z",
+        "location": "Fortis Hospital Mulund, Mumbai - OPD Consultation Room",
+        "duration_mins": 20,
+        "status": "scheduled",
+        "agent_triggered": false,
+        "briefing_id": null,
+        "created_at": "2026-05-18T17:48:07.190126Z"
+    },
+    {
+        "_id": "mtg_rakesh_023",
+        "rep_id": "rep_rakesh_sharma",
+        "hcp_id": "hcp_sarah_chen",
+        "drug_ids": [
+            "drug_lisinopril_10mg",
+            "drug_amlodipine_5mg"
+        ],
+        "detailing_sequence": [
+            "drug_lisinopril_10mg",
+            "drug_amlodipine_5mg"
+        ],
+        "objective": "Detail lisinopril 10mg, amlodipine 5mg and address objection: 'rejects marketing language \u2014 demands peer-reviewed data'",
+        "planned_samples": [
+            {
+                "drug_id": "drug_lisinopril_10mg",
+                "quantity": 5
+            },
+            {
+                "drug_id": "drug_amlodipine_5mg",
+                "quantity": 5
+            }
+        ],
+        "pending_action_items": [
+            "Share recent clinical trial summaries for lisinopril 10mg, amlodipine 5mg",
+            "Follow up on patient feedback on samples"
+        ],
+        "meeting_date": "2026-06-02T10:00:00Z",
+        "location": "Tata Memorial Centre, Mumbai - OPD Consultation Room",
+        "duration_mins": 20,
+        "status": "scheduled",
+        "agent_triggered": false,
+        "briefing_id": null,
+        "created_at": "2026-05-18T17:48:07.190133Z"
+    },
+    {
+        "_id": "mtg_rakesh_024",
+        "rep_id": "rep_rakesh_sharma",
+        "hcp_id": "hcp_marcus_thorne",
+        "drug_ids": [
+            "drug_metformin_500mg"
+        ],
+        "detailing_sequence": [
+            "drug_metformin_500mg"
+        ],
+        "objective": "Detail metformin 500mg and address objection: 'extremely time-constrained \u2014 max 5 minutes per rep visit'",
+        "planned_samples": [
+            {
+                "drug_id": "drug_metformin_500mg",
+                "quantity": 10
+            }
+        ],
+        "pending_action_items": [
+            "Share recent clinical trial summaries for metformin 500mg",
+            "Follow up on patient feedback on samples"
+        ],
+        "meeting_date": "2026-06-03T10:00:00Z",
+        "location": "Lilavati Hospital, Mumbai - OPD Consultation Room",
+        "duration_mins": 20,
+        "status": "scheduled",
+        "agent_triggered": false,
+        "briefing_id": null,
+        "created_at": "2026-05-18T17:48:07.190139Z"
+    },
+    {
+        "_id": "mtg_rakesh_025",
+        "rep_id": "rep_rakesh_sharma",
+        "hcp_id": "hcp_ananya_mehta",
+        "drug_ids": [
+            "drug_cardioglyde"
+        ],
+        "detailing_sequence": [
+            "drug_cardioglyde"
+        ],
+        "objective": "Detail cardioglyde and address objection: 'prefers generic brands'",
+        "planned_samples": [
+            {
+                "drug_id": "drug_cardioglyde",
+                "quantity": 5
+            }
+        ],
+        "pending_action_items": [
+            "Share recent clinical trial summaries for cardioglyde",
+            "Follow up on patient feedback on samples"
+        ],
+        "meeting_date": "2026-06-04T10:00:00Z",
+        "location": "Kokilaben Dhirubhai Ambani Hospital, Mumbai - OPD Consultation Room",
+        "duration_mins": 30,
+        "status": "scheduled",
+        "agent_triggered": false,
+        "briefing_id": null,
+        "created_at": "2026-05-18T17:48:07.190145Z"
+    },
+    {
+        "_id": "mtg_rakesh_026",
+        "rep_id": "rep_rakesh_sharma",
+        "hcp_id": "hcp_vikram_patel",
+        "drug_ids": [
+            "drug_amlodipine_5mg",
+            "drug_lisinopril_10mg"
+        ],
+        "detailing_sequence": [
+            "drug_amlodipine_5mg",
+            "drug_lisinopril_10mg"
+        ],
+        "objective": "Detail amlodipine 5mg, lisinopril 10mg and address objection: 'wants large-scale Indian trial data'",
+        "planned_samples": [
+            {
+                "drug_id": "drug_amlodipine_5mg",
+                "quantity": 10
+            },
+            {
+                "drug_id": "drug_lisinopril_10mg",
+                "quantity": 10
+            }
+        ],
+        "pending_action_items": [
+            "Share recent clinical trial summaries for amlodipine 5mg, lisinopril 10mg",
+            "Follow up on patient feedback on samples"
+        ],
+        "meeting_date": "2026-06-05T10:00:00Z",
+        "location": "Fortis Hospital Mulund, Mumbai - OPD Consultation Room",
+        "duration_mins": 30,
+        "status": "scheduled",
+        "agent_triggered": false,
+        "briefing_id": null,
+        "created_at": "2026-05-18T17:48:07.190152Z"
+    },
+    {
+        "_id": "mtg_rakesh_027",
+        "rep_id": "rep_rakesh_sharma",
+        "hcp_id": "hcp_sarah_chen",
+        "drug_ids": [
+            "drug_cardioglyde",
+            "drug_lisinopril_10mg"
+        ],
+        "detailing_sequence": [
+            "drug_cardioglyde",
+            "drug_lisinopril_10mg"
+        ],
+        "objective": "Detail cardioglyde, lisinopril 10mg and address objection: 'rejects marketing language \u2014 demands peer-reviewed data'",
+        "planned_samples": [
+            {
+                "drug_id": "drug_cardioglyde",
+                "quantity": 10
+            },
+            {
+                "drug_id": "drug_lisinopril_10mg",
+                "quantity": 5
+            }
+        ],
+        "pending_action_items": [
+            "Share recent clinical trial summaries for cardioglyde, lisinopril 10mg",
+            "Follow up on patient feedback on samples"
+        ],
+        "meeting_date": "2026-06-08T10:00:00Z",
+        "location": "Tata Memorial Centre, Mumbai - OPD Consultation Room",
+        "duration_mins": 20,
+        "status": "scheduled",
+        "agent_triggered": false,
+        "briefing_id": null,
+        "created_at": "2026-05-18T17:48:07.190159Z"
+    },
+    {
+        "_id": "mtg_rakesh_028",
+        "rep_id": "rep_rakesh_sharma",
+        "hcp_id": "hcp_marcus_thorne",
+        "drug_ids": [
+            "drug_metformin_500mg",
+            "drug_amlodipine_5mg"
+        ],
+        "detailing_sequence": [
+            "drug_metformin_500mg",
+            "drug_amlodipine_5mg"
+        ],
+        "objective": "Detail metformin 500mg, amlodipine 5mg and address objection: 'extremely time-constrained \u2014 max 5 minutes per rep visit'",
+        "planned_samples": [
+            {
+                "drug_id": "drug_metformin_500mg",
+                "quantity": 10
+            },
+            {
+                "drug_id": "drug_amlodipine_5mg",
+                "quantity": 10
+            }
+        ],
+        "pending_action_items": [
+            "Share recent clinical trial summaries for metformin 500mg, amlodipine 5mg",
+            "Follow up on patient feedback on samples"
+        ],
+        "meeting_date": "2026-06-09T10:00:00Z",
+        "location": "Lilavati Hospital, Mumbai - OPD Consultation Room",
+        "duration_mins": 20,
+        "status": "scheduled",
+        "agent_triggered": false,
+        "briefing_id": null,
+        "created_at": "2026-05-18T17:48:07.190166Z"
+    },
+    {
+        "_id": "mtg_rakesh_029",
+        "rep_id": "rep_rakesh_sharma",
+        "hcp_id": "hcp_ananya_mehta",
+        "drug_ids": [
+            "drug_oncotarget",
+            "drug_lisinopril_10mg"
+        ],
+        "detailing_sequence": [
+            "drug_oncotarget",
+            "drug_lisinopril_10mg"
+        ],
+        "objective": "Detail oncotarget, lisinopril 10mg and address objection: 'prefers generic brands'",
+        "planned_samples": [
+            {
+                "drug_id": "drug_oncotarget",
+                "quantity": 10
+            },
+            {
+                "drug_id": "drug_lisinopril_10mg",
+                "quantity": 10
+            }
+        ],
+        "pending_action_items": [
+            "Share recent clinical trial summaries for oncotarget, lisinopril 10mg",
+            "Follow up on patient feedback on samples"
+        ],
+        "meeting_date": "2026-06-10T10:00:00Z",
+        "location": "Kokilaben Dhirubhai Ambani Hospital, Mumbai - OPD Consultation Room",
+        "duration_mins": 30,
+        "status": "scheduled",
+        "agent_triggered": false,
+        "briefing_id": null,
+        "created_at": "2026-05-18T17:48:07.190172Z"
+    },
+    {
+        "_id": "mtg_rakesh_030",
+        "rep_id": "rep_rakesh_sharma",
+        "hcp_id": "hcp_vikram_patel",
+        "drug_ids": [
+            "drug_metformin_500mg",
+            "drug_cardioglyde"
+        ],
+        "detailing_sequence": [
+            "drug_metformin_500mg",
+            "drug_cardioglyde"
+        ],
+        "objective": "Detail metformin 500mg, cardioglyde and address objection: 'wants large-scale Indian trial data'",
+        "planned_samples": [
+            {
+                "drug_id": "drug_metformin_500mg",
+                "quantity": 5
+            },
+            {
+                "drug_id": "drug_cardioglyde",
+                "quantity": 5
+            }
+        ],
+        "pending_action_items": [
+            "Share recent clinical trial summaries for metformin 500mg, cardioglyde",
+            "Follow up on patient feedback on samples"
+        ],
+        "meeting_date": "2026-06-11T10:00:00Z",
+        "location": "Fortis Hospital Mulund, Mumbai - OPD Consultation Room",
+        "duration_mins": 30,
+        "status": "scheduled",
+        "agent_triggered": false,
+        "briefing_id": null,
+        "created_at": "2026-05-18T17:48:07.190179Z"
+    },
+    {
+        "_id": "mtg_rakesh_031",
+        "rep_id": "rep_rakesh_sharma",
+        "hcp_id": "hcp_sarah_chen",
+        "drug_ids": [
+            "drug_lisinopril_10mg",
+            "drug_metformin_500mg"
+        ],
+        "detailing_sequence": [
+            "drug_lisinopril_10mg",
+            "drug_metformin_500mg"
+        ],
+        "objective": "Detail lisinopril 10mg, metformin 500mg and address objection: 'rejects marketing language \u2014 demands peer-reviewed data'",
+        "planned_samples": [
+            {
+                "drug_id": "drug_lisinopril_10mg",
+                "quantity": 10
+            },
+            {
+                "drug_id": "drug_metformin_500mg",
+                "quantity": 10
+            }
+        ],
+        "pending_action_items": [
+            "Share recent clinical trial summaries for lisinopril 10mg, metformin 500mg",
+            "Follow up on patient feedback on samples"
+        ],
+        "meeting_date": "2026-06-12T10:00:00Z",
+        "location": "Tata Memorial Centre, Mumbai - OPD Consultation Room",
+        "duration_mins": 20,
+        "status": "scheduled",
+        "agent_triggered": false,
+        "briefing_id": null,
+        "created_at": "2026-05-18T17:48:07.190185Z"
+    },
+    {
+        "_id": "mtg_rakesh_032",
+        "rep_id": "rep_rakesh_sharma",
+        "hcp_id": "hcp_marcus_thorne",
+        "drug_ids": [
+            "drug_lisinopril_10mg"
+        ],
+        "detailing_sequence": [
+            "drug_lisinopril_10mg"
+        ],
+        "objective": "Detail lisinopril 10mg and address objection: 'extremely time-constrained \u2014 max 5 minutes per rep visit'",
+        "planned_samples": [
+            {
+                "drug_id": "drug_lisinopril_10mg",
+                "quantity": 10
+            }
+        ],
+        "pending_action_items": [
+            "Share recent clinical trial summaries for lisinopril 10mg",
+            "Follow up on patient feedback on samples"
+        ],
+        "meeting_date": "2026-06-15T10:00:00Z",
+        "location": "Lilavati Hospital, Mumbai - OPD Consultation Room",
+        "duration_mins": 20,
+        "status": "scheduled",
+        "agent_triggered": false,
+        "briefing_id": null,
+        "created_at": "2026-05-18T17:48:07.190192Z"
+    },
+    {
+        "_id": "mtg_rakesh_033",
+        "rep_id": "rep_rakesh_sharma",
+        "hcp_id": "hcp_ananya_mehta",
+        "drug_ids": [
+            "drug_oncotarget"
+        ],
+        "detailing_sequence": [
+            "drug_oncotarget"
+        ],
+        "objective": "Detail oncotarget and address objection: 'prefers generic brands'",
+        "planned_samples": [
+            {
+                "drug_id": "drug_oncotarget",
+                "quantity": 10
+            }
+        ],
+        "pending_action_items": [
+            "Share recent clinical trial summaries for oncotarget",
+            "Follow up on patient feedback on samples"
+        ],
+        "meeting_date": "2026-06-16T10:00:00Z",
+        "location": "Kokilaben Dhirubhai Ambani Hospital, Mumbai - OPD Consultation Room",
+        "duration_mins": 30,
+        "status": "scheduled",
+        "agent_triggered": false,
+        "briefing_id": null,
+        "created_at": "2026-05-18T17:48:07.190198Z"
+    },
+    {
+        "_id": "mtg_rakesh_034",
+        "rep_id": "rep_rakesh_sharma",
+        "hcp_id": "hcp_vikram_patel",
+        "drug_ids": [
+            "drug_metformin_500mg"
+        ],
+        "detailing_sequence": [
+            "drug_metformin_500mg"
+        ],
+        "objective": "Detail metformin 500mg and address objection: 'wants large-scale Indian trial data'",
+        "planned_samples": [
+            {
+                "drug_id": "drug_metformin_500mg",
+                "quantity": 10
+            }
+        ],
+        "pending_action_items": [
+            "Share recent clinical trial summaries for metformin 500mg",
+            "Follow up on patient feedback on samples"
+        ],
+        "meeting_date": "2026-06-17T10:00:00Z",
+        "location": "Fortis Hospital Mulund, Mumbai - OPD Consultation Room",
+        "duration_mins": 25,
+        "status": "scheduled",
+        "agent_triggered": false,
+        "briefing_id": null,
+        "created_at": "2026-05-18T17:48:07.190204Z"
+    },
+    {
+        "_id": "mtg_rakesh_035",
+        "rep_id": "rep_rakesh_sharma",
+        "hcp_id": "hcp_sarah_chen",
+        "drug_ids": [
+            "drug_metformin_500mg"
+        ],
+        "detailing_sequence": [
+            "drug_metformin_500mg"
+        ],
+        "objective": "Detail metformin 500mg and address objection: 'rejects marketing language \u2014 demands peer-reviewed data'",
+        "planned_samples": [
+            {
+                "drug_id": "drug_metformin_500mg",
+                "quantity": 5
+            }
+        ],
+        "pending_action_items": [
+            "Share recent clinical trial summaries for metformin 500mg",
+            "Follow up on patient feedback on samples"
+        ],
+        "meeting_date": "2026-06-18T10:00:00Z",
+        "location": "Tata Memorial Centre, Mumbai - OPD Consultation Room",
+        "duration_mins": 20,
+        "status": "scheduled",
+        "agent_triggered": false,
+        "briefing_id": null,
+        "created_at": "2026-05-18T17:48:07.190210Z"
+    },
+    {
+        "_id": "mtg_rakesh_036",
+        "rep_id": "rep_rakesh_sharma",
+        "hcp_id": "hcp_marcus_thorne",
+        "drug_ids": [
+            "drug_lisinopril_10mg"
+        ],
+        "detailing_sequence": [
+            "drug_lisinopril_10mg"
+        ],
+        "objective": "Detail lisinopril 10mg and address objection: 'extremely time-constrained \u2014 max 5 minutes per rep visit'",
+        "planned_samples": [
+            {
+                "drug_id": "drug_lisinopril_10mg",
+                "quantity": 5
+            }
+        ],
+        "pending_action_items": [
+            "Share recent clinical trial summaries for lisinopril 10mg",
+            "Follow up on patient feedback on samples"
+        ],
+        "meeting_date": "2026-06-19T10:00:00Z",
+        "location": "Lilavati Hospital, Mumbai - OPD Consultation Room",
+        "duration_mins": 30,
+        "status": "scheduled",
+        "agent_triggered": false,
+        "briefing_id": null,
+        "created_at": "2026-05-18T17:48:07.190216Z"
+    },
+    {
+        "_id": "mtg_rakesh_037",
+        "rep_id": "rep_rakesh_sharma",
+        "hcp_id": "hcp_ananya_mehta",
+        "drug_ids": [
+            "drug_amlodipine_5mg",
+            "drug_cardioglyde"
+        ],
+        "detailing_sequence": [
+            "drug_amlodipine_5mg",
+            "drug_cardioglyde"
+        ],
+        "objective": "Detail amlodipine 5mg, cardioglyde and address objection: 'prefers generic brands'",
+        "planned_samples": [
+            {
+                "drug_id": "drug_amlodipine_5mg",
+                "quantity": 10
+            },
+            {
+                "drug_id": "drug_cardioglyde",
+                "quantity": 5
+            }
+        ],
+        "pending_action_items": [
+            "Share recent clinical trial summaries for amlodipine 5mg, cardioglyde",
+            "Follow up on patient feedback on samples"
+        ],
+        "meeting_date": "2026-06-22T10:00:00Z",
+        "location": "Kokilaben Dhirubhai Ambani Hospital, Mumbai - OPD Consultation Room",
+        "duration_mins": 25,
+        "status": "scheduled",
+        "agent_triggered": false,
+        "briefing_id": null,
+        "created_at": "2026-05-18T17:48:07.190223Z"
+    },
+    {
+        "_id": "mtg_rakesh_038",
+        "rep_id": "rep_rakesh_sharma",
+        "hcp_id": "hcp_vikram_patel",
+        "drug_ids": [
+            "drug_lisinopril_10mg"
+        ],
+        "detailing_sequence": [
+            "drug_lisinopril_10mg"
+        ],
+        "objective": "Detail lisinopril 10mg and address objection: 'wants large-scale Indian trial data'",
+        "planned_samples": [
+            {
+                "drug_id": "drug_lisinopril_10mg",
+                "quantity": 5
+            }
+        ],
+        "pending_action_items": [
+            "Share recent clinical trial summaries for lisinopril 10mg",
+            "Follow up on patient feedback on samples"
+        ],
+        "meeting_date": "2026-06-23T10:00:00Z",
+        "location": "Fortis Hospital Mulund, Mumbai - OPD Consultation Room",
+        "duration_mins": 25,
+        "status": "scheduled",
+        "agent_triggered": false,
+        "briefing_id": null,
+        "created_at": "2026-05-18T17:48:07.190229Z"
+    },
+    {
+        "_id": "mtg_rakesh_039",
+        "rep_id": "rep_rakesh_sharma",
+        "hcp_id": "hcp_sarah_chen",
+        "drug_ids": [
+            "drug_amlodipine_5mg",
+            "drug_oncotarget"
+        ],
+        "detailing_sequence": [
+            "drug_amlodipine_5mg",
+            "drug_oncotarget"
+        ],
+        "objective": "Detail amlodipine 5mg, oncotarget and address objection: 'rejects marketing language \u2014 demands peer-reviewed data'",
+        "planned_samples": [
+            {
+                "drug_id": "drug_amlodipine_5mg",
+                "quantity": 10
+            },
+            {
+                "drug_id": "drug_oncotarget",
+                "quantity": 10
+            }
+        ],
+        "pending_action_items": [
+            "Share recent clinical trial summaries for amlodipine 5mg, oncotarget",
+            "Follow up on patient feedback on samples"
+        ],
+        "meeting_date": "2026-06-24T10:00:00Z",
+        "location": "Tata Memorial Centre, Mumbai - OPD Consultation Room",
+        "duration_mins": 30,
+        "status": "scheduled",
+        "agent_triggered": false,
+        "briefing_id": null,
+        "created_at": "2026-05-18T17:48:07.190238Z"
+    },
+    {
+        "_id": "mtg_rakesh_040",
+        "rep_id": "rep_rakesh_sharma",
+        "hcp_id": "hcp_marcus_thorne",
+        "drug_ids": [
+            "drug_cardioglyde"
+        ],
+        "detailing_sequence": [
+            "drug_cardioglyde"
+        ],
+        "objective": "Detail cardioglyde and address objection: 'extremely time-constrained \u2014 max 5 minutes per rep visit'",
+        "planned_samples": [
+            {
+                "drug_id": "drug_cardioglyde",
+                "quantity": 5
+            }
+        ],
+        "pending_action_items": [
+            "Share recent clinical trial summaries for cardioglyde",
+            "Follow up on patient feedback on samples"
+        ],
+        "meeting_date": "2026-06-25T10:00:00Z",
+        "location": "Lilavati Hospital, Mumbai - OPD Consultation Room",
+        "duration_mins": 30,
+        "status": "scheduled",
+        "agent_triggered": false,
+        "briefing_id": null,
+        "created_at": "2026-05-18T17:48:07.190244Z"
+    },
+    {
+        "_id": "mtg_rakesh_041",
+        "rep_id": "rep_rakesh_sharma",
+        "hcp_id": "hcp_ananya_mehta",
+        "drug_ids": [
+            "drug_amlodipine_5mg"
+        ],
+        "detailing_sequence": [
+            "drug_amlodipine_5mg"
+        ],
+        "objective": "Detail amlodipine 5mg and address objection: 'prefers generic brands'",
+        "planned_samples": [
+            {
+                "drug_id": "drug_amlodipine_5mg",
+                "quantity": 5
+            }
+        ],
+        "pending_action_items": [
+            "Share recent clinical trial summaries for amlodipine 5mg",
+            "Follow up on patient feedback on samples"
+        ],
+        "meeting_date": "2026-06-26T10:00:00Z",
+        "location": "Kokilaben Dhirubhai Ambani Hospital, Mumbai - OPD Consultation Room",
+        "duration_mins": 30,
+        "status": "scheduled",
+        "agent_triggered": false,
+        "briefing_id": null,
+        "created_at": "2026-05-18T17:48:07.190251Z"
+    },
+    {
+        "_id": "mtg_rakesh_042",
+        "rep_id": "rep_rakesh_sharma",
+        "hcp_id": "hcp_vikram_patel",
+        "drug_ids": [
+            "drug_metformin_500mg",
+            "drug_oncotarget"
+        ],
+        "detailing_sequence": [
+            "drug_metformin_500mg",
+            "drug_oncotarget"
+        ],
+        "objective": "Detail metformin 500mg, oncotarget and address objection: 'wants large-scale Indian trial data'",
+        "planned_samples": [
+            {
+                "drug_id": "drug_metformin_500mg",
+                "quantity": 5
+            },
+            {
+                "drug_id": "drug_oncotarget",
+                "quantity": 5
+            }
+        ],
+        "pending_action_items": [
+            "Share recent clinical trial summaries for metformin 500mg, oncotarget",
+            "Follow up on patient feedback on samples"
+        ],
+        "meeting_date": "2026-06-29T10:00:00Z",
+        "location": "Fortis Hospital Mulund, Mumbai - OPD Consultation Room",
+        "duration_mins": 30,
+        "status": "scheduled",
+        "agent_triggered": false,
+        "briefing_id": null,
+        "created_at": "2026-05-18T17:48:07.190258Z"
+    },
+    {
+        "_id": "mtg_rakesh_043",
+        "rep_id": "rep_rakesh_sharma",
+        "hcp_id": "hcp_sarah_chen",
+        "drug_ids": [
+            "drug_lisinopril_10mg"
+        ],
+        "detailing_sequence": [
+            "drug_lisinopril_10mg"
+        ],
+        "objective": "Detail lisinopril 10mg and address objection: 'rejects marketing language \u2014 demands peer-reviewed data'",
+        "planned_samples": [
+            {
+                "drug_id": "drug_lisinopril_10mg",
+                "quantity": 10
+            }
+        ],
+        "pending_action_items": [
+            "Share recent clinical trial summaries for lisinopril 10mg",
+            "Follow up on patient feedback on samples"
+        ],
+        "meeting_date": "2026-06-30T10:00:00Z",
+        "location": "Tata Memorial Centre, Mumbai - OPD Consultation Room",
+        "duration_mins": 20,
+        "status": "scheduled",
+        "agent_triggered": false,
+        "briefing_id": null,
+        "created_at": "2026-05-18T17:48:07.190266Z"
+    }
+]

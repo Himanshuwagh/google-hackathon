@@ -1,0 +1,161 @@
+.askContainer {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  background-color: var(--bg-primary);
+  position: relative;
+}
+
+.contextBar {
+  padding: 8px 32px;
+  background-color: var(--bg-secondary);
+  font-size: 15px;
+  color: var(--text-tertiary);
+  width: 100%;
+}
+
+.chatArea {
+  flex: 1;
+  padding: 32px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  max-width: 1250px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+/* Document-style Q&A */
+.messagePair {
+  display: flex;
+  flex-direction: column;
+}
+
+.qLabel {
+  font-size: 15px;
+  text-transform: uppercase;
+  color: var(--text-tertiary);
+  margin-bottom: 8px;
+}
+
+.qText {
+  font-size: 19px;
+  font-weight: 500;
+  color: var(--text-primary);
+  margin-bottom: 16px;
+}
+
+.separator {
+  border: none;
+  border-top: 1px solid var(--border-light);
+  margin: 0 0 16px 0;
+}
+
+.aText {
+  font-size: 19px;
+  color: var(--text-primary);
+  line-height: 1.7;
+  white-space: pre-wrap;
+}
+
+.errorText {
+  color: var(--status-failed);
+}
+
+.sourcesLine {
+  font-size: 15px;
+  color: var(--text-tertiary);
+  margin-top: 16px;
+}
+
+.sourcesLine a {
+  color: var(--text-tertiary);
+  text-decoration: underline;
+  text-decoration-color: transparent;
+  transition: text-decoration-color 150ms ease;
+}
+
+.sourcesLine a:hover {
+  text-decoration-color: var(--text-tertiary);
+}
+
+/* Suggestions */
+.suggestionsContainer {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: auto;
+}
+
+.suggestionPill {
+  background-color: var(--bg-secondary);
+  font-size: 16px;
+  color: var(--text-primary);
+  border: 1px solid var(--border);
+  border-radius: 5px;
+  padding: 8px 16px;
+  transition: border-color 150ms ease, background-color 150ms ease;
+}
+
+.suggestionPill:hover {
+  border-color: var(--accent);
+  background-color: var(--bg-card);
+}
+
+/* Input Area */
+.inputArea {
+  padding: 24px 32px;
+  background-color: var(--bg-primary);
+  position: sticky;
+  bottom: 0;
+  max-width: 1250px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.inputForm {
+  display: flex;
+  height: 55px;
+}
+
+.input {
+  flex: 1;
+  background-color: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 4px 0 0 4px;
+  padding: 0 16px;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 19px;
+  color: var(--text-primary);
+  outline: none;
+  transition: border-color 150ms ease;
+}
+
+.input:focus {
+  border-color: var(--accent);
+}
+
+.input::placeholder {
+  color: var(--text-tertiary);
+}
+
+.submitBtn {
+  background-color: var(--bg-dark);
+  color: var(--text-inverse);
+  font-size: 17px;
+  padding: 0 24px;
+  border-radius: 0 4px 4px 0;
+  transition: opacity 150ms ease;
+}
+
+.submitBtn:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+@media (max-width: 1199px) {
+  .chatArea, .inputArea {
+    padding: 16px;
+  }
+}

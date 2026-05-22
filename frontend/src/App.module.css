@@ -1,0 +1,39 @@
+.appContainer {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.mainLayout {
+  display: flex;
+  flex: 1;
+  overflow: hidden;
+}
+
+.resizingSidebar {
+  cursor: col-resize;
+  user-select: none;
+}
+
+.toast {
+  background: var(--bg-dark);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 999px;
+  bottom: 24px;
+  box-shadow: 0 12px 32px rgba(26, 25, 22, 0.18);
+  color: var(--text-inverse);
+  font-size: 15px;
+  font-weight: 700;
+  left: 50%;
+  padding: 12px 18px;
+  position: fixed;
+  transform: translateX(-50%);
+  z-index: 2200;
+}
+
+@media (max-width: 767px) {
+  .mainLayout {
+    flex-direction: column;
+  }
+}

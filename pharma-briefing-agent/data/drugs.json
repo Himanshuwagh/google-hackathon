@@ -1,0 +1,140 @@
+[
+    {
+        "_id": "drug_lisinopril_10mg",
+        "brand_name": "Lisinopril 10mg",
+        "generic_name": "Lisinopril",
+        "drug_class": "ACE Inhibitor",
+        "indications": ["hypertension", "chronic heart failure", "post-myocardial infarction", "diabetic nephropathy"],
+        "pubmed_search_terms": [
+            "lisinopril hypertension outcomes",
+            "ACE inhibitor heart failure India",
+            "lisinopril renal protection diabetic"
+        ],
+        "elastic_doc_tags": ["lisinopril", "ace-inhibitor", "cardiology", "nephrology"],
+        "approved_claims": [
+            "Reduces systolic BP by avg 10mmHg in 8 weeks (per FDA label)",
+            "Indicated for heart failure post-MI (SAVE trial)",
+            "Slows progression of diabetic nephropathy (EUCLID trial)",
+            "Once-daily dosing for improved patient compliance"
+        ]
+    },
+    {
+        "_id": "drug_metformin_500mg",
+        "brand_name": "Metformin 500mg",
+        "generic_name": "Metformin Hydrochloride",
+        "drug_class": "Biguanide",
+        "indications": ["type 2 diabetes mellitus", "prediabetes", "polycystic ovary syndrome"],
+        "pubmed_search_terms": [
+            "metformin type 2 diabetes outcomes India",
+            "metformin cardiovascular benefit",
+            "metformin HbA1c reduction"
+        ],
+        "elastic_doc_tags": ["metformin", "biguanide", "endocrinology", "diabetes"],
+        "approved_claims": [
+            "Reduces HbA1c by 1.0-1.5% as monotherapy (UKPDS data)",
+            "First-line therapy for type 2 diabetes (ADA/EASD guidelines)",
+            "Demonstrated CV mortality reduction in overweight T2DM patients (UKPDS 34)",
+            "Weight-neutral to mildly weight-reducing vs sulfonylureas"
+        ]
+    },
+    {
+        "_id": "drug_amlodipine_5mg",
+        "brand_name": "Amlodipine 5mg",
+        "generic_name": "Amlodipine Besylate",
+        "drug_class": "Calcium Channel Blocker (Dihydropyridine)",
+        "indications": ["hypertension", "chronic stable angina", "vasospastic angina"],
+        "pubmed_search_terms": [
+            "amlodipine hypertension efficacy",
+            "calcium channel blocker outcomes India",
+            "amlodipine vs ACE inhibitor comparison"
+        ],
+        "elastic_doc_tags": ["amlodipine", "calcium-channel-blocker", "cardiology"],
+        "approved_claims": [
+            "Reduces systolic BP by 12-15mmHg at 5mg dose (ALLHAT trial)",
+            "Long half-life allows true once-daily dosing with 24h BP control",
+            "Safe in renal impairment - no dose adjustment needed",
+            "Effective as monotherapy or combined with ACE inhibitors/ARBs"
+        ]
+    },
+    {
+        "_id": "drug_cardioglyde",
+        "brand_name": "CardioGlyde",
+        "generic_name": "Glydepeptide",
+        "drug_class": "GLP-1 Receptor Agonist",
+        "indications": [
+            "type 2 diabetes mellitus",
+            "weight management in adults with T2DM and obesity",
+            "cardiovascular risk reduction in adults with T2DM and established ASCVD"
+        ],
+        "pubmed_search_terms": [
+            "GLP-1 agonist cardiovascular outcomes diabetes",
+            "semaglutide-class weight loss HbA1c",
+            "GLP-1 GI tolerability titration"
+        ],
+        "elastic_doc_tags": [
+            "cardioglyde",
+            "glp-1",
+            "cardiology",
+            "metabolics",
+            "diabetes",
+            "weight-loss"
+        ],
+        "approved_claims": [
+            "Reduced major adverse cardiovascular events by 26% vs placebo in SURPASS-CARDIO (HR 0.74, 95% CI 0.61-0.89, p=0.002)",
+            "Mean weight loss of 6.8 kg at 52 weeks vs 1.2 kg with standard care (p<0.001)",
+            "HbA1c reduction of 1.8% from baseline at 40 weeks as add-on therapy",
+            "Once-weekly subcutaneous dosing with pre-filled pen"
+        ],
+        "positioning_strengths": [
+            "Superior weight loss vs oral GLP-1 competitors",
+            "Proven cardiovascular benefit in established ASCVD",
+            "Once-weekly dosing vs daily oral alternatives"
+        ],
+        "positioning_weaknesses": [
+            "GI side effects (nausea) during titration — requires protocol",
+            "Cold-chain storage 2-8°C until first use",
+            "Injectable route vs oral MetaboMax convenience"
+        ],
+        "primary_competitor": "MetaboMax"
+    },
+    {
+        "_id": "drug_oncotarget",
+        "brand_name": "OncoTarget",
+        "generic_name": "Targotinib",
+        "drug_class": "EGFR Tyrosine Kinase Inhibitor",
+        "indications": [
+            "locally advanced or metastatic NSCLC with EGFR exon 19 deletion or L858R mutation",
+            "first-line treatment in EGFR-mutation positive NSCLC"
+        ],
+        "pubmed_search_terms": [
+            "EGFR TKI progression-free survival NSCLC",
+            "oral kinase inhibitor rash management",
+            "OncoTarget vs chemotherapy quality of life"
+        ],
+        "elastic_doc_tags": [
+            "oncotarget",
+            "egfr",
+            "oncology",
+            "kinase-inhibitor",
+            "nsclc",
+            "targeted-therapy"
+        ],
+        "approved_claims": [
+            "Median progression-free survival 18.9 months vs 10.4 months with platinum chemotherapy (HR 0.46, p<0.001) in ONCO-STAR phase III",
+            "Objective response rate 76% vs 31% for chemotherapy (p<0.001)",
+            "Oral once-daily dosing — no infusion center visits required",
+            "Grade 3+ rash in 8.2% of patients; manageable with dose modification per protocol"
+        ],
+        "positioning_strengths": [
+            "High efficacy in EGFR exon 19 and L858R mutations",
+            "Oral once-daily — no IV infusion center burden",
+            "Superior quality of life vs legacy IV chemotherapy regimens"
+        ],
+        "positioning_weaknesses": [
+            "Strict adherence and rash monitoring required",
+            "Grade 3+ rash risk — dose modification protocol essential",
+            "Less infusion-chair visibility vs VenaChemo for adherence tracking"
+        ],
+        "primary_competitor": "VenaChemo"
+    }
+]
