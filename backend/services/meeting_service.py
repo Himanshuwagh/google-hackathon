@@ -409,6 +409,33 @@ async def create_meeting(payload: NewMeetingRequest) -> str:
     return meeting_id
 
 
+async def delete_meeting(meeting_id: str) -> Optional[dict[str, int]]:
+    db = get_database()
+    meeting = await db[COLLECTIONS["meetings"]].find_one({"_id": meeting_id})
+    if not meeting:
+        return None
+
+    briefing_id = meeting.get("briefing_id")
+    briefing_filters: list[dict[str, Any]] = [{"meeting_id": meeting_id}]
+    if briefing_id:
+        briefing_filters.extend(
+            [
+                {"_id": briefing_id},
+                {"briefing_id": briefing_id},
+            ]
+        )
+
+    briefings = await db[COLLECTIONS["briefings"]].delete_many({"$or": briefing_filters})
+    agent_runs = await db["agent_runs"].delete_many({"meeting_id": meeting_id})
+    result = await db[COLLECTIONS["meetings"]].delete_one({"_id": meeting_id})
+
+    return {
+        "meetings": result.deleted_count,
+        "briefings": briefings.deleted_count,
+        "agent_runs": agent_runs.deleted_count,
+    }
+
+
 async def get_meeting_detail(meeting_id: str) -> Optional[dict[str, Any]]:
     logger.info("[GET_DETAIL] Fetching meeting detail for meeting_id=%s", meeting_id)
     db = get_database()

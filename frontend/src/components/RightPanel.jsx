@@ -3,7 +3,7 @@ import styles from './RightPanel.module.css';
 import BriefingTab from './BriefingTab';
 import AboutTab from './AboutTab';
 
-function EmptyState({ meetingsCount, selectedDate }) {
+function EmptyState({ meetingsCount, selectedDate, onAddMeeting }) {
   const selectedDateLabel = selectedDate.toLocaleDateString('en-GB', {
     day: 'numeric',
     month: 'long',
@@ -17,19 +17,27 @@ function EmptyState({ meetingsCount, selectedDate }) {
         You have {meetingsCount} meetings on {selectedDateLabel}.<br/>
         Select one to view the briefing.
       </p>
-      <button className={styles.viewBtn}>View selected date →</button>
+      <button type="button" className={styles.viewBtn} onClick={onAddMeeting}>
+        Add meeting
+      </button>
     </div>
   );
 }
 
-function RightPanel({ selectedMeeting, meetingsCount = 0, selectedDate = new Date(), onRefreshMeetings }) {
+function RightPanel({
+  selectedMeeting,
+  meetingsCount = 0,
+  selectedDate = new Date(),
+  onAddMeeting,
+  onRefreshMeetings,
+}) {
   const [activeTab, setActiveTab] = useState('briefing'); // briefing, about
   const [briefingAction, setBriefingAction] = useState(null);
 
   if (!selectedMeeting) {
     return (
       <main className={styles.rightPanel}>
-        <EmptyState meetingsCount={meetingsCount} selectedDate={selectedDate} />
+        <EmptyState meetingsCount={meetingsCount} selectedDate={selectedDate} onAddMeeting={onAddMeeting} />
       </main>
     );
   }

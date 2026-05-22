@@ -104,6 +104,7 @@ function App() {
   const [meetingsError, setMeetingsError] = useState('');
   const [isLoadingMeetings, setIsLoadingMeetings] = useState(true);
   const [isAddMeetingOpen, setIsAddMeetingOpen] = useState(false);
+  const [deletingMeetingId, setDeletingMeetingId] = useState(null);
   const [toastMessage, setToastMessage] = useState('');
   const hasAutoSelectedMeeting = useRef(false);
 
@@ -235,6 +236,36 @@ function App() {
     window.setTimeout(() => setToastMessage(''), 3600);
   };
 
+  const handleDeleteMeeting = useCallback(async (meeting) => {
+    if (!window.confirm(`Delete the meeting with ${meeting.doctor}?`)) return;
+
+    setDeletingMeetingId(meeting.id);
+    try {
+      const response = await fetchJson(`/meetings/${meeting.id}`, { method: 'DELETE' });
+      const deletingSelectedMeeting = selectedMeetingId === meeting.id;
+      if (deletingSelectedMeeting) {
+        setSelectedMeetingId(null);
+        writeParams({ meeting: null });
+      }
+
+      const nextMeetings = await loadMeetings();
+
+      if (deletingSelectedMeeting) {
+        const replacement = nextMeetings.find((item) => item.date === meeting.date && item.id !== meeting.id);
+        setSelectedMeetingId(replacement?.id || null);
+        writeParams({ meeting: replacement?.id || null });
+      }
+
+      setToastMessage(response.message || 'Meeting deleted.');
+      window.setTimeout(() => setToastMessage(''), 3600);
+    } catch (error) {
+      setToastMessage(error.message || 'Could not delete meeting.');
+      window.setTimeout(() => setToastMessage(''), 3600);
+    } finally {
+      setDeletingMeetingId(null);
+    }
+  }, [loadMeetings, selectedMeetingId]);
+
   return (
     <div className={styles.appContainer} style={{ '--sidebar-width': `${sidebarWidth}px` }}>
       <Topbar 
@@ -255,11 +286,14 @@ function App() {
           width={sidebarWidth}
           onResizeStart={handleSidebarResizeStart}
           onAddMeeting={() => setIsAddMeetingOpen(true)}
+          onDeleteMeeting={handleDeleteMeeting}
+          deletingMeetingId={deletingMeetingId}
         />
         <RightPanel 
           selectedMeeting={selectedMeeting} 
           meetingsCount={filteredMeetings.length}
           selectedDate={selectedDate}
+          onAddMeeting={() => setIsAddMeetingOpen(true)}
           onRefreshMeetings={() => loadMeetings()}
         />
         {isCalendarOpen && (

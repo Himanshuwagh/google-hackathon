@@ -1,8 +1,8 @@
-from fastapi import APIRouter, BackgroundTasks, Query
+from fastapi import APIRouter, BackgroundTasks, HTTPException, Query
 
 from models.meeting import MeetingListItem, NewMeetingRequest, NewMeetingResponse
 from services import agent_runner
-from services.meeting_service import create_meeting, get_meeting_form_options, list_meetings
+from services.meeting_service import create_meeting, delete_meeting, get_meeting_form_options, list_meetings
 
 
 router = APIRouter()
@@ -59,3 +59,22 @@ async def post_meeting_singular(
     background_tasks: BackgroundTasks,
 ) -> NewMeetingResponse:
     return await _create_meeting_response(payload, background_tasks)
+
+
+@router.delete("/{meeting_id}")
+async def remove_meeting(meeting_id: str) -> dict:
+    deleted = await delete_meeting(meeting_id)
+    if deleted is None:
+        raise HTTPException(
+            status_code=404,
+            detail={
+                "code": "MEETING_NOT_FOUND",
+                "message": f"No meeting found with ID {meeting_id}",
+            },
+        )
+
+    return {
+        "meeting_id": meeting_id,
+        "message": "Meeting deleted.",
+        "deleted": deleted,
+    }

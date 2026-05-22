@@ -127,18 +127,7 @@ const normalizeEvidence = (briefing) =>
     };
   });
 
-/**
- * Check whether the detail object contains a briefing we can display.
- * This is used to decide whether auto-generation should be triggered.
- */
-const hasBriefingData = (data) => {
-  if (!data) return false;
-  if (data.briefing) return true;
-  // If status says briefing_ready but briefing object is null, treat as ready
-  // (could be a serialization gap — the data exists in DB).
-  if (data.status === 'briefing_ready' || data.status === 'needs_review') return true;
-  return false;
-};
+const hasBriefingData = (data) => Boolean(data?.briefing);
 
 function BriefingTab({ meeting, onRefreshMeetings, onRegenerateControlChange }) {
   const [detail, setDetail] = useState(null);
@@ -352,18 +341,36 @@ function BriefingTab({ meeting, onRefreshMeetings, onRegenerateControlChange }) 
     0
   );
   const generatedAt = formatGeneratedAt(briefing?.generated_at);
-  const hasWorkflowNotes = Boolean(
-    workflowNotes.objective ||
+  const hasWorkflowReminders = Boolean(
     workflowNotes.sampleReminders.length ||
     workflowNotes.followUpReminders.length
   );
+  const hasReadyStatusWithoutBriefing = Boolean(
+    !briefing &&
+    (detail?.status === 'briefing_ready' || detail?.status === 'needs_review')
+  );
+  const isProcessingBriefing = Boolean(
+    isGenerating ||
+    detail?.status === 'agent_processing' ||
+    meeting.status === 'processing'
+  );
 
   if (isLoading && !detail) {
-    return <div className={styles.stateMessage}>Loading briefing...</div>;
+    return (
+      <div className={styles.stateMessage}>
+        <strong>Loading briefing</strong>
+        <span>Fetching meeting prep, generated notes, and trace history.</span>
+      </div>
+    );
   }
 
   if (error && !detail?.briefing) {
-    return <div className={styles.stateMessage}>{error}</div>;
+    return (
+      <div className={styles.stateMessage}>
+        <strong>Briefing unavailable</strong>
+        <span>{error}</span>
+      </div>
+    );
   }
 
   const askForm = (
@@ -397,14 +404,35 @@ function BriefingTab({ meeting, onRefreshMeetings, onRegenerateControlChange }) 
         {!briefing && (
           <section className={styles.section}>
             <div className={styles.sectionLabel}>Briefing Status</div>
-            <div className={styles.emptyPanel}>
-              {detail?.status === 'failed'
-                ? detail.error_message || meeting.errorMessage || 'Agent could not complete this briefing.'
-                : detail?.status === 'briefing_ready' || detail?.status === 'needs_review'
-                  ? 'Briefing is ready. Reloading details...'
-                  : isGenerating || detail?.status === 'agent_processing'
-                    ? 'Generating briefing with the agent pipeline. This view will update when the backend saves the generated result.'
-                    : 'Starting briefing generation...'}
+            <div className={styles.statusPanel}>
+              <strong>
+                {detail?.status === 'failed'
+                  ? 'Generation failed'
+                  : hasReadyStatusWithoutBriefing
+                    ? 'Saved briefing needs repair'
+                    : isProcessingBriefing
+                      ? 'Generating briefing'
+                      : 'Starting generation'}
+              </strong>
+              <p>
+                {detail?.status === 'failed'
+                  ? detail.error_message || meeting.errorMessage || 'The agent could not complete this briefing.'
+                  : hasReadyStatusWithoutBriefing
+                    ? 'The meeting is marked ready, but the generated briefing payload is not available in this view.'
+                    : isProcessingBriefing
+                      ? 'The agent pipeline is running. Trace steps will update here as the backend saves results.'
+                      : 'The meeting is queued for briefing generation.'}
+              </p>
+              {(detail?.status === 'failed' || hasReadyStatusWithoutBriefing) && (
+                <button
+                  type="button"
+                  className={styles.statusAction}
+                  onClick={handleRegenerate}
+                  disabled={isGenerating}
+                >
+                  {isGenerating ? 'Starting...' : 'Regenerate briefing'}
+                </button>
+              )}
             </div>
           </section>
         )}
@@ -450,7 +478,7 @@ function BriefingTab({ meeting, onRefreshMeetings, onRegenerateControlChange }) 
                   <strong>{evidence.length}</strong>
                 </div>
                 {generatedAt && (
-                  <div className={styles.signalCell}>
+                  <div className={`${styles.signalCell} ${styles.generatedSignalCell}`}>
                     <span>Generated</span>
                     <strong>{generatedAt}</strong>
                   </div>
@@ -471,7 +499,7 @@ function BriefingTab({ meeting, onRefreshMeetings, onRegenerateControlChange }) 
           </>
         )}
 
-        {(drugSections.length > 0 || standalonePoints.length > 0 || hasWorkflowNotes || transitionNotes.length > 0) && (
+        {(drugSections.length > 0 || standalonePoints.length > 0 || hasWorkflowReminders || transitionNotes.length > 0) && (
           <div className={styles.prepLayout}>
             <div className={styles.conversationColumn}>
               {drugSections.length > 0 && (
@@ -563,18 +591,12 @@ function BriefingTab({ meeting, onRefreshMeetings, onRegenerateControlChange }) 
             </div>
 
             <aside className={styles.prepAside}>
-              {hasWorkflowNotes && (
+              {hasWorkflowReminders && (
                 <section className={styles.sideSection}>
                   <div className={styles.sectionHeading}>
                     <div className={styles.sectionLabel}>Rep Workflow</div>
                     <h3>Before and after the visit</h3>
                   </div>
-                  {workflowNotes.objective && (
-                    <div className={styles.workflowBlock}>
-                      <div className={styles.groupLabel}>Objective</div>
-                      <p>{workflowNotes.objective}</p>
-                    </div>
-                  )}
                   {workflowNotes.sampleReminders.length > 0 && (
                     <div className={styles.workflowBlock}>
                       <div className={styles.groupLabel}>Sample reminders</div>
@@ -658,9 +680,6 @@ function BriefingTab({ meeting, onRefreshMeetings, onRegenerateControlChange }) 
                     {item.description && <div className={styles.evidenceDesc}>{item.description}</div>}
                     {item.meta && <div className={styles.evidenceMeta}>{item.meta}</div>}
                     {!item.meta && item.reference && <div className={styles.evidenceMeta}>{item.reference}</div>}
-                    {item.url && (
-                      <div className={styles.evidenceUrl}>{item.url}</div>
-                    )}
                   </>
                 );
                 return item.url ? (

@@ -11,6 +11,8 @@ function Sidebar({
   width,
   onResizeStart,
   onAddMeeting,
+  onDeleteMeeting,
+  deletingMeetingId,
 }) {
   const isToday = (date) => {
     if (!date) return true;
@@ -52,6 +54,25 @@ function Sidebar({
             className={`${styles.meetingItem} ${selectedMeetingId === meeting.id ? styles.active : ''}`}
             onClick={() => onSelectMeeting(meeting.id)}
           >
+            <button
+              type="button"
+              className={styles.deleteMeetingBtn}
+              onClick={(event) => {
+                event.stopPropagation();
+                onDeleteMeeting(meeting);
+              }}
+              disabled={deletingMeetingId === meeting.id}
+              aria-label={`Delete meeting with ${meeting.doctor}`}
+              title="Delete meeting"
+            >
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                <path d="M3 6h18" />
+                <path d="M8 6V4h8v2" />
+                <path d="M19 6l-1 14H6L5 6" />
+                <path d="M10 11v5" />
+                <path d="M14 11v5" />
+              </svg>
+            </button>
             <div className={styles.meetingHeader}>
               <span className={`${styles.statusDot} ${styles[`status-${meeting.status}`]}`}></span>
               <span className={styles.doctorName}>{meeting.doctor}</span>
