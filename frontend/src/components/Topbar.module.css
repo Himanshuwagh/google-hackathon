@@ -65,3 +65,46 @@
   font-size: 17px;
   font-family: 'DM Sans', sans-serif;
 }
+
+@media (max-width: 767px) {
+  .topbar {
+    height: 76px;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    grid-template-rows: auto auto;
+    column-gap: 12px;
+    row-gap: 3px;
+    padding: 10px 16px;
+  }
+
+  .logo {
+    grid-column: 1;
+    grid-row: 1;
+    flex: none;
+    line-height: 1;
+    min-width: 0;
+  }
+
+  .date {
+    grid-column: 1;
+    grid-row: 2;
+    flex: none;
+    justify-content: flex-start;
+    min-width: 0;
+    overflow: hidden;
+    font-size: 14px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .user {
+    align-self: center;
+    flex: none;
+    grid-column: 2;
+    grid-row: 1 / span 2;
+  }
+
+  .userName {
+    display: none;
+  }
+}

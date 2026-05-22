@@ -3,76 +3,129 @@ import { fetchJson } from '../api';
 import styles from './BriefingTab.module.css';
 import ToolTracePanel from './ToolTracePanel';
 
-const formatDate = (value) => {
+const asArray = (value) => Array.isArray(value) ? value : [];
+
+const itemText = (item) => {
+  if (typeof item === 'string') return item;
+  if (!item || typeof item !== 'object') return '';
+  return item.text || item.point || item.warning || item.reason || item.message || item.description || item.title || '';
+};
+
+const textItems = (value) => asArray(value).map(itemText).filter(Boolean);
+
+const formatGeneratedAt = (value) => {
   if (!value) return '';
-  return new Date(value).toLocaleDateString('en-GB', {
+  const date = new Date(value);
+  if (Number.isNaN(date.getTime())) return '';
+  return date.toLocaleString('en-GB', {
     day: 'numeric',
     month: 'short',
-    year: 'numeric'
+    year: 'numeric',
+    hour: '2-digit',
+    minute: '2-digit',
   });
 };
 
-const asArray = (value) => Array.isArray(value) ? value : [];
+const publicSourceType = (source) => {
+  const type = typeof source === 'string'
+    ? source
+    : source?.type || source?.source || source?.source_type || '';
+
+  if (type === 'InternalDoc') return 'Company document';
+  if (type === 'CompetitiveIntel') return 'Competitive intelligence';
+  if (type === 'ClinicalTrials') return 'Clinical trial';
+  return type || 'Source';
+};
+
+const isCompanyDocument = (source) =>
+  publicSourceType(source) === 'Company document';
 
 const sourceLabel = (source) => {
   if (!source) return '';
-  if (typeof source === 'string') return source;
-  const type = source.type || source.source || 'Source';
-  const id = source.doc_id || source.id || source.pmid || source.nctId || source.source_id;
+  if (typeof source === 'string') return publicSourceType(source);
+  const type = publicSourceType(source);
+  const id = isCompanyDocument(source)
+    ? null
+    : source.pmid || source.nctId || source.nct_id || source.id || source.source_id;
   const title = source.title || source.label || source.relevance;
   return [type, id, title].filter(Boolean).join(' · ');
 };
 
-const normalizeTalkingPoints = (briefing) => {
-  const points = [];
-
-  asArray(briefing?.talking_points).forEach((point) => {
-    if (typeof point === 'string') {
-      points.push({ text: point });
-      return;
-    }
-    if (point?.point) {
-      points.push({
-        text: point.point,
-        source: point.citation || sourceLabel(point.source) || sourceLabel(point),
-      });
-    }
-  });
-
-  asArray(briefing?.drug_sections).forEach((section) => {
-    asArray(section.key_talking_points).forEach((point) => {
-      points.push({
-        text: point.point || String(point),
-        source: sourceLabel(point.source),
-        label: section.drug_name,
-      });
-    });
-  });
-
-  return points;
+const normalizePoint = (point, label) => {
+  if (typeof point === 'string') return { text: point, label };
+  if (!point?.point) return null;
+  return {
+    text: point.point,
+    source: point.citation || sourceLabel(point.source) || sourceLabel(point),
+    label,
+    numbers: textItems(point.specific_numbers),
+  };
 };
 
-const normalizeObjections = (briefing) => {
-  if (briefing?.anticipated_objection) {
-    return [briefing.anticipated_objection];
-  }
+const normalizeStandalonePoints = (briefing) =>
+  asArray(briefing?.talking_points)
+    .map((point) => normalizePoint(point))
+    .filter(Boolean);
 
-  return asArray(briefing?.drug_sections).flatMap((section) =>
-    asArray(section.known_objections_responses).map((item) => ({
-      ...item,
-      drug_name: section.drug_name,
-    }))
-  );
+const normalizeDrugSections = (briefing) =>
+  asArray(briefing?.drug_sections).map((section) => ({
+    id: section.drug_id || section.drug_name,
+    name: section.drug_name || section.drug_id || 'Drug detail',
+    points: asArray(section.key_talking_points)
+      .map((point) => normalizePoint(point, section.drug_name))
+      .filter(Boolean),
+    objections: asArray(section.known_objections_responses).map((item) =>
+      typeof item === 'string'
+        ? { objection: item, sources: [] }
+        : {
+            ...item,
+            sources: asArray(item?.sources).map(sourceLabel).filter(Boolean),
+          }
+    ),
+  }));
+
+const normalizeStandaloneObjections = (briefing) =>
+  briefing?.anticipated_objection ? [briefing.anticipated_objection] : [];
+
+const normalizeWorkflowNotes = (briefing) => {
+  const notes = briefing?.rep_workflow_notes || {};
+  return {
+    objective: itemText(notes.objective) || notes.objective || '',
+    sampleReminders: [
+      ...textItems(notes.sample_reminders),
+      ...textItems(notes.planned_samples),
+    ],
+    followUpReminders: [
+      ...textItems(notes.follow_up_reminders),
+      ...textItems(notes.pending_action_items),
+    ],
+  };
 };
+
+const normalizeWarnings = (briefing) => textItems(briefing?.draft_warnings);
 
 const normalizeEvidence = (briefing) =>
-  asArray(briefing?.supporting_evidence).map((evidence) => ({
-    title: evidence.source || evidence.type || evidence.title || 'Evidence',
-    id: evidence.id || evidence.source_id || evidence.pmid || evidence.nctId || evidence.doc_id || evidence.drug_label,
-    description: evidence.relevance || evidence.label || evidence.summary || evidence.content,
-    meta: evidence.journal || evidence.source_label || evidence.url,
-    url: evidence.source_url || evidence.url,
-  }));
+  asArray(briefing?.supporting_evidence).map((evidence) => {
+    const rawUrl =
+      evidence.pdf_url ||
+      evidence.source_url ||
+      evidence.url ||
+      (evidence.pmid ? `https://pubmed.ncbi.nlm.nih.gov/${evidence.pmid}/` : null) ||
+      null;
+    const reference = evidence.pmid
+      ? `PMID: ${evidence.pmid}`
+      : evidence.nctId || evidence.nct_id
+        ? evidence.nctId || evidence.nct_id
+        : null;
+    return {
+      kind: publicSourceType(evidence),
+      title: evidence.title || evidence.label || evidence.drug_label || publicSourceType(evidence) || 'Evidence',
+      description: evidence.relevance || evidence.label || evidence.summary || evidence.content,
+      meta: evidence.source_citation || evidence.journal || evidence.source_label,
+      reference,
+      url: rawUrl,
+    };
+  });
 
 /**
  * Check whether the detail object contains a briefing we can display.
@@ -283,11 +336,27 @@ function BriefingTab({ meeting, onRefreshMeetings, onRegenerateControlChange }) 
   };
 
   const briefing = detail?.briefing;
-  const hcp = detail?.hcp || {};
-  const drug = detail?.drug || {};
-  const talkingPoints = useMemo(() => normalizeTalkingPoints(briefing), [briefing]);
-  const objections = useMemo(() => normalizeObjections(briefing), [briefing]);
+  const standalonePoints = useMemo(() => normalizeStandalonePoints(briefing), [briefing]);
+  const drugSections = useMemo(() => normalizeDrugSections(briefing), [briefing]);
+  const standaloneObjections = useMemo(() => normalizeStandaloneObjections(briefing), [briefing]);
   const evidence = useMemo(() => normalizeEvidence(briefing), [briefing]);
+  const workflowNotes = useMemo(() => normalizeWorkflowNotes(briefing), [briefing]);
+  const transitionNotes = useMemo(() => textItems(briefing?.cross_drug_notes), [briefing]);
+  const warnings = useMemo(() => normalizeWarnings(briefing), [briefing]);
+  const talkingPointCount = standalonePoints.length + drugSections.reduce(
+    (total, section) => total + section.points.length,
+    0
+  );
+  const objectionCount = standaloneObjections.length + drugSections.reduce(
+    (total, section) => total + section.objections.length,
+    0
+  );
+  const generatedAt = formatGeneratedAt(briefing?.generated_at);
+  const hasWorkflowNotes = Boolean(
+    workflowNotes.objective ||
+    workflowNotes.sampleReminders.length ||
+    workflowNotes.followUpReminders.length
+  );
 
   if (isLoading && !detail) {
     return <div className={styles.stateMessage}>Loading briefing...</div>;
@@ -325,21 +394,292 @@ function BriefingTab({ meeting, onRefreshMeetings, onRegenerateControlChange }) 
   return (
     <div className={`${styles.briefingTab} ${isChatOpen ? styles.chatOpen : ''}`}>
       <div className={styles.content}>
-        <section className={styles.section}>
-          <div className={styles.sectionLabel}>Doctor Context</div>
-          <div className={styles.chipRow}>
-            {hcp.specialty && <span className={styles.chip}>Specialty: {hcp.specialty}</span>}
-            {hcp.last_visited && <span className={styles.chip}>Last visited: {formatDate(hcp.last_visited)}</span>}
-            {hcp.relationship_score !== undefined && <span className={styles.chip}>Relationship: {hcp.relationship_score}/10</span>}
-            {asArray(hcp.prescribing_focus).map((focus) => (
-              <span key={focus} className={styles.chip}>Focus: {focus}</span>
-            ))}
-            {asArray(hcp.known_objections).map((objection) => (
-              <span key={objection} className={styles.chip}>Concern: {objection}</span>
-            ))}
-            {drug.brand_name && <span className={styles.chip}>Drug: {drug.brand_name}</span>}
-          </div>
+        {!briefing && (
+          <section className={styles.section}>
+            <div className={styles.sectionLabel}>Briefing Status</div>
+            <div className={styles.emptyPanel}>
+              {detail?.status === 'failed'
+                ? detail.error_message || meeting.errorMessage || 'Agent could not complete this briefing.'
+                : detail?.status === 'briefing_ready' || detail?.status === 'needs_review'
+                  ? 'Briefing is ready. Reloading details...'
+                  : isGenerating || detail?.status === 'agent_processing'
+                    ? 'Generating briefing with the agent pipeline. This view will update when the backend saves the generated result.'
+                    : 'Starting briefing generation...'}
+            </div>
+          </section>
+        )}
 
+        {briefing && (
+          <>
+            <section className={styles.overview}>
+              <div className={styles.overviewMain}>
+                <div className={styles.sectionLabel}>Meeting Prep</div>
+                <h2>Briefing strategy</h2>
+                {workflowNotes.objective && (
+                  <div className={styles.objectiveLine}>
+                    <span>Objective</span>
+                    <strong>{workflowNotes.objective}</strong>
+                  </div>
+                )}
+                {briefing.rep_summary_report ? (
+                  <div className={styles.summaryBox}>{briefing.rep_summary_report}</div>
+                ) : (
+                  talkingPointCount > 0 && (
+                    <div className={styles.summaryBox}>
+                      Talking points, objection responses, and supporting evidence are ready for this meeting.
+                    </div>
+                  )
+                )}
+              </div>
+
+              <div className={styles.signalGrid}>
+                <div className={styles.signalCell}>
+                  <span>Drugs</span>
+                  <strong>{drugSections.length || (talkingPointCount > 0 ? 1 : 0)}</strong>
+                </div>
+                <div className={styles.signalCell}>
+                  <span>Talking points</span>
+                  <strong>{talkingPointCount}</strong>
+                </div>
+                <div className={styles.signalCell}>
+                  <span>Objections</span>
+                  <strong>{objectionCount}</strong>
+                </div>
+                <div className={styles.signalCell}>
+                  <span>Evidence</span>
+                  <strong>{evidence.length}</strong>
+                </div>
+                {generatedAt && (
+                  <div className={styles.signalCell}>
+                    <span>Generated</span>
+                    <strong>{generatedAt}</strong>
+                  </div>
+                )}
+              </div>
+            </section>
+
+            {warnings.length > 0 && (
+              <section className={styles.reviewStrip}>
+                <div className={styles.sectionLabel}>Review Notes</div>
+                <div className={styles.reviewList}>
+                  {warnings.map((warning, index) => (
+                    <div key={`${warning}-${index}`} className={styles.reviewItem}>{warning}</div>
+                  ))}
+                </div>
+              </section>
+            )}
+          </>
+        )}
+
+        {(drugSections.length > 0 || standalonePoints.length > 0 || hasWorkflowNotes || transitionNotes.length > 0) && (
+          <div className={styles.prepLayout}>
+            <div className={styles.conversationColumn}>
+              {drugSections.length > 0 && (
+                <section className={styles.section}>
+                  <div className={styles.sectionHeading}>
+                    <div className={styles.sectionLabel}>Conversation Plan</div>
+                    <h3>Drug details</h3>
+                  </div>
+                  <div className={styles.drugStack}>
+                    {drugSections.map((section, sectionIndex) => (
+                      <article key={section.id || `${section.name}-${sectionIndex}`} className={styles.drugPanel}>
+                        <header className={styles.drugHeader}>
+                          <div>
+                            <div className={styles.drugEyebrow}>Drug {sectionIndex + 1}</div>
+                            <h4>{section.name}</h4>
+                          </div>
+                          <span>{section.points.length} points</span>
+                        </header>
+
+                        {section.points.length > 0 && (
+                          <div className={styles.pointList}>
+                            {section.points.map((point, index) => (
+                              <div key={`${point.text}-${index}`} className={styles.pointCard}>
+                                <div className={styles.pointNumber}>{index + 1}</div>
+                                <div className={styles.pointContent}>
+                                  <p className={styles.pointText}>{point.text}</p>
+                                  {point.numbers?.length > 0 && (
+                                    <div className={styles.numberRow}>
+                                      {point.numbers.map((number) => (
+                                        <span key={number} className={styles.numberChip}>{number}</span>
+                                      ))}
+                                    </div>
+                                  )}
+                                  {point.source && <div className={styles.pointSource}>Source: {point.source}</div>}
+                                </div>
+                              </div>
+                            ))}
+                          </div>
+                        )}
+
+                        {section.objections.length > 0 && (
+                          <div className={styles.objectionGroup}>
+                            <div className={styles.groupLabel}>Objections to prepare</div>
+                            {section.objections.map((item, index) => (
+                              <div key={`${item.objection || section.name}-${index}`} className={styles.objectionBox}>
+                                {item.objection && <p className={styles.objectionPrompt}>{item.objection}</p>}
+                                {item.response && <p><strong>Response:</strong> {item.response}</p>}
+                                {item.competitive_context && <p className={styles.objectionContext}>{item.competitive_context}</p>}
+                                {item.sources?.length > 0 && (
+                                  <div className={styles.objectionSources}>Sources: {item.sources.join(' | ')}</div>
+                                )}
+                              </div>
+                            ))}
+                          </div>
+                        )}
+                      </article>
+                    ))}
+                  </div>
+                </section>
+              )}
+
+              {standalonePoints.length > 0 && (
+                <section className={styles.section}>
+                  <div className={styles.sectionHeading}>
+                    <div className={styles.sectionLabel}>Talking Points</div>
+                    <h3>{drugSections.length > 0 ? 'Additional points' : 'Meeting points'}</h3>
+                  </div>
+                  <div className={styles.pointList}>
+                    {standalonePoints.map((point, index) => (
+                      <div key={`${point.text}-${index}`} className={styles.pointCard}>
+                        <div className={styles.pointNumber}>{index + 1}</div>
+                        <div className={styles.pointContent}>
+                          {point.label && <div className={styles.pointLabel}>{point.label}</div>}
+                          <p className={styles.pointText}>{point.text}</p>
+                          {point.numbers?.length > 0 && (
+                            <div className={styles.numberRow}>
+                              {point.numbers.map((number) => (
+                                <span key={number} className={styles.numberChip}>{number}</span>
+                              ))}
+                            </div>
+                          )}
+                          {point.source && <div className={styles.pointSource}>Source: {point.source}</div>}
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </section>
+              )}
+            </div>
+
+            <aside className={styles.prepAside}>
+              {hasWorkflowNotes && (
+                <section className={styles.sideSection}>
+                  <div className={styles.sectionHeading}>
+                    <div className={styles.sectionLabel}>Rep Workflow</div>
+                    <h3>Before and after the visit</h3>
+                  </div>
+                  {workflowNotes.objective && (
+                    <div className={styles.workflowBlock}>
+                      <div className={styles.groupLabel}>Objective</div>
+                      <p>{workflowNotes.objective}</p>
+                    </div>
+                  )}
+                  {workflowNotes.sampleReminders.length > 0 && (
+                    <div className={styles.workflowBlock}>
+                      <div className={styles.groupLabel}>Sample reminders</div>
+                      <div className={styles.reminderList}>
+                        {workflowNotes.sampleReminders.map((reminder, index) => (
+                          <div key={`${reminder}-${index}`} className={styles.reminderItem}>{reminder}</div>
+                        ))}
+                      </div>
+                    </div>
+                  )}
+                  {workflowNotes.followUpReminders.length > 0 && (
+                    <div className={styles.workflowBlock}>
+                      <div className={styles.groupLabel}>Follow-up reminders</div>
+                      <div className={styles.reminderList}>
+                        {workflowNotes.followUpReminders.map((reminder, index) => (
+                          <div key={`${reminder}-${index}`} className={styles.reminderItem}>{reminder}</div>
+                        ))}
+                      </div>
+                    </div>
+                  )}
+                </section>
+              )}
+
+              {transitionNotes.length > 0 && (
+                <section className={styles.sideSection}>
+                  <div className={styles.sectionHeading}>
+                    <div className={styles.sectionLabel}>Sequence</div>
+                    <h3>Conversation transitions</h3>
+                  </div>
+                  <ol className={styles.transitionList}>
+                    {transitionNotes.map((note, index) => (
+                      <li key={`${note}-${index}`}>{note}</li>
+                    ))}
+                  </ol>
+                </section>
+              )}
+            </aside>
+          </div>
+        )}
+
+        {standaloneObjections.length > 0 && (
+          <section className={styles.section}>
+            <div className={styles.sectionHeading}>
+              <div className={styles.sectionLabel}>Anticipated Objections</div>
+              <h3>General response prep</h3>
+            </div>
+            <div className={styles.generalObjectionGrid}>
+              {standaloneObjections.map((item, index) => (
+                <div key={index} className={styles.objectionBox}>
+                  {typeof item === 'string' ? (
+                    <p>{item}</p>
+                  ) : (
+                    <>
+                      {item.drug_name && <p><strong>{item.drug_name}</strong></p>}
+                      {item.objection && <p className={styles.objectionPrompt}>{item.objection}</p>}
+                      {item.response && <p><strong>Response:</strong> {item.response}</p>}
+                      {item.competitive_context && <p className={styles.objectionContext}>{item.competitive_context}</p>}
+                    </>
+                  )}
+                </div>
+              ))}
+            </div>
+          </section>
+        )}
+
+        {evidence.length > 0 && (
+          <section className={styles.section}>
+            <div className={styles.sectionHeading}>
+              <div className={styles.sectionLabel}>Evidence Used</div>
+              <h3>Sources behind the briefing</h3>
+            </div>
+            <div className={styles.evidenceGrid}>
+              {evidence.map((item, index) => {
+                const content = (
+                  <>
+                    <div className={styles.evidenceTopline}>
+                      <span className={styles.evidenceKind}>{item.kind}</span>
+                      {item.url && <span className={styles.evidenceAction}>Open source</span>}
+                    </div>
+                    <div className={styles.evidenceTitle}>{item.title}</div>
+                    {item.description && <div className={styles.evidenceDesc}>{item.description}</div>}
+                    {item.meta && <div className={styles.evidenceMeta}>{item.meta}</div>}
+                    {!item.meta && item.reference && <div className={styles.evidenceMeta}>{item.reference}</div>}
+                    {item.url && (
+                      <div className={styles.evidenceUrl}>{item.url}</div>
+                    )}
+                  </>
+                );
+                return item.url ? (
+                  <a key={index} href={item.url} className={styles.evidenceCard} target="_blank" rel="noreferrer">
+                    {content}
+                  </a>
+                ) : (
+                  <div key={index} className={styles.evidenceCard}>{content}</div>
+                );
+              })}
+            </div>
+          </section>
+        )}
+
+        <section className={styles.section}>
+          <div className={styles.sectionHeading}>
+            <div className={styles.sectionLabel}>Agent Trace</div>
+            <h3>Generation history</h3>
+          </div>
           <details
             className={styles.traceDetails}
             open={isTraceOpen}
@@ -374,105 +714,6 @@ function BriefingTab({ meeting, onRefreshMeetings, onRegenerateControlChange }) 
             </div>
           </details>
         </section>
-
-        {!briefing && (
-          <section className={styles.section}>
-            <div className={styles.sectionLabel}>Briefing Status</div>
-            <div className={styles.emptyPanel}>
-              {detail?.status === 'failed'
-                ? detail.error_message || meeting.errorMessage || 'Agent could not complete this briefing.'
-                : detail?.status === 'briefing_ready' || detail?.status === 'needs_review'
-                  ? 'Briefing is ready. Reloading details...'
-                  : isGenerating || detail?.status === 'agent_processing'
-                    ? 'Generating briefing with the agent pipeline. This view will update when the backend saves the generated result.'
-                    : 'Starting briefing generation...'}
-            </div>
-          </section>
-        )}
-
-        {briefing?.rep_summary_report && (
-          <section className={styles.section}>
-            <div className={styles.sectionLabel}>Rep Summary</div>
-            <div className={styles.summaryBox}>{briefing.rep_summary_report}</div>
-          </section>
-        )}
-
-        {talkingPoints.length > 0 && (
-          <section className={styles.section}>
-            <div className={styles.sectionHeader}>
-              <div className={styles.sectionLabel}>Talking Points</div>
-              {briefing.compliance_status && (
-                <div className={styles.complianceNote}>Compliance: {briefing.compliance_status}</div>
-              )}
-            </div>
-            {talkingPoints.map((point, index) => (
-              <div key={`${point.text}-${index}`} className={styles.pointCard}>
-                <div className={`${styles.pointNumber} serif`}>{index + 1}</div>
-                <div className={styles.pointContent}>
-                  {point.label && <div className={styles.pointLabel}>{point.label}</div>}
-                  <p className={styles.pointText}>{point.text}</p>
-                  {point.source && <div className={styles.pointSource}>Source: {point.source}</div>}
-                </div>
-              </div>
-            ))}
-          </section>
-        )}
-
-        {objections.length > 0 && (
-          <section className={styles.section}>
-            <div className={styles.sectionLabel}>Anticipated Objections</div>
-            {objections.map((item, index) => (
-              <div key={index} className={styles.objectionBox}>
-                {typeof item === 'string' ? (
-                  <p>{item}</p>
-                ) : (
-                  <>
-                    {item.drug_name && <p><strong>{item.drug_name}</strong></p>}
-                    {item.objection && <p>{item.objection}</p>}
-                    {item.response && <p><strong>Response:</strong> {item.response}</p>}
-                    {item.competitive_context && <p>{item.competitive_context}</p>}
-                  </>
-                )}
-              </div>
-            ))}
-          </section>
-        )}
-
-        {briefing && (
-          <section className={styles.section}>
-            <div className={styles.actionStrip}>
-              <span className={styles.actionChip}>Briefing saved</span>
-              {briefing.calendar_event_id && <span className={styles.actionChip}>Calendar event: {briefing.calendar_event_id}</span>}
-              {briefing.gmail_draft_id && <span className={styles.actionChip}>Gmail draft: {briefing.gmail_draft_id}</span>}
-              {briefing.draft_email_subject && <span className={styles.actionChip}>Email draft prepared</span>}
-            </div>
-          </section>
-        )}
-
-        {evidence.length > 0 && (
-          <section className={styles.section}>
-            <div className={styles.sectionLabel}>Evidence Used</div>
-            <div className={styles.evidenceGrid}>
-              {evidence.map((item, index) => {
-                const content = (
-                  <>
-                    <div className={styles.evidenceTitle}>{item.title}</div>
-                    {item.id && <div className={styles.evidenceSub}>{item.id}</div>}
-                    {item.description && <div className={styles.evidenceDesc}>{item.description}</div>}
-                    {item.meta && <div className={styles.evidenceMeta}>{item.meta}</div>}
-                  </>
-                );
-                return item.url ? (
-                  <a key={index} href={item.url} className={styles.evidenceCard} target="_blank" rel="noreferrer">
-                    {content}
-                  </a>
-                ) : (
-                  <div key={index} className={styles.evidenceCard}>{content}</div>
-                );
-              })}
-            </div>
-          </section>
-        )}
       </div>
 
       {isChatOpen && (
@@ -492,7 +733,7 @@ function BriefingTab({ meeting, onRefreshMeetings, onRegenerateControlChange }) 
           <div className={styles.chatMessages}>
             {messages.length === 0 && (
               <div className={styles.emptyChat}>
-                Ask about this doctor, briefing evidence, objections, compliance rules, or the project workflow.
+                Ask about this doctor, briefing evidence, objections, or the project workflow.
               </div>
             )}
             {messages.map((msg, idx) => (

@@ -8,95 +8,38 @@ const AGENT_STEPS = [
     name: 'Meeting planner',
     agent: 'MeetingPlanner',
     description: 'Read the meeting, doctor, drug, and visit context to decide what the rep should prepare.',
-    data: 'MongoDB meeting, doctor profile, drug profile',
   },
   {
     key: 'retriever',
     name: 'Information retriever',
     agent: 'InformationRetriever',
     description: 'Collected internal context and external evidence that could support the briefing.',
-    data: 'Elasticsearch, PubMed, ClinicalTrials.gov, OpenFDA',
   },
   {
     key: 'writer',
     name: 'Brief writer',
     agent: 'BriefWriter',
     description: 'Turned the selected evidence into talking points, objections, and follow-up wording.',
-    data: 'Retrieved evidence and CRM memory',
   },
   {
     key: 'quality',
     name: 'Claim quality gate',
     agent: 'ClaimQualityGate',
     description: 'Verified each talking point has numeric, drug-owned, cited evidence before compliance review.',
-    data: 'Evidence ledger and draft claims',
   },
   {
     key: 'compliance',
     name: 'Compliance checker',
     agent: 'ComplianceChecker',
     description: 'Checked the output against promotional and sample-handling rules before saving.',
-    data: 'MongoDB compliance rules',
   },
   {
     key: 'executor',
     name: 'Action executor',
     agent: 'ActionExecutor',
     description: 'Saved the briefing and updated the meeting so the dashboard can show the result.',
-    data: 'MongoDB briefing and meeting records',
   },
 ];
-
-const sourceKey = (source) => {
-  if (!source || typeof source !== 'object') return '';
-  const raw = String(source.source || source.type || '').toLowerCase();
-  if (raw.includes('pubmed') || source.pmid) return 'pubmed';
-  if (raw.includes('clinical') || source.nctId || source.nct_id) return 'clinical';
-  if (raw.includes('openfda') || source.drug_label) return 'openfda';
-  if (
-    raw.includes('internal') ||
-    raw.includes('competitive') ||
-    raw.includes('crm') ||
-    source.doc_id ||
-    source.source_id
-  ) {
-    return 'elastic';
-  }
-  return '';
-};
-
-const collectEvidenceSources = (briefing) => {
-  const sources = [];
-  const visit = (value) => {
-    if (!value) return;
-    if (Array.isArray(value)) {
-      value.forEach(visit);
-      return;
-    }
-    if (typeof value !== 'object') return;
-
-    if (sourceKey(value)) sources.push(value);
-    if (value.source && typeof value.source === 'object') sources.push(value.source);
-
-    Object.entries(value).forEach(([key, child]) => {
-      if (key === 'source') return;
-      if (Array.isArray(child) || (child && typeof child === 'object')) {
-        visit(child);
-      }
-    });
-  };
-
-  visit(briefing?.supporting_evidence);
-  visit(briefing?.drug_sections);
-  return sources;
-};
-
-const countBy = (items, keyFn) =>
-  items.reduce((counts, item) => {
-    const key = keyFn(item);
-    if (!key) return counts;
-    return { ...counts, [key]: (counts[key] || 0) + 1 };
-  }, {});
 
 const connectionLabel = (state) => {
   if (state === 'complete') return 'Trace complete';
@@ -179,8 +122,6 @@ function ToolTracePanel({ meeting, detail, onRefreshMeetings, onTraceComplete })
   const storedTrace = briefing?.tool_trace;
   const isFailed = detail?.status === 'failed' || meeting.status === 'failed';
 
-  const evidenceSources = useMemo(() => collectEvidenceSources(briefing), [briefing]);
-  const sourceCounts = useMemo(() => countBy(evidenceSources, sourceKey), [evidenceSources]);
   const stepStates = useMemo(() => {
     const states = AGENT_STEPS.reduce((acc, step) => ({ ...acc, [step.agent]: 'waiting' }), {});
 
@@ -213,98 +154,6 @@ function ToolTracePanel({ meeting, detail, onRefreshMeetings, onTraceComplete })
     () => Boolean(briefing || storedTrace?.steps || events.some((event) => event.tag === 'STEP' && event.step)),
     [briefing, events, storedTrace]
   );
-  const retrieverState = stepStates.InformationRetriever;
-  const plannerState = stepStates.MeetingPlanner;
-  const executorState = stepStates.ActionExecutor;
-
-  const dataSources = useMemo(() => {
-    const retrieverStatus = retrieverState === 'done'
-      ? 'Checked'
-      : retrieverState === 'running'
-        ? 'Checking'
-        : 'Waiting';
-    const sources = [
-      {
-        name: 'MongoDB Atlas',
-        purpose: 'Meeting schedule, doctor profile, drug profile, CRM history, compliance rules, and saved briefing.',
-        status: plannerState === 'done' || executorState === 'done'
-          ? 'Used'
-          : plannerState === 'running'
-            ? 'Reading'
-            : 'Waiting',
-      },
-      {
-        name: 'Elasticsearch',
-        purpose: sourceCounts.elastic
-          ? `${sourceCounts.elastic} internal evidence item${sourceCounts.elastic === 1 ? '' : 's'} ${
-              retrieverState === 'done' ? 'used' : 'referenced in the saved briefing'
-            } from company docs, CRM memory, or competitive intel.`
-          : 'Internal company docs, CRM memory, and competitive intelligence search.',
-        status: sourceCounts.elastic && retrieverState === 'done' ? 'Used' : retrieverStatus,
-      },
-    ];
-
-    if (sourceCounts.pubmed || retrieverState === 'running' || retrieverState === 'done') {
-      sources.push({
-        name: 'PubMed API',
-        purpose: sourceCounts.pubmed
-          ? `${sourceCounts.pubmed} literature reference${sourceCounts.pubmed === 1 ? '' : 's'} ${
-              retrieverState === 'done' ? 'included' : 'found in the saved briefing'
-            }.`
-          : 'Literature evidence lookup when needed.',
-        status: sourceCounts.pubmed && retrieverState === 'done' ? 'Used' : retrieverStatus,
-      });
-    }
-
-    if (sourceCounts.clinical || retrieverState === 'running' || retrieverState === 'done') {
-      sources.push({
-        name: 'ClinicalTrials.gov API',
-        purpose: sourceCounts.clinical
-          ? `${sourceCounts.clinical} trial reference${sourceCounts.clinical === 1 ? '' : 's'} ${
-              retrieverState === 'done' ? 'included' : 'found in the saved briefing'
-            }.`
-          : 'Clinical trial lookup when needed.',
-        status: sourceCounts.clinical && retrieverState === 'done' ? 'Used' : retrieverStatus,
-      });
-    }
-
-    if (sourceCounts.openfda || retrieverState === 'running' || retrieverState === 'done') {
-      sources.push({
-        name: 'OpenFDA API',
-        purpose: sourceCounts.openfda
-          ? `${sourceCounts.openfda} drug label reference${sourceCounts.openfda === 1 ? '' : 's'} ${
-              retrieverState === 'done' ? 'included' : 'found in the saved briefing'
-            }.`
-          : 'Drug label lookup when needed.',
-        status: sourceCounts.openfda && retrieverState === 'done' ? 'Used' : retrieverStatus,
-      });
-    }
-
-    if (briefing?.gmail_draft_id && executorState === 'done') {
-      sources.push({
-        name: 'Gmail API',
-        purpose: `Draft email created: ${briefing.gmail_draft_id}`,
-        status: 'Used',
-      });
-    } else if (briefing?.draft_email_subject && executorState === 'done') {
-      sources.push({
-        name: 'Email draft',
-        purpose: 'Draft subject and body were prepared in the briefing. Gmail was not called for this run.',
-        status: 'Prepared',
-      });
-    }
-
-    if (briefing?.calendar_event_id && executorState === 'done') {
-      sources.push({
-        name: 'Google Calendar API',
-        purpose: `Calendar prep block created: ${briefing.calendar_event_id}`,
-        status: 'Used',
-      });
-    }
-
-    return sources;
-  }, [briefing, executorState, plannerState, retrieverState, sourceCounts]);
-
   const effectiveConnectionState = briefing ? 'complete' : connectionState;
   const isComplete = effectiveConnectionState === 'complete' || Boolean(briefing);
 
@@ -365,41 +214,18 @@ function ToolTracePanel({ meeting, detail, onRefreshMeetings, onTraceComplete })
               <div className={styles.traceMarker} aria-hidden="true" />
               <div className={styles.traceBody}>
                 <div className={styles.traceTopline}>
-                  <div>
-                    <div className={styles.agentName}>{step.name}</div>
-                    <div className={styles.agentId}>{step.agent}</div>
-                  </div>
+                  <div className={styles.agentName}>{step.name}</div>
                   <span className={`${styles.statusPill} ${styles[`status-${step.status}`]}`}>
                     {stepStateLabel[step.status]}
                   </span>
                 </div>
                 {(step.status === 'running' || step.status === 'failed' || isComplete) && (
-                  <>
-                    <p>{step.description}</p>
-                    <div className={styles.dataLine}>Data used: {step.data}</div>
-                  </>
+                  <p>{step.description}</p>
                 )}
               </div>
             </div>
           ))}
         </div>
-
-        {(isComplete || isFailed) && (
-          <div className={styles.sourceTrail}>
-            <div className={styles.sectionTitle}>Data & APIs used</div>
-            <div className={styles.sourceGrid}>
-              {dataSources.map((source) => (
-                <div key={source.name} className={styles.sourceItem}>
-                  <div className={styles.sourceTopline}>
-                    <div className={styles.sourceName}>{source.name}</div>
-                    <span>{source.status}</span>
-                  </div>
-                  <p>{source.purpose}</p>
-                </div>
-              ))}
-            </div>
-          </div>
-        )}
       </div>
     </div>
   );

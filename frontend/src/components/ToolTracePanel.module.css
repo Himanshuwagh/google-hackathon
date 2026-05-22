@@ -14,8 +14,7 @@
   padding: 16px 18px 14px;
 }
 
-.eyebrow,
-.sectionTitle {
+.eyebrow {
   color: var(--text-tertiary);
   font-size: 11px;
   font-weight: 700;
@@ -32,8 +31,7 @@
 }
 
 .connectionPill,
-.statusPill,
-.sourceTopline span {
+.statusPill {
   background-color: var(--accent-light);
   border-radius: 999px;
   color: var(--accent);
@@ -156,40 +154,28 @@
   padding-bottom: 15px;
 }
 
-.traceTopline,
-.sourceTopline {
+.traceTopline {
   align-items: flex-start;
   display: flex;
   gap: 10px;
   justify-content: space-between;
 }
 
-.agentName,
-.sourceName {
+.agentName {
   color: var(--text-primary);
   font-size: 15px;
   font-weight: 700;
   line-height: 1.25;
 }
 
-.agentId {
-  color: var(--text-tertiary);
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 12px;
-  margin-top: 2px;
-}
-
-.traceBody p,
-.sourceItem p {
+.traceBody p {
   color: var(--text-secondary);
   font-size: 14px;
   line-height: 1.45;
 }
 
 .trace-running .agentName,
-.trace-running .agentId,
 .trace-running .traceBody p,
-.trace-running .dataLine,
 .trace-running .statusPill {
   animation: shimmer 3.8s linear infinite;
   background: linear-gradient(100deg, rgba(70, 70, 70, 0.52) 0%, #1f1f1f 22%, #ffffff 46%, #1f1f1f 58%, rgba(70, 70, 70, 0.52) 100%);
@@ -201,27 +187,6 @@
 
 .trace-running .statusPill {
   background-color: var(--status-processing-bg);
-}
-
-.dataLine {
-  color: var(--text-tertiary);
-  font-size: 12px;
-  line-height: 1.35;
-}
-
-.sourceTrail,
-.sourceGrid {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-}
-
-.sourceItem {
-  border-top: 1px solid var(--border-light);
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-  padding-top: 10px;
 }
 
 @keyframes pulse {

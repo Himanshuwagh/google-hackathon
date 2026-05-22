@@ -1,5 +1,8 @@
+import json
 import logging
 from datetime import UTC, datetime, time
+from functools import lru_cache
+from pathlib import Path
 from typing import Any, Optional
 from uuid import uuid4
 from zoneinfo import ZoneInfo
@@ -18,6 +21,12 @@ REAL_BRIEFING_FILTER = {
         {"generated_by": "pharma_adk_pipeline"},
     ]
 }
+COMPANY_DOCS_PATH = (
+    Path(__file__).resolve().parents[2]
+    / "pharma-briefing-agent"
+    / "data"
+    / "elastic_company_docs.json"
+)
 
 
 def _display_time(value: datetime) -> str:
@@ -88,6 +97,58 @@ def _public_drug(drug: Optional[dict[str, Any]]) -> dict[str, Any]:
         "brand_name": drug.get("brand_name") or drug.get("drug_name") or drug.get("name"),
         "drug_class": drug.get("drug_class") or drug.get("class"),
     }
+
+
+@lru_cache(maxsize=1)
+def _company_document_catalog() -> dict[str, dict[str, Any]]:
+    try:
+        with COMPANY_DOCS_PATH.open(encoding="utf-8") as catalog_file:
+            documents = json.load(catalog_file)
+    except (OSError, json.JSONDecodeError) as exc:
+        logger.warning("Could not load company document catalog for evidence hydration: %s", exc)
+        return {}
+
+    return {
+        str(document["doc_id"]): document
+        for document in documents
+        if isinstance(document, dict) and document.get("doc_id")
+    }
+
+
+def _hydrate_briefing_evidence(briefing: dict[str, Any]) -> dict[str, Any]:
+    supporting_evidence = briefing.get("supporting_evidence")
+    if not isinstance(supporting_evidence, list):
+        return briefing
+
+    catalog = _company_document_catalog()
+    hydrated_items = []
+    for evidence in supporting_evidence:
+        if not isinstance(evidence, dict):
+            hydrated_items.append(evidence)
+            continue
+
+        item = dict(evidence)
+        source_type = item.get("source") or item.get("type")
+        if source_type == "PubMed":
+            pmid = item.get("pmid") or item.get("source_id") or item.get("id")
+            if pmid and not item.get("source_url") and not item.get("url"):
+                item["source_url"] = f"https://pubmed.ncbi.nlm.nih.gov/{pmid}/"
+
+        if source_type == "InternalDoc":
+            doc_id = item.get("doc_id") or item.get("source_id") or item.get("id")
+            document = catalog.get(str(doc_id)) if doc_id else None
+            if document:
+                item.setdefault("title", document.get("title"))
+                if document.get("source") and not item.get("source_citation"):
+                    item["source_citation"] = document["source"]
+                if document.get("pdf_url") and not item.get("pdf_url") and not item.get("url"):
+                    item["pdf_url"] = document["pdf_url"]
+
+        hydrated_items.append(item)
+
+    hydrated_briefing = dict(briefing)
+    hydrated_briefing["supporting_evidence"] = hydrated_items
+    return hydrated_briefing
 
 
 def _briefing_id(briefing: dict[str, Any]) -> str | None:
@@ -394,7 +455,7 @@ async def get_meeting_detail(meeting_id: str) -> Optional[dict[str, Any]]:
         briefing_id = None
     if briefing:
         briefing["briefing_id"] = _briefing_id(briefing)
-        briefing = _serialize(briefing)
+        briefing = _serialize(_hydrate_briefing_evidence(briefing))
 
     logger.info(
         "[GET_DETAIL] Returning: meeting_id=%s, status=%s, has_briefing=%s, briefing_id=%s",

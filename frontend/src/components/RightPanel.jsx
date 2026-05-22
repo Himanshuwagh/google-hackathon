@@ -36,7 +36,6 @@ function RightPanel({ selectedMeeting, meetingsCount = 0, selectedDate = new Dat
 
   const getStatusText = (meeting) => {
     const { status } = meeting;
-    if (meeting.rawStatus === 'needs_review') return 'Needs Review';
     switch (status) {
       case 'ready': return 'Briefing Ready';
       case 'processing': return 'Processing...';
