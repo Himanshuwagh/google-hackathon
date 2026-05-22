@@ -48,17 +48,19 @@ _es = _get_es_client()
 
 
 def search_company_docs(query_text: str, drug_id: str) -> dict:
-    """Searches the company documents index for drug datasheets and
-    clinical trial summaries relevant to a specific drug.
+    """
+    Searches the company documents index for drug clinical trial summaries,
+    prescribing information, and datasheets relevant to a specific drug.
 
     Uses a bool query that combines full-text search on the content
-    field with an exact-match filter on drug_id. This finds the most
-    relevant internal documents (datasheets, trial summaries) for a
-    given drug based on a natural language query.
+    field with an exact-match filter on drug_id. Returns rich evidence
+    objects including pdf_url (link to real published paper or internal
+    document), source (journal citation), and description.
 
     The agent should call this when it needs drug-specific clinical
     data, prescribing information, or trial evidence to build
-    talking points for a briefing.
+    talking points for a briefing. Include pdf_url and source in
+    the evidence_ledger of the briefing for frontend display.
 
     Args:
         query_text: Natural language search query describing what
@@ -76,10 +78,13 @@ def search_company_docs(query_text: str, drug_id: str) -> dict:
             "results": [
                 {
                     "doc_id": "cd_001",
-                    "title": "Cardivex (Lisinopril 10mg) — Full Product Datasheet",
+                    "title": "ALLHAT Trial — Lisinopril vs Chlorthalidone...",
+                    "description": "Landmark RCT comparing ACE inhibitor...",
+                    "source": "JAMA, December 18, 2002 | PMID: 12479763",
+                    "pdf_url": "https://pubmed.ncbi.nlm.nih.gov/12479763/",
                     "content": "...",
                     "score": 4.52,
-                    "doc_type": "datasheet",
+                    "doc_type": "clinical_trial",
                     "tags": ["lisinopril", "ace-inhibitor"]
                 },
                 ...
@@ -108,6 +113,9 @@ def search_company_docs(query_text: str, drug_id: str) -> dict:
         results.append({
             "doc_id": src.get("doc_id", hit["_id"]),
             "title": src.get("title", ""),
+            "description": src.get("description", ""),
+            "source": src.get("source", ""),
+            "pdf_url": src.get("pdf_url", ""),
             "content": src.get("content", ""),
             "score": round(hit["_score"], 2),
             "doc_type": src.get("doc_type", ""),

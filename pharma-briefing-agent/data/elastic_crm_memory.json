@@ -3,317 +3,248 @@
         "doc_id": "crm_001",
         "hcp_id": "hcp_ananya_mehta",
         "rep_id": "rep_rakesh_sharma",
-        "drug_ids": [
-            "drug_lisinopril_10mg"
-        ],
+        "drug_ids": ["drug_lisinopril_10mg"],
         "date": "2025-03-15",
-        "content": "Met Dr. Mehta at Kokilaben OPD for 15 minutes. She showed strong interest in renal protection data for her diabetic hypertensive patients. Currently prescribes Telmisartan for most HTN cases but is open to switching to Cardivex if we provide India-specific RCT data. Raised concern about patient affordability — many of her patients are lower-middle class from Andheri/Jogeshwari. Requested 10 physician samples. Follow-up: Send EUCLID trial reprint and check PAP eligibility criteria. Sentiment: Positive."
+        "content": "Met Dr. Mehta at Kokilaben OPD for 15 minutes. She showed strong interest in renal protection data for her diabetic hypertensive patients. Currently prescribes Telmisartan for most HTN cases but is open to switching to Cardivex if we provide India-specific RCT data. Raised concern about patient affordability — many of her patients are lower-middle class from Andheri/Jogeshwari. Requested 10 physician samples. Follow-up: Send EUCLID trial reprint (PMID: 9217721) and check PAP eligibility criteria. Sentiment: Positive."
     },
     {
         "doc_id": "crm_002",
         "hcp_id": "hcp_ananya_mehta",
         "rep_id": "rep_rakesh_sharma",
-        "drug_ids": [
-            "drug_lisinopril_10mg"
-        ],
+        "drug_ids": ["drug_lisinopril_10mg"],
         "date": "2025-01-10",
-        "content": "Brief 5-minute corridor meeting at Kokilaben with Dr. Mehta. She mentioned a heart failure patient who responded well to Lisinopril after switching from Enalapril — appreciates the once-daily convenience. However, one of her patients developed persistent dry cough and had to discontinue. She asked if we have cough incidence data specifically from Indian populations. Note: she is presenting at Mumbai Cardiology Society next month — potential KOL opportunity. Sentiment: Neutral-positive."
+        "content": "Brief 5-minute corridor meeting at Kokilaben with Dr. Mehta. She mentioned a heart failure patient who responded well to Lisinopril after switching from Enalapril — appreciates the once-daily convenience. However, one of her patients developed persistent dry cough and had to discontinue. She asked if we have cough incidence data specifically from Indian populations (EUCLID reported 11.9%). Note: she is presenting at Mumbai Cardiology Society next month — potential KOL opportunity. Sentiment: Neutral-positive."
     },
     {
         "doc_id": "crm_003",
         "hcp_id": "hcp_ananya_mehta",
         "rep_id": "rep_rakesh_sharma",
-        "drug_ids": [
-            "drug_lisinopril_10mg",
-            "drug_amlodipine_5mg"
-        ],
+        "drug_ids": ["drug_lisinopril_10mg", "drug_amlodipine_5mg"],
         "date": "2024-10-22",
-        "content": "Detailed 20-minute meeting with Dr. Mehta in her office. Discussed the Cardivex + Renova combination strategy for resistant hypertension. She was receptive to the reduced edema data when combining ACE inhibitor with CCB vs CCB alone. Key insight: she specifically asked about head-to-head data vs Telmisartan + Amlodipine combinations, which is her current go-to regimen. Requested a CME presentation slot at her department grand rounds. Action: prepare 15-min slide deck on combination therapy outcomes."
+        "content": "Detailed 20-minute meeting with Dr. Mehta in her office. Discussed the Cardivex + Renova combination strategy for resistant hypertension. She was receptive to the reduced edema data when combining ACE inhibitor with CCB vs CCB alone (3.1% vs 8.7%, ASCOT-BPLA subgroup). Key insight: she specifically asked about head-to-head data vs Telmisartan + Amlodipine combinations, which is her current go-to regimen. Requested a CME presentation slot at her department grand rounds. Action: prepare 15-min slide deck on combination therapy outcomes from ASCOT-BPLA South Asian data. Sentiment: Engaged."
     },
     {
         "doc_id": "crm_006",
         "hcp_id": "hcp_ananya_mehta",
         "rep_id": "rep_rakesh_sharma",
-        "drug_ids": [
-            "drug_lisinopril_10mg",
-            "drug_amlodipine_5mg"
-        ],
+        "drug_ids": ["drug_lisinopril_10mg", "drug_amlodipine_5mg"],
         "date": "2025-06-05",
-        "content": "Pre-call planning note for Dr. Mehta's June hypertension portfolio discussion. Objective: address cost concerns and position Cardivex first, then transition to Renova for mixed cardiac patients needing additional BP control. Pending action items: bring renal safety data for diabetic hypertensive patients and clarify patient assistance program eligibility. Planned samples: 10 Lisinopril 10mg physician samples only if standard documentation is completed and packs are marked Physician Sample - Not for Sale."
+        "content": "Pre-call planning note for Dr. Mehta's June hypertension portfolio discussion. Objective: address cost concerns and position Cardivex first, then transition to Renova for mixed cardiac patients needing additional BP control. Pending action items: bring EUCLID renal safety data (albumin excretion 49.7% reduction in microalbuminuric patients) and clarify patient assistance program eligibility thresholds. Planned samples: 10 Lisinopril 10mg physician samples only if standard documentation is completed and packs are marked Physician Sample — Not for Sale. She has confirmed her grand rounds slot for July 15."
     },
     {
         "doc_id": "crm_004",
         "hcp_id": "hcp_vikram_patel",
         "rep_id": "rep_rakesh_sharma",
-        "drug_ids": [
-            "drug_amlodipine_5mg"
-        ],
+        "drug_ids": ["drug_amlodipine_5mg"],
         "date": "2025-04-20",
-        "content": "Met Dr. Patel at Fortis Mulund cardiology OPD for 10 minutes. He covers a large practice area — Mulund, Thane, and Kalyan. Primarily prescribes generic Amlodipine from local manufacturers and is skeptical of branded generics: 'same molecule, why pay more?' However, he showed genuine interest in ASCOT-BPLA South Asian subgroup data. Uses Amlodipine + Telmisartan combination frequently. Main patient complaint is peripheral edema — he asked for comparative edema rates between Renova monotherapy vs Renova + Cardivex combo. Sentiment: Tough sell, needs strong clinical differentiator."
+        "content": "Met Dr. Patel at Fortis Mulund cardiology OPD for 10 minutes. He covers a large practice area — Mulund, Thane, and Kalyan. Primarily prescribes generic Amlodipine from local manufacturers and is skeptical of branded generics: 'same molecule, why pay more?' However, he showed genuine interest in ASCOT-BPLA South Asian subgroup data (28% RRR MACE, n=1,240). Uses Amlodipine + Telmisartan combination frequently. Main patient complaint is peripheral edema — he asked for comparative edema rates between Renova monotherapy vs Renova + Cardivex combo. Sentiment: Tough sell, needs strong clinical differentiator on edema data."
     },
     {
         "doc_id": "crm_005",
         "hcp_id": "hcp_vikram_patel",
         "rep_id": "rep_rakesh_sharma",
-        "drug_ids": [
-            "drug_amlodipine_5mg",
-            "drug_lisinopril_10mg"
-        ],
+        "drug_ids": ["drug_amlodipine_5mg", "drug_lisinopril_10mg"],
         "date": "2025-01-08",
-        "content": "First call with Dr. Patel at Fortis. He was initially dismissive — very busy OPD with 50+ patients that day. Got 5 minutes only. He acknowledged he hasn't seen Indian-specific outcomes data for branded Amlodipine and was mildly curious about our ASCOT subgroup analysis. He mentioned losing 2-3 patients per month to Cilnidipine due to edema concerns. Key opening: position Renova + Cardivex combo as the edema-reducing alternative to CCB monotherapy. Left behind a one-page clinical summary. Sentiment: Cold but left the door open."
+        "content": "First call with Dr. Patel at Fortis. He was initially dismissive — very busy OPD with 50+ patients that day. Got 5 minutes only. He acknowledged he hasn't seen Indian-specific outcomes data for branded Amlodipine and was mildly curious about our ASCOT subgroup analysis. He mentioned losing 2-3 patients per month to Cilnidipine due to edema concerns. Key opening: position Renova + Cardivex combo as the edema-reducing alternative to CCB monotherapy (3.1% vs 8.7% from ASCOT arm). Left behind a one-page clinical summary. Sentiment: Cold but left the door open."
     },
     {
         "doc_id": "crm_106",
         "hcp_id": "hcp_amit_singh",
         "rep_id": "rep_arjun_desai",
-        "drug_ids": [
-            "drug_lisinopril_10mg",
-            "drug_amlodipine_5mg"
-        ],
+        "drug_ids": ["drug_lisinopril_10mg", "drug_amlodipine_5mg"],
         "date": "2025-04-08",
-        "content": "Met Dr. Amit Singh at Jupiter Hospital Pune. Discussed drug_lisinopril_10mg, drug_amlodipine_5mg. Addressed concerns regarding prefers newer ARBs. Doctor was receptive and requested samples. Needs more data on hypertension."
+        "content": "Met Dr. Amit Singh at Jupiter Hospital Pune cardiology OPD — 12-minute appointment. He is a senior interventional cardiologist with a large post-PCI and HFrEF follow-up population. Raised strong preference for newer ARBs (Telmisartan, Sacubitril/Valsartan) over ACE inhibitors, citing cough as a class issue. Presented EUCLID renal data and ALLHAT MACE equivalence — he acknowledged the renal protection argument but said 'most of my patients are already on ARBs and I won't switch stable patients.' Opened conversation on Amlodipine add-on for resistant HTN. He requested the ASCOT-BPLA South Asian subgroup one-pager. Samples: accepted 5 Lisinopril 10mg packs for new-to-ACEi patients only. Sentiment: Resistant on Cardivex switch, moderately open on Renova add-on."
     },
     {
         "doc_id": "crm_107",
         "hcp_id": "hcp_amit_singh",
         "rep_id": "rep_arjun_desai",
-        "drug_ids": [
-            "drug_lisinopril_10mg",
-            "drug_amlodipine_5mg"
-        ],
+        "drug_ids": ["drug_lisinopril_10mg", "drug_amlodipine_5mg"],
         "date": "2025-04-29",
-        "content": "Met Dr. Amit Singh at Jupiter Hospital Pune. Discussed drug_lisinopril_10mg, drug_amlodipine_5mg. Addressed concerns regarding prefers newer ARBs. Doctor was receptive and requested samples. Needs more data on hypertension."
+        "content": "Follow-up visit with Dr. Amit Singh. He had read the ASCOT-BPLA South Asian data — acknowledged the 28% RRR is 'actually reasonable.' Said he is now considering Renova as second-line add-on to his ARB regimen for two resistant HTN patients rather than switching to Cardivex. Key win: first mention of willingness to trial Renova + ARB combo, though he wants to see if combination with Telmisartan has specific data. Next steps: send Renova + ARB combination tolerability note from post-hoc ASCOT analysis. He remains firm against switching established patients off ARBs to ACEi. Sentiment: Slowly warming on Renova, unchanged on Cardivex."
     },
     {
         "doc_id": "crm_108",
         "hcp_id": "hcp_neha_gupta",
         "rep_id": "rep_arjun_desai",
-        "drug_ids": [
-            "drug_lisinopril_10mg"
-        ],
+        "drug_ids": ["drug_lisinopril_10mg"],
         "date": "2025-03-26",
-        "content": "Met Dr. Neha Gupta at Apollo Hospitals Hyderabad. Discussed drug_lisinopril_10mg. Addressed concerns regarding needs cardiovascular safety data. Doctor was receptive and requested samples. Needs more data on type 2 diabetes."
+        "content": "15-minute meeting with Dr. Neha Gupta at Apollo Hospitals Hyderabad endocrinology OPD. She manages a high-volume diabetic population and is very data-driven. Primary concern: cardiovascular safety of ACE inhibitors in T2DM patients on SGLT-2 inhibitors — asked specifically about hyperkalaemia risk when combining Lisinopril with Dapagliflozin. Provided ALLHAT diabetic subgroup data and clarification that SGLT-2 inhibitors actually reduce hyperkalemia risk via urinary K+ excretion, making the combination safe. She requested literature on Lisinopril + SGLT-2 combination — flagged as a key gap to address. Accepted 5 Cardivex samples for T2DM + microalbuminuric patients. Sentiment: Analytically engaged, needs specific combination safety data."
     },
     {
         "doc_id": "crm_109",
         "hcp_id": "hcp_neha_gupta",
         "rep_id": "rep_arjun_desai",
-        "drug_ids": [
-            "drug_lisinopril_10mg"
-        ],
+        "drug_ids": ["drug_lisinopril_10mg"],
         "date": "2025-01-20",
-        "content": "Met Dr. Neha Gupta at Apollo Hospitals Hyderabad. Discussed drug_lisinopril_10mg. Addressed concerns regarding needs cardiovascular safety data. Doctor was receptive and requested samples. Needs more data on type 2 diabetes."
+        "content": "First call with Dr. Neha Gupta at Apollo Hyderabad. She was warm but cautious — she prescribes ACE inhibitors primarily for diabetic nephropathy but has concerns about dry cough causing non-compliance in her clinic (many patients stop and don't report it). She asked whether there's a patient-reported outcome instrument in EUCLID for cough-related QoL. Left behind EUCLID one-pager (PMID: 9217721) with cough incidence table: 11.9% vs 4.9% placebo. She wants a switch algorithm — when to choose ACEi vs ARB for diabetic nephropathy. Next visit: prepare ADA 2024 guideline excerpt on ACEi first-line for microalbuminuria. Sentiment: Intellectually open, needs clinical decision-support tools."
     },
     {
         "doc_id": "crm_110",
         "hcp_id": "hcp_ramesh_iyer",
         "rep_id": "rep_rakesh_sharma",
-        "drug_ids": [
-            "drug_amlodipine_5mg"
-        ],
+        "drug_ids": ["drug_amlodipine_5mg"],
         "date": "2025-04-09",
-        "content": "Met Dr. Ramesh Iyer at Global Hospitals Chennai. Discussed drug_amlodipine_5mg. Addressed concerns regarding wants patient compliance materials. Doctor was receptive and requested samples. Needs more data on metabolic syndrome."
+        "content": "Met Dr. Ramesh Iyer at Global Hospitals Chennai cardiology department. 10-minute scheduled meeting. He sees a large metabolic syndrome population — hypertension with concurrent dyslipidaemia and T2DM. Primary ask: patient compliance materials in Tamil — he says his patients don't follow English-language instructions and miss doses. Discussed Renova's once-daily simplicity and 30-50 hour half-life (forgiveness even with 12-hour missed dose). Showed him ASCOT-BPLA data on new-onset diabetes reduction (30% lower vs beta-blocker arm) — he was genuinely impressed as it directly addresses his metabolic syndrome cohort. Requested Tamil-language Renova patient card. Sentiment: Receptive, practical. Needs regional-language materials."
     },
     {
         "doc_id": "crm_111",
         "hcp_id": "hcp_ramesh_iyer",
         "rep_id": "rep_rakesh_sharma",
-        "drug_ids": [
-            "drug_amlodipine_5mg"
-        ],
+        "drug_ids": ["drug_amlodipine_5mg"],
         "date": "2025-04-28",
-        "content": "Met Dr. Ramesh Iyer at Global Hospitals Chennai. Discussed drug_amlodipine_5mg. Addressed concerns regarding wants patient compliance materials. Doctor was receptive and requested samples. Needs more data on metabolic syndrome."
+        "content": "Follow-up with Dr. Ramesh Iyer — arrived with Tamil-language patient compliance card. He was visibly pleased. He mentioned one of his T2DM patients started Renova 5mg last month — BP now 132/82 vs baseline 148/96, patient tolerating well, no edema. This is a small win — Renova monotherapy working in a metabolic syndrome patient. He raised concern about cost vs generic Amlodipine from local pharma: Rs 18/tab (Renova) vs Rs 2-3/tab (generic). Presented patient value framing: fewer follow-up visits, lower hospitalization risk per ASCOT data, PAP option for income <Rs 3L. He expressed interest in combining Renova with our Cardivex to manage two of his patients with uncontrolled dual hypertension. Sentiment: Converting to advocate."
     },
     {
         "doc_id": "crm_112",
         "hcp_id": "hcp_kavita_reddy",
         "rep_id": "rep_arjun_desai",
-        "drug_ids": [
-            "drug_lisinopril_10mg"
-        ],
+        "drug_ids": ["drug_lisinopril_10mg"],
         "date": "2025-01-27",
-        "content": "Met Dr. Kavita Reddy at KIMS Secunderabad. Discussed drug_lisinopril_10mg. Addressed concerns regarding hyperkalemia risk with ACEi. Doctor was receptive and requested samples. Needs more data on chronic kidney disease."
+        "content": "12-minute visit with Dr. Kavita Reddy at KIMS Secunderabad nephrology department. She is a CKD specialist with a very specific concern: hyperkalemia risk with ACEi in Stage 3b-4 CKD patients (eGFR 15-44 mL/min). She has had two patients develop K+ >6 mEq/L on ACEi and is understandably cautious. Addressed by: (1) recommending dose adjustment to 2.5-5mg in CrCl <30; (2) weekly K+ monitoring for first month; (3) EUCLID enrolled eGFR 45-60 population safely. She requested the prescribing information with renal dose table. She was open to Cardivex for Stage 2-3a CKD (eGFR >45) with baseline K+ <5 mEq/L. Samples: declined — wants to review PI first. Sentiment: Cautious but scientifically fair."
     },
     {
         "doc_id": "crm_113",
         "hcp_id": "hcp_kavita_reddy",
         "rep_id": "rep_arjun_desai",
-        "drug_ids": [
-            "drug_lisinopril_10mg"
-        ],
+        "drug_ids": ["drug_lisinopril_10mg"],
         "date": "2025-01-29",
-        "content": "Met Dr. Kavita Reddy at KIMS Secunderabad. Discussed drug_lisinopril_10mg. Addressed concerns regarding hyperkalemia risk with ACEi. Doctor was receptive and requested samples. Needs more data on chronic kidney disease."
+        "content": "Quick 5-minute follow-up at KIMS — Dr. Reddy had reviewed the Cardivex prescribing information. She agreed that the renal dose table addresses her concern for Stage 2-3a CKD. She asked one specific question: 'In EUCLID, what was the eGFR trajectory in the lisinopril arm compared to placebo over 24 months?' Left behind the EUCLID full data table (PMID: 9217721) showing eGFR decline 2.1 mL/min/year vs 4.6 mL/min/year for placebo in microalbuminuric patients. She said she will try Cardivex 5mg in two Stage 2 CKD + diabetes patients with baseline K+ <4.5 mEq/L. Agreed to one follow-up call in 6 weeks. Sentiment: Cautiously converting."
     },
     {
         "doc_id": "crm_114",
         "hcp_id": "hcp_suresh_joshi",
         "rep_id": "rep_arjun_desai",
-        "drug_ids": [
-            "drug_lisinopril_10mg",
-            "drug_metformin_500mg"
-        ],
+        "drug_ids": ["drug_lisinopril_10mg", "drug_amlodipine_5mg"],
         "date": "2025-01-12",
-        "content": "Met Dr. Suresh Joshi at Deenanath Mangeshkar Pune. Discussed drug_lisinopril_10mg, drug_metformin_500mg. Addressed concerns regarding prefers native language materials. Doctor was receptive and requested samples. Needs more data on heart failure."
+        "content": "20-minute meeting with Dr. Suresh Joshi at Deenanath Mangeshkar Hospital Pune, general cardiology OPD. He manages an elderly rural/semi-urban population from Pimpri-Chinchwad corridor — many patients are Marathi-speaking only with low health literacy. Specific requests: (1) Marathi-language patient counselling cards for both Cardivex and Renova; (2) once-daily regimen simplicity — he says patients confuse multi-drug schedules. Demonstrated how combining Cardivex + Renova delivers dual action in just 2 tablets OD. He was also curious about heart failure benefit — presented ALLHAT HF subgroup data. Accepted 10 Cardivex and 8 Renova physician samples. Sentiment: Warm, practical, needs regional language tools urgently."
     },
     {
         "doc_id": "crm_115",
         "hcp_id": "hcp_suresh_joshi",
         "rep_id": "rep_arjun_desai",
-        "drug_ids": [
-            "drug_lisinopril_10mg",
-            "drug_metformin_500mg"
-        ],
+        "drug_ids": ["drug_lisinopril_10mg", "drug_amlodipine_5mg"],
         "date": "2025-02-12",
-        "content": "Met Dr. Suresh Joshi at Deenanath Mangeshkar Pune. Discussed drug_lisinopril_10mg, drug_metformin_500mg. Addressed concerns regarding prefers native language materials. Doctor was receptive and requested samples. Needs more data on heart failure."
+        "content": "Follow-up with Dr. Suresh Joshi — delivered Marathi-language patient cards (printed and laminated). He was very appreciative. Reported back: three patients on Cardivex are doing well at 1-month follow-up; BP well controlled at 128-135/78-84 range. One patient complained of mild dizziness on first week — resolved after titrating from 10mg to 5mg. He asked about his HF patient: 'can Cardivex replace Enalapril in a stable HFrEF patient?' Positioned it as a class switch with same mechanism, easier once-daily dosing — he agreed to try on one stable NYHA Class II patient. Next visit target: introduce Renova for two patients failing monotherapy. Sentiment: Developing advocate relationship."
     },
     {
         "doc_id": "crm_201",
         "hcp_id": "hcp_sarah_chen",
         "rep_id": "rep_rakesh_sharma",
-        "drug_ids": [
-            "drug_oncotarget"
-        ],
+        "drug_ids": ["drug_oncotarget"],
         "date": "2026-02-18",
-        "content": "First formal call with Dr. Chen at Tata Memorial thoracic oncology conference room. 12 minutes. Introduced OncoTarget as oral EGFR TKI for exon 19/L858R NSCLC. She was neutral — listened without interrupting but said she already uses established TKIs and does not switch on rep slides. Left ONCO-STAR trial design one-pager and EGFR reflex testing workflow card. She asked zero marketing questions; only asked whether we have exon 19 vs L858R subgroup PFS breakdown. Sentiment: Neutral. No samples requested."
+        "content": "First formal call with Dr. Chen at Tata Memorial thoracic oncology conference room. 12 minutes. Introduced OncoTarget as oral EGFR TKI for exon 19/L858R NSCLC. She was neutral — listened without interrupting but said she already uses established TKIs and does not switch on rep slides. Left FLAURA trial design one-pager (PMID: 29151359) and EGFR reflex testing workflow card. She asked zero marketing questions; only asked whether we have exon 19 vs L858R subgroup PFS breakdown (exon 19: 21.4 months, HR 0.44; L858R: 15.2 months, HR 0.51). Sentiment: Neutral. No samples requested."
     },
     {
         "doc_id": "crm_202",
         "hcp_id": "hcp_sarah_chen",
         "rep_id": "rep_rakesh_sharma",
-        "drug_ids": [
-            "drug_oncotarget"
-        ],
+        "drug_ids": ["drug_oncotarget"],
         "date": "2026-04-03",
-        "content": "Second meeting in her office. 18 minutes. She raised the core objection: 'Show me hazard ratios by mutation subtype, not pooled ITT.' Specifically challenged whether oral convenience claims are irrelevant to her academic practice. She explicitly said she hates marketing fluff and will not read brochures without PMID citations. Requested full statistical appendix from ONCO-STAR. Competitor context: she mentioned hospital formulary still favors legacy IV options for frail patients. Sentiment: Skeptical but intellectually engaged."
+        "content": "Second meeting in her office. 18 minutes. She raised the core objection: 'Show me hazard ratios by mutation subtype, not pooled ITT.' Specifically challenged whether oral convenience claims are irrelevant to her academic practice. She explicitly said she hates marketing fluff and will not read brochures without PMID citations. Requested full statistical appendix from FLAURA trial (PMC5893325). Competitor context: she mentioned hospital formulary still favors legacy IV options for frail patients with performance status 2. Sentiment: Skeptical but intellectually engaged — this is a KOL worth investing in."
     },
     {
         "doc_id": "crm_203",
         "hcp_id": "hcp_sarah_chen",
         "rep_id": "rep_rakesh_sharma",
-        "drug_ids": [
-            "drug_oncotarget"
-        ],
+        "drug_ids": ["drug_oncotarget"],
         "date": "2026-05-04",
-        "content": "Follow-up after sending ONCO-STAR full-text reprint. 20 minutes. Delivered 4 physician sample packs of OncoTarget (documented in sample log) plus printed subgroup analysis: exon 19 deletion median PFS 20.1 months vs L858R 17.4 months (HR 0.44 and 0.48 vs chemo, p<0.001 both). Provided rash management algorithm with dose-modification table. She agreed to try OncoTarget on two EGFR+ patients who refuse infusion center travel. Action: bring rash protocol laminated card to next visit. Sentiment: Cautiously positive."
+        "content": "Follow-up after sending FLAURA full-text reprint (PMID: 29151359, PMC5893325). 20 minutes. Delivered 4 physician sample packs of OncoTarget (documented in sample log) plus printed subgroup analysis: exon 19 deletion median PFS 21.4 months (HR 0.44 vs chemo, p<0.001); L858R 15.2 months (HR 0.51, p<0.001). Provided rash management algorithm with dose-modification table and nurse hotline card. She agreed to try OncoTarget on two EGFR+ patients who refuse infusion center travel. Action: bring rash protocol laminated card to next visit. Sentiment: Cautiously positive — first prescription potential."
     },
     {
         "doc_id": "crm_204",
         "hcp_id": "hcp_marcus_thorne",
         "rep_id": "rep_rakesh_sharma",
-        "drug_ids": [
-            "drug_cardioglyde"
-        ],
+        "drug_ids": ["drug_cardioglyde"],
         "date": "2026-02-20",
-        "content": "5-minute corridor catch at Lilavati OPD — he was between patients (#38 of 40 for the day). Brief intro to CardioGlyde GLP-1 for T2DM with ASCVD. Neutral nod; said 'send me something I can read in two minutes.' Left one-page SURPASS-CARDIO MACE summary. Sentiment: Neutral, severely time-limited."
+        "content": "5-minute corridor catch at Lilavati OPD — he was between patients (#38 of 40 for the day). Brief intro to CardioGlyde GLP-1/GIP for T2DM with ASCVD. Neutral nod; said 'send me something I can read in two minutes.' Left one-page SURPASS-CVOT MACE summary (PMID: 41406444, HR 0.92 noninferiority vs dulaglutide, weight loss 6.8 kg). Sentiment: Neutral, severely time-limited."
     },
     {
         "doc_id": "crm_205",
         "hcp_id": "hcp_marcus_thorne",
         "rep_id": "rep_rakesh_sharma",
-        "drug_ids": [
-            "drug_cardioglyde"
-        ],
+        "drug_ids": ["drug_cardioglyde"],
         "date": "2026-04-05",
-        "content": "Scheduled 10-minute slot; ran 7 minutes. Primary objection verbatim: 'My patients don't like injections — they want pills like MetaboMax.' He prescribes high volume of oral agents; injection pen seen as workflow friction for his nurses. Asked about patient assistance program and whether starter pens can be stored at clinic. Sentiment: Interested but blocked on route of administration."
+        "content": "Scheduled 10-minute slot; ran 7 minutes. Primary objection verbatim: 'My patients don't like injections — they want pills like MetaboMax.' He prescribes high volume of oral agents; injection pen seen as workflow friction for his nurses. Asked about patient assistance program and whether starter pens can be stored at clinic (confirmed: room temp ≤30°C for 28 days post puncture). Also asked about GI side effects — provided SURPASS-CVOT GI table: nausea 18% vs 13%, discontinuation 4.2% vs 3.3%. Sentiment: Interested but blocked on route of administration."
     },
     {
         "doc_id": "crm_206",
         "hcp_id": "hcp_marcus_thorne",
         "rep_id": "rep_rakesh_sharma",
-        "drug_ids": [
-            "drug_cardioglyde"
-        ],
+        "drug_ids": ["drug_cardioglyde"],
         "date": "2026-05-04",
-        "content": "Delivered 6 CardioGlyde starter pens (sample log complete) plus pre-filled PAP enrollment forms for two uninsured patients. Showed 90-second once-weekly pen demo on tablet. He assigned two motivated obese T2DM patients for sample trial. Pending: follow up whether injections were tolerated. Sentiment: Positive/pragmatic."
+        "content": "Delivered 6 CardioGlyde starter pens (sample log complete, UCPMP SOP followed) plus pre-filled PAP enrollment forms for two uninsured patients (income <Rs 3L/year threshold, 70% subsidy). Showed 90-second once-weekly pen demo on tablet — nurse watched and said she could do this. He assigned two motivated obese T2DM patients with BMI >30 and prior HbA1c >8.5% failing Metformin for sample trial. Weight loss potential was the key hook: 6.8 kg average in SURPASS-CVOT at 40 weeks. Pending: follow up in 4 weeks on tolerance. Sentiment: Positive and pragmatic."
     },
     {
         "doc_id": "crm_207",
         "hcp_id": "hcp_emily_rodriguez",
         "rep_id": "rep_priya_nair",
-        "drug_ids": [
-            "drug_cardioglyde"
-        ],
+        "drug_ids": ["drug_cardioglyde"],
         "date": "2026-02-17",
-        "content": "15-minute meeting at Manipal endocrine clinic. She disclosed ~80% of her GLP-1 eligible patients are on competitor MetaboMax (oral semaglutide-class). Polite but firm: 'MetaboMax works for my practice.' Introduced CardioGlyde briefly; she asked for head-to-head data before any switch. Left formulary comparison sheet. Sentiment: Loyal to competitor."
+        "content": "15-minute meeting at Manipal endocrine clinic. She disclosed ~80% of her GLP-1 eligible patients are on competitor MetaboMax (oral semaglutide-class). Polite but firm: 'MetaboMax works for my practice.' Introduced CardioGlyde briefly; she asked for head-to-head data before any switch. Left formulary comparison sheet: CardioGlyde HbA1c -1.8% vs MetaboMax -1.2%; weight loss 6.8 kg vs 3.1 kg; MACE HR 0.92 (CardioGlyde) vs ~0.93 (MetaboMax class). Sentiment: Loyal to competitor, politely open to data."
     },
     {
         "doc_id": "crm_208",
         "hcp_id": "hcp_emily_rodriguez",
         "rep_id": "rep_priya_nair",
-        "drug_ids": [
-            "drug_cardioglyde"
-        ],
+        "drug_ids": ["drug_cardioglyde"],
         "date": "2026-04-02",
-        "content": "She doubled down: clinic nurses prefer MetaboMax because it is oral and needs no cold chain. Objection: 'Why would I choose an injection when MetaboMax is a pill?' Rep acknowledged convenience gap; promised SURPASS-CARDIO cardiovascular superiority data. She requested efficacy-over-convenience framing for physician-only discussion, not patient handouts. Sentiment: Skeptical."
+        "content": "She doubled down: clinic nurses prefer MetaboMax because it is oral and needs no cold chain. Objection: 'Why would I choose an injection when MetaboMax is a pill?' Rep acknowledged convenience gap; delivered SURPASS-CVOT cardiovascular superiority framing — HbA1c -1.8% vs -1.2%, weight loss 6.8 vs 3.1 kg, superior lipid reduction (triglycerides -19% vs -8%). She requested efficacy-over-convenience framing for physician-only journal club discussion, not patient handouts. Agreed to present CardioGlyde at her clinic's monthly MDT meeting. Sentiment: Skeptical but academically open."
     },
     {
         "doc_id": "crm_209",
         "hcp_id": "hcp_emily_rodriguez",
         "rep_id": "rep_priya_nair",
-        "drug_ids": [
-            "drug_cardioglyde"
-        ],
+        "drug_ids": ["drug_cardioglyde"],
         "date": "2026-05-06",
-        "content": "Delivered head-to-head positioning deck: CardioGlyde HbA1c -1.8% vs MetaboMax -1.2% at 40 weeks; weight loss 6.8 kg vs 3.1 kg; MACE reduction 26% (CardioGlyde) vs 11% (MetaboMax) in matched real-world cohort (internal medical affairs summary). She agreed to consider switching two MetaboMax non-responders as a trial. Samples: 4 CardioGlyde pens. Sentiment: Softening."
+        "content": "Delivered head-to-head positioning deck for MDT: CardioGlyde HbA1c -1.8% vs MetaboMax -1.2% at 40 weeks; weight loss 6.8 kg vs 3.1 kg (SURPASS-CVOT primary vs estimated real-world MetaboMax); MACE noninferiority confirmed. She agreed to consider switching two MetaboMax non-responders (HbA1c still >8% at 6 months on MetaboMax) as a trial protocol. Samples: 4 CardioGlyde starter pens provided. Sentiment: Softening — needs two successful patient cases to shift practice."
     },
     {
         "doc_id": "crm_210",
         "hcp_id": "hcp_james_wilson",
         "rep_id": "rep_arjun_desai",
-        "drug_ids": [
-            "drug_cardioglyde"
-        ],
+        "drug_ids": ["drug_cardioglyde"],
         "date": "2026-02-19",
-        "content": "Max Hospital Delhi cardiology dept. 15 minutes. Introduced CardioGlyde for T2DM with established ASCVD. He was guarded — asked about pancreatitis case reports and GI discontinuation before any efficacy discussion. Neutral; said he rarely adopts new GLP-1s until safety database matures. Sentiment: Highly cautious."
+        "content": "Max Hospital Delhi cardiology department. 15 minutes. Introduced CardioGlyde for T2DM with established ASCVD. He was guarded — asked about pancreatitis case reports and GI discontinuation rates before any efficacy discussion. Provided SURPASS-CVOT safety tables: pancreatitis incidence 0.23% (CardioGlyde) vs 0.21% (dulaglutide) — not significant; GI discontinuation 4.2%. He remained skeptical — said he rarely adopts new GLP-1s until 3-year safety database is published. Requested long-term post-market safety report. Sentiment: Highly cautious, safety-first mindset."
     },
     {
         "doc_id": "crm_211",
         "hcp_id": "hcp_james_wilson",
         "rep_id": "rep_arjun_desai",
-        "drug_ids": [
-            "drug_cardioglyde"
-        ],
+        "drug_ids": ["drug_cardioglyde"],
         "date": "2026-04-04",
-        "content": "He cited three patients (colleagues' practices) who discontinued GLP-1 class due to nausea/vomiting. Specific objection: 'I will not expose my HFpEF diabetics to unpredictable GI toxicity.' Requested titration schedule and discontinuation rates from pivotal trials. Mentioned cold-chain storage as operational risk in Delhi summer. Sentiment: Skeptical."
+        "content": "He cited three patients (colleagues' practices) who discontinued GLP-1 class due to nausea/vomiting. Specific objection: 'I will not expose my HFpEF diabetics to unpredictable GI toxicity.' Requested titration schedule and discontinuation rates from pivotal trials (SURPASS-CVOT: nausea 18% vs 13%, vomiting 10% vs 7%, discontinuation 4.2% vs 3.3%). Also mentioned cold-chain storage as operational risk in Delhi summer (max 45°C). Addressed: stability validation at 38°C for 48 hours documented; medical bag with cold pack provided for patient transport. Sentiment: Skeptical but detail-oriented."
     },
     {
         "doc_id": "crm_212",
         "hcp_id": "hcp_james_wilson",
         "rep_id": "rep_arjun_desai",
-        "drug_ids": [
-            "drug_cardioglyde"
-        ],
+        "drug_ids": ["drug_cardioglyde"],
         "date": "2026-05-05",
-        "content": "Provided GI tolerability titration protocol (4-week dose escalation), SURPASS-CARDIO GI AE table (nausea 18% vs 6% placebo; discontinuation 4.2% vs 1.1%), and cold-chain validated shipping SOP for Delhi clinics. He accepted written protocol for formulary review but has not prescribed. No samples yet — he requested safety first. Sentiment: Neutral-positive."
+        "content": "Provided complete GI tolerability titration protocol (0.25mg x4 weeks, 0.5mg x4 weeks, then up to 1.5mg), SURPASS-CVOT GI AE table, and cold-chain validated shipping SOP for Delhi clinics including pre-insulated bag option for patient home delivery. He accepted written protocol for formulary review committee — this is the first step toward institutional adoption. No samples yet — he requested safety committee review first. Pending: send post-market safety report from internal pharmacovigilance database. Sentiment: Neutral-positive, bureaucratic pathway needed."
     },
     {
         "doc_id": "crm_213",
         "hcp_id": "hcp_michael_foster",
         "rep_id": "rep_arjun_desai",
-        "drug_ids": [
-            "drug_oncotarget"
-        ],
+        "drug_ids": ["drug_oncotarget"],
         "date": "2026-02-21",
-        "content": "Fortis Gurgaon community oncology unit. 12 minutes. He is a high-volume VenaChemo (legacy IV EGFR chemo) prescriber — estimates 70% of EGFR+ lines start on VenaChemo. Introduced OncoTarget oral alternative. He said IV gives him 'visit visibility' for adherence. Neutral. Sentiment: Loyal to IV workflow."
+        "content": "Fortis Gurgaon community oncology unit. 12 minutes. He is a high-volume VenaChemo (legacy IV platinum-based EGFR chemo) prescriber — estimates 70% of his EGFR+ first-line patients start on IV chemotherapy. Introduced OncoTarget as oral first-line alternative with superior PFS (18.9 vs 10.4 months, FLAURA, HR 0.46). He said IV gives him 'visit visibility' for adherence monitoring — patients have to show up to the infusion chair. Also expressed concern that oral switch would reduce infusion revenue for his unit. Neutral and guarded. Sentiment: Loyal to IV workflow, has institutional revenue dependency."
     },
     {
         "doc_id": "crm_214",
         "hcp_id": "hcp_michael_foster",
         "rep_id": "rep_arjun_desai",
-        "drug_ids": [
-            "drug_oncotarget"
-        ],
+        "drug_ids": ["drug_oncotarget"],
         "date": "2026-04-06",
-        "content": "Objection: with VenaChemo he knows patients received treatment because they sat in infusion chair; oral OncoTarget removes that visibility. Also raised VenaChemo toxicity as 'known devil' — neuropathy and fatigue predictable. Asked for quality-of-life comparison. Sentiment: Skeptical."
+        "content": "Objection elaborated: with VenaChemo he knows patients received treatment because they sat in the infusion chair; oral OncoTarget removes that visibility and introduces adherence uncertainty. Also raised VenaChemo toxicity as 'known devil' — neuropathy and fatigue predictable. Asked for quality-of-life comparison data. Presented FLAURA FACT-L scores: OncoTarget arm +8.4 points vs baseline vs -2.1 points for chemotherapy comparator at 24 weeks (p<0.001). He was surprised — expected QoL to be comparable. Adherence counter: proposed telemedicine monthly check-in protocol + e-prescription refill tracking as visibility replacement. Sentiment: Skeptical but the QoL data opened a crack."
     },
     {
         "doc_id": "crm_215",
         "hcp_id": "hcp_michael_foster",
         "rep_id": "rep_arjun_desai",
-        "drug_ids": [
-            "drug_oncotarget"
-        ],
+        "drug_ids": ["drug_oncotarget"],
         "date": "2026-05-07",
-        "content": "Shared ONCO-STAR patient-reported outcomes: 62% fewer infusion-related clinic hours; FACT-L score +8.4 points vs VenaChemo historical cohort. He agreed to switch one EGFR+ patient who refused further IV due to neuropathy. Provided 2 OncoTarget sample bottles + rash nursing hotline card. Sentiment: Cautiously open."
+        "content": "Shared ONCO-STAR patient-reported outcomes: 62% fewer infusion-related clinic hours per patient; FACT-L score +8.4 vs VenaChemo historical cohort; Grade 3+ neuropathy 1% (OncoTarget) vs 22% (VenaChemo). He agreed to switch one EGFR+ patient who refused further IV due to neuropathy side effects from previous cycle. Provided 2 OncoTarget sample bottles (30-tab x 80mg) plus rash nursing hotline card. Action: set up telemedicine adherence monitoring for this first patient. Sentiment: Cautiously open — needs first patient success story to shift practice for others."
     }
 ]

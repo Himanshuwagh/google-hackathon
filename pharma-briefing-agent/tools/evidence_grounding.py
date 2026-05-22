@@ -174,7 +174,13 @@ def build_evidence_ledger(retrieved_context: Any) -> list[dict[str, Any]]:
                     title=str(doc.get("title", "")),
                     source_text=text,
                     source_scope="direct_brand",
-                    extra={"doc_type": doc.get("doc_type"), "tags": doc.get("tags", [])},
+                    extra={
+                        "doc_type": doc.get("doc_type"),
+                        "tags": doc.get("tags", []),
+                        "pdf_url": doc.get("pdf_url", ""),
+                        "source": doc.get("source", ""),
+                        "description": doc.get("description", ""),
+                    },
                 )
             )
 
@@ -268,6 +274,8 @@ def _collect_cited_evidence(clean_brief: dict[str, Any], ledger_by_key: dict[tup
                 item["nctId"] = source_id
             elif source_type in {"InternalDoc", "CompetitiveIntel"}:
                 item["doc_id"] = source_id
+                item["pdf_url"] = ledger_entry.get("pdf_url", "")
+                item["source_citation"] = ledger_entry.get("source", "")
             evidence.append(item)
             seen.add(key)
     return evidence

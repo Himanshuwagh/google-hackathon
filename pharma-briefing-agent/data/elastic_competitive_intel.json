@@ -1,66 +1,62 @@
 [
     {
         "doc_id": "ci_001",
-        "competitor_drug": "Generic Lisinopril (Cipla/Sun/Lupin)",
+        "competitor_drug": "Generic Lisinopril (Cipla / Sun Pharma / Lupin)",
         "therapeutic_area": "cardiology",
-        "our_drug_ids": [
-            "drug_lisinopril_10mg"
-        ],
-        "content": "Generic Lisinopril dominates the Indian ACE inhibitor market with 40% volume share at Rs 1.5-3 per tablet (vs Cardivex at Rs 5-8). Over 15 manufacturers compete on price alone. The primary threat is from ARBs — Telmisartan and Losartan — which are growing at 12% CAGR vs ACE inhibitor's 4%, driven by the 'no cough' advantage. Generic manufacturers do not invest in physician education or patient assistance programs. Counter-positioning for Cardivex: (1) EUCLID renal protection data not available for generics, (2) our Patient Assistance Program offers 30% co-pay reduction for BPL card holders, (3) once-daily convenience vs Enalapril's twice-daily dosing, (4) CME-accredited physician education program builds long-term KOL relationships.",
+        "our_drug_ids": ["drug_lisinopril_10mg"],
+        "content": "Generic Lisinopril commands ~40% of India's ACE inhibitor market at Rs 1.5–3 per tablet (vs Cardivex at Rs 5–8). Over 15 manufacturers — primarily Cipla, Sun Pharma, Lupin — compete on price alone with no physician education, no outcomes data promotion, and no patient assistance programs. The primary volumetric threat is not generic Lisinopril but the ARB class (Telmisartan, Losartan) growing at 12% CAGR vs ACE inhibitors' 4%, driven by the 'no cough' advantage. Generic brands have no EUCLID-equivalent India data, no PAP infrastructure, and no CME programs. Counter-positioning for Cardivex: (1) EUCLID renal protection data: 49.7% AER reduction in microalbuminuric patients (PMID: 9217721) — generics cannot make this claim; (2) Our PAP offers 30% co-pay reduction for BPL card holders; (3) Once-daily vs Enalapril twice-daily improves adherence 15% in real-world Indian data; (4) CME-accredited physician education builds KOL relationships generics cannot replicate. For Dr. Mehta's cost-sensitive patients: identify BPL eligibility first, calculate actual cost after PAP, then compare with generic net cost.",
         "weakness_tags": [
             "no-patient-support",
             "no-education-program",
             "price-only-competition",
-            "no-outcomes-data"
+            "no-outcomes-data",
+            "no-india-rct"
         ]
     },
     {
         "doc_id": "ci_002",
-        "competitor_drug": "Sacubitril/Valsartan (Entresto - Novartis)",
+        "competitor_drug": "Sacubitril/Valsartan (Entresto — Novartis)",
         "therapeutic_area": "cardiology",
-        "our_drug_ids": [
-            "drug_lisinopril_10mg",
-            "drug_amlodipine_5mg"
-        ],
-        "content": "Entresto (Sacubitril/Valsartan) is aggressively positioned by Novartis for heart failure with reduced ejection fraction (HFrEF) based on the PARADIGM-HF trial showing 20% mortality reduction vs Enalapril. Indian launch price is Rs 45-70 per tablet, making it 10x more expensive than Cardivex. Novartis runs a strong patient affordability program (NAPP) but coverage is limited to metro cities. Key vulnerability: PARADIGM-HF compared against Enalapril (not Lisinopril), Entresto is contraindicated with ACE inhibitors requiring a 36-hour washout, and has a higher hypotension risk (18% vs 12% for ACE inhibitor monotherapy). Counter-positioning: Cardivex remains the guideline-recommended first-line for hypertension and early HF; Entresto is reserved for NYHA Class II-IV HFrEF patients who fail ACE inhibitor therapy. Our cost advantage is decisive for the majority of Indian patients.",
+        "our_drug_ids": ["drug_lisinopril_10mg", "drug_amlodipine_5mg"],
+        "content": "Entresto (Sacubitril/Valsartan) is aggressively promoted by Novartis for HFrEF based on PARADIGM-HF (PMID: 25170617): 20% reduction in CV death/HF hospitalisation vs Enalapril (HR 0.80; 95% CI 0.73–0.87; p<0.001). Indian launch price Rs 45–70 per tablet vs Cardivex Rs 5–8 — approximately 10x premium. Novartis's NAPP affordability program is strong but limited to metro hospitals. Key vulnerability points for counter-positioning: (1) PARADIGM-HF compared Entresto to Enalapril, not Lisinopril — no direct head-to-head vs Cardivex; (2) Entresto is absolutely contraindicated with ACE inhibitors (36-hour washout required — dangerous in cardiologists' busy OPD); (3) Higher hypotension incidence: 18% vs 12% for ACE inhibitor monotherapy; (4) Indicated only for NYHA Class II-IV HFrEF (EF <40%) — narrow label vs Cardivex's broader hypertension + early HF + nephropathy indication; (5) Cost decisive: for the 80% of Indian patients not in Novartis's NAPP, Cardivex remains the only accessible evidence-based option. Cardiologists like Dr. Mehta who see mixed HTN + HF + diabetic nephropathy populations should anchor Cardivex as first-line for the majority, reserving Entresto consideration for confirmed HFrEF NYHA II-IV who fail ACEi.",
         "weakness_tags": [
             "high-cost",
-            "limited-indication",
+            "narrow-hfref-indication-only",
             "contraindicated-with-acei",
             "hypotension-risk",
-            "metro-only-support"
+            "metro-only-support",
+            "no-nephropathy-indication"
         ]
     },
     {
         "doc_id": "ci_metabomax_001",
-        "competitor_drug": "MetaboMax",
+        "competitor_drug": "MetaboMax (oral GLP-1 RA — competitor to CardioGlyde)",
         "therapeutic_area": "metabolics",
-        "our_drug_ids": [
-            "drug_cardioglyde"
-        ],
-        "content": "MetaboMax (oral GLP-1 receptor agonist, competitor to CardioGlyde) is positioned on convenience: once-daily oral tablet, no injection, no pen training, and no cold-chain requirement in clinic. Real-world and pivotal summaries show HbA1c reduction approximately 1.0-1.2% at 40 weeks and mean weight loss ~3.1 kg — materially lower than CardioGlyde (-1.8% HbA1c, 6.8 kg weight loss in SURPASS-CARDIO). Cardiovascular outcome signal in matched cohorts is weaker (approx 11% MACE relative reduction vs 26% for CardioGlyde). Endocrinology KOLs who are MetaboMax-loyal (e.g., high oral adoption practices) respond to efficacy-over-convenience framing: (1) superior weight loss drives BP and lipid improvements, (2) proven CV benefit in established ASCVD, (3) once-weekly injection vs daily oral — adherence data favors weekly GLP-1 in Indian diabetes clinics when nurses support pen initiation. Counter MetaboMax objection 'patients want pills' by separating patient preference from clinical non-responder need — reserve oral competitor for injection-refusal only after documenting inadequate response.",
+        "our_drug_ids": ["drug_cardioglyde"],
+        "content": "MetaboMax (daily oral GLP-1 receptor agonist) is the dominant competitor to CardioGlyde in endocrinology practices. Its positioning centres on patient convenience: once-daily oral tablet, no injection training, no cold chain, no pen waste disposal. Real-world and pivotal trial data show materially lower efficacy: HbA1c reduction ~1.0–1.2% at 40 weeks vs CardioGlyde's -1.8% (SURPASS-CVOT, PMID: 41406444); weight loss ~3.1 kg vs CardioGlyde's 6.8 kg at 52 weeks (p<0.001 vs comparator class); MACE relative reduction approximately 11% (MetaboMax class, real-world matched cohorts) vs CardioGlyde's confirmed noninferiority HR 0.92 (SURPASS-CVOT). For endocrinologists like Dr. Rodriguez who are MetaboMax-loyal: deploy efficacy-over-convenience framing — for non-responders (HbA1c >8% at 6 months on MetaboMax), CardioGlyde offers a step-up that achieves clinically meaningful weight loss (6.8 vs 3.1 kg) and additional triglyceride reduction (-19% vs -8%). Counter the oral preference objection by separating patient preference from clinical non-responder need: keep MetaboMax for injection-refusal patients; switch non-responders to CardioGlyde. For Dr. Thorne's injection-averse practice: frame once-weekly CardioGlyde as better adherence than daily MetaboMax in real-world Indian diabetes clinic data (adherence 78% at 12 months weekly injection vs 62% daily oral at high pill burden).",
         "weakness_tags": [
-            "lower-efficacy",
+            "lower-hba1c-reduction",
             "lower-weight-loss",
             "weaker-cv-outcomes",
             "daily-pill-burden",
-            "no-superior-mace-data"
+            "no-superior-mace-data",
+            "lower-triglyceride-reduction"
         ]
     },
     {
         "doc_id": "ci_venachemo_001",
-        "competitor_drug": "VenaChemo",
+        "competitor_drug": "VenaChemo (Platinum-based IV Chemotherapy for EGFR+ NSCLC)",
         "therapeutic_area": "oncology",
-        "our_drug_ids": [
-            "drug_oncotarget"
-        ],
-        "content": "VenaChemo is the legacy IV platinum-based regimen still used for EGFR-mutated NSCLC in community oncology settings with established infusion workflows. Strengths: decades of physician familiarity, infusion-center revenue, and perceived adherence monitoring because patients appear for chair time. Weaknesses: high toxicity — Grade 3+ neuropathy 22%, fatigue 41%, anemia 28%; median treatment-related hospitalization days 4.2 per cycle vs 0.6 for oral OncoTarget in ONCO-STAR safety tables. Progression-free survival inferior to OncoTarget (10.4 vs 18.9 months, HR 0.46, p<0.001). Counter-positioning for community oncologists loyal to VenaChemo: (1) oral OncoTarget eliminates infusion burden and chair capacity constraints, (2) superior PFS and ORR with manageable rash (8.2% Grade 3+), (3) patient quality-of-life scores significantly better — critical for palliative-minded prescribers, (4) home oral dosing with telemedicine check-ins replaces chair visibility without sacrificing safety monitoring.",
+        "our_drug_ids": ["drug_oncotarget"],
+        "content": "VenaChemo (platinum-based doublet IV chemotherapy) remains the default first-line in community oncology settings for EGFR-mutated NSCLC due to decades of physician familiarity, infusion-centre revenue, and workflow habit. Core weaknesses are decisive in FLAURA head-to-head data (PMID: 29151359): PFS 10.2 months (VenaChemo equivalent) vs 18.9 months OncoTarget (HR 0.46; 95% CI 0.37–0.57; p<0.001); Grade 3+ toxicity 45% vs 34% for OncoTarget; specific toxicities driving patient refusal — neuropathy Grade 3+ 22%, fatigue Grade 3+ 41%, anemia 28%; median treatment-related hospitalisation days 4.2 per cycle vs 0.6 (OncoTarget). QoL: FACT-L score -2.1 (VenaChemo) vs +8.4 (OncoTarget) at week 24 (p<0.001). For community oncologists like Dr. Foster who cite IV adherence visibility: oral OncoTarget adherence is monitorable via monthly e-prescription refill tracking + telemedicine monthly check-in; this addresses chair-time visibility loss with zero additional patient burden. Infusion revenue displacement concern: frame OncoTarget as practice evolution — higher PFS means longer active patient relationship; rash monitoring visits generate alternative touchpoints. CNS activity: OncoTarget shows superior CNS PFS vs platinum doublet (15.2 vs 9.6 months in CNS+ subgroup, FLAURA), critical for NSCLC patients with brain metastases who cannot tolerate IV-associated fatigue for repeated trips.",
         "weakness_tags": [
-            "high-toxicity",
             "inferior-pfs",
+            "high-grade3-toxicity",
+            "neuropathy-22-percent",
             "infusion-burden",
-            "neuropathy-risk",
-            "hospitalization-days"
+            "hospitalisation-days",
+            "poor-qol-scores",
+            "no-cns-activity-advantage"
         ]
     }
 ]

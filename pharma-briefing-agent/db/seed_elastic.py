@@ -2,9 +2,9 @@
 seed_elastic.py — Seed Elasticsearch with 3 Indices
 =====================================================
 Creates and populates:
-  1. idx_company_docs     — Drug datasheets + trial summaries (4 docs)
-  2. idx_crm_memory       — Past visit notes per HCP (5 docs)
-  3. idx_competitive_intel — Competitor analysis briefs (2 docs)
+  1. idx_company_docs     — Drug clinical trials, prescribing info, datasheets (9 docs)
+  2. idx_crm_memory       — Past rep visit notes per HCP (30 docs)
+  3. idx_competitive_intel — Competitor analysis briefs (4 docs)
 
 BM25 text search only — no dense_vector fields.
 Uses delete_by_query + bulk index for idempotent re-runs.
@@ -53,6 +53,9 @@ MAPPING_COMPANY_DOCS = {
             "drug_id": {"type": "keyword"},
             "therapeutic_area": {"type": "keyword"},
             "title": {"type": "text", "analyzer": "standard"},
+            "description": {"type": "text", "analyzer": "standard"},
+            "source": {"type": "keyword"},
+            "pdf_url": {"type": "keyword", "index": False},
             "content": {"type": "text", "analyzer": "standard"},
             "tags": {"type": "keyword"},
         }
