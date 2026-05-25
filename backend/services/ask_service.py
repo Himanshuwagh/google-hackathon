@@ -1,4 +1,5 @@
 import json
+import logging
 import os
 import re
 from typing import Any
@@ -10,6 +11,11 @@ from runtime_config import configure_environment
 from services.meeting_service import get_meeting_context
 
 
+logger = logging.getLogger("pharmaops.ask_service")
+
+DEFAULT_ASK_MODEL = "gemini-3.1-flash-lite"
+DEFAULT_ASK_FALLBACK_MODELS = ("gemini-2.5-flash-lite", "gemini-2.5-flash")
+
 SYSTEM_PROMPT = """
 You are a pharma sales intelligence assistant. You have full context about
 a specific doctor meeting including clinical evidence, compliance rules, and
@@ -17,6 +23,33 @@ doctor profile. Answer the rep's question accurately and concisely using
 only the provided context. Cite your sources. Never make claims that would
 violate UCPMP 2024 rules. Never mention off-label uses.
 """
+
+
+def _split_model_list(value: str | None) -> list[str]:
+    if not value:
+        return []
+    return [item.strip() for item in value.split(",") if item.strip()]
+
+
+def _ask_model_candidates() -> list[str]:
+    """Return chat-specific model candidates.
+
+    Do not read GEMINI_MODEL here. That variable is shared with the briefing
+    pipeline and can be pinned to a model whose model-specific quota is
+    unavailable while newer Gemini models still work for the same key/project.
+    """
+    primary_models = _split_model_list(
+        os.getenv("ASK_GEMINI_MODEL") or os.getenv("GEMINI_CHAT_MODEL") or DEFAULT_ASK_MODEL
+    )
+    fallback_models = _split_model_list(os.getenv("ASK_GEMINI_FALLBACK_MODELS")) or list(
+        DEFAULT_ASK_FALLBACK_MODELS
+    )
+
+    candidates: list[str] = []
+    for model in [*primary_models, *fallback_models]:
+        if model not in candidates:
+            candidates.append(model)
+    return candidates
 
 
 def _compact_error_message(exc: Exception) -> str:
@@ -125,13 +158,33 @@ Answer in 2-4 paragraphs. Be specific. Cite trial data where relevant.
 
     try:
         client = _client()
-        response = client.models.generate_content(
-            model=os.getenv("GEMINI_MODEL", "gemini-3.1-flash-lite"),
-            contents=user_prompt,
-            config=types.GenerateContentConfig(system_instruction=SYSTEM_PROMPT),
-        )
-        answer = getattr(response, "text", None) or str(response)
+        last_error: Exception | None = None
+        answer = ""
+        for model in _ask_model_candidates():
+            try:
+                logger.info("[ASK] Generating answer for meeting_id=%s with model=%s", meeting_id, model)
+                response = client.models.generate_content(
+                    model=model,
+                    contents=user_prompt,
+                    config=types.GenerateContentConfig(system_instruction=SYSTEM_PROMPT),
+                )
+                answer = getattr(response, "text", None) or str(response)
+                break
+            except Exception as model_error:
+                last_error = model_error
+                detail = str(model_error)
+                if "RESOURCE_EXHAUSTED" in detail or "quota" in detail.lower():
+                    logger.warning(
+                        "[ASK] Model quota exhausted for meeting_id=%s model=%s; trying fallback if available",
+                        meeting_id,
+                        model,
+                    )
+                    continue
+                raise
+        if not answer and last_error:
+            raise last_error
     except Exception as exc:
+        logger.error("[ASK] Failed to answer meeting_id=%s: %s", meeting_id, exc, exc_info=True)
         answer = _compact_error_message(exc)
 
     return {

@@ -1,12 +1,14 @@
 import logging
 import sys
+from pathlib import Path
 
 from fastapi import FastAPI, HTTPException, Request
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
+from fastapi.staticfiles import StaticFiles
 
 from routers import ask, briefings, logs, meetings
-from runtime_config import validate_runtime_config
+from runtime_config import AGENT_ROOT, configure_environment, validate_runtime_config
 
 # ── Logging configuration ────────────────────────────────────────────
 # Use explicit handler on "pharmaops" namespace so uvicorn can't override it
@@ -84,6 +86,16 @@ app.include_router(ask.router, prefix="/ask", tags=["ask"])
 app.include_router(logs.router, prefix="/ws", tags=["logs"])
 
 
+def _load_partner_mcp_status() -> dict:
+    configure_environment()
+    agent_root = str(AGENT_ROOT)
+    if agent_root not in sys.path:
+        sys.path.insert(0, agent_root)
+    from tools.mcp_servers import partner_mcp_status
+
+    return partner_mcp_status()
+
+
 @app.on_event("startup")
 async def startup_checks() -> None:
     logger.info("Starting PharmaOps API — running config validation")
@@ -94,3 +106,18 @@ async def startup_checks() -> None:
 @app.get("/health")
 def health() -> dict[str, str]:
     return {"status": "ok", "service": "pharmaops-api"}
+
+
+@app.get("/agent-runtime")
+def agent_runtime() -> dict:
+    return {
+        "runtime": "Google ADK on Cloud Run",
+        "agent_builder_alignment": "Vertex AI Agent Builder code-first ADK runtime",
+        "gemini": "google-adk LlmAgent pipeline",
+        "partner_mcp": _load_partner_mcp_status(),
+    }
+
+
+FRONTEND_DIST = Path(__file__).resolve().parents[1] / "frontend" / "dist"
+if FRONTEND_DIST.exists():
+    app.mount("/", StaticFiles(directory=FRONTEND_DIST, html=True), name="frontend")

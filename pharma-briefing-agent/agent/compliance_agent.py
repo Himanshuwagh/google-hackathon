@@ -4,6 +4,7 @@ import re
 
 from google.adk.agents import LlmAgent
 
+from tools.mcp_servers import partner_mcp_toolsets
 from tools.mongo_tools import get_compliance_rules
 
 
@@ -11,6 +12,9 @@ COMPLIANCE_INSTRUCTION = """You are a pharma compliance checker. You receive a
 claim quality gate result from {quality_gate_result} and a draft briefing from
 {draft_brief}. Use quality_gate_result.clean_brief as the draft to validate
 when it is present.
+The runtime also exposes the official MongoDB MCP server with a "mongodb" tool
+prefix. Use it for rules collection inspection when available, then use
+get_compliance_rules as the canonical rules payload.
 
 Step 1: Call get_compliance_rules to load all active rules.
 Step 2: First preserve any blocker flags already present in
@@ -115,7 +119,7 @@ def _strip_json_markdown_fence(callback_context, llm_response):
 compliance_agent = LlmAgent(
     name="ComplianceChecker",
     model="gemini-3.1-flash-lite",
-    tools=[get_compliance_rules],
+    tools=[get_compliance_rules, *partner_mcp_toolsets()],
     output_key="compliance_result",
     instruction=COMPLIANCE_INSTRUCTION,
     after_model_callback=_strip_json_markdown_fence,

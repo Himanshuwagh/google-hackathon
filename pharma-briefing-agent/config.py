@@ -10,8 +10,11 @@ MCP Server Architecture:
 """
 
 import os
+from pathlib import Path
 from dotenv import load_dotenv
 
+AGENT_DIR = Path(__file__).resolve().parent
+load_dotenv(AGENT_DIR / ".env")
 load_dotenv()
 
 # ── MongoDB Atlas ──────────────────────────────────────────────

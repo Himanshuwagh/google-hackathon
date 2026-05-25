@@ -1,7 +1,7 @@
 # PharmaOps Sales Agent
 
-> Fully autonomous AI agent for pharmaceutical sales reps in India.  
-> Built for the **Google Cloud Rapid Agent Hackathon** (MongoDB + Elastic partner tracks).
+> Autonomous AI briefing workflow for pharmaceutical sales reps in India.  
+> Built for the **Google Cloud Rapid Agent Hackathon** MongoDB partner track.
 
 ## What It Does
 
@@ -12,21 +12,31 @@ When a new doctor meeting is added to MongoDB, the agent **automatically**:
 3. **Retrieves** internal docs from Elastic + live evidence from PubMed/ClinicalTrials.gov
 4. **Writes** personalised talking points
 5. **Validates** against India's UCPMP 2024 pharmaceutical marketing law
-6. **Saves** the briefing to MongoDB, creates a Google Calendar prep block, drafts a Gmail email
+6. **Saves** the briefing to MongoDB and exposes the result in the PharmaOps dashboard
 7. **Rep wakes up** to find everything done — no prompts, no clicks
 
 **This is NOT a chatbot.** The agent runs end-to-end in the background.
+
+## Hackathon Runtime Notes
+
+- The agent is built with Google ADK `SequentialAgent` + Gemini `LlmAgent`
+  stages.
+- The ADK runtime loads the official MongoDB MCP server through
+  `tools/mcp_servers.py` using `McpToolset`.
+- MongoDB MCP is read-only by default so the agent can inspect partner data
+  safely. Controlled writes still go through deterministic application tools.
+- The web app is deployed as a single Google Cloud Run service from the root
+  `Dockerfile`.
 
 ## Tech Stack
 
 | Component | Tool |
 |---|---|
-| AI Brain | Google ADK + Gemini |
-| Database | MongoDB Atlas (MCP server) |
-| Doc Search | Elasticsearch (MCP server) |
+| AI Runtime | Google ADK + Gemini on Google Cloud Run |
+| Partner MCP | MongoDB MCP Server via ADK `McpToolset` |
+| Database | MongoDB Atlas |
+| Doc Search | Elasticsearch |
 | Evidence | PubMed API, ClinicalTrials.gov API, OpenFDA API |
-| Calendar | Google Calendar API |
-| Email | Gmail API |
 | Frontend | React on Google Cloud Run |
 
 ## Setup
@@ -61,11 +71,10 @@ pharma-briefing-agent/
 │   ├── writer_agent.py     # Writes briefing
 │   └── compliance_agent.py # UCPMP 2024 compliance check
 ├── tools/                  # Tool functions for agents
-│   ├── mongo_tools.py      # MongoDB MCP read/write
-│   ├── elastic_tools.py    # Elastic MCP search
+│   ├── mcp_servers.py      # Partner MCP server toolsets for ADK
+│   ├── mongo_tools.py      # Controlled MongoDB read/write
+│   ├── elastic_tools.py    # Structured Elastic search
 │   ├── pubmed_tools.py     # PubMed + ClinicalTrials API
-│   ├── gmail_tools.py      # Gmail draft creation
-│   └── calendar_tools.py   # Calendar event creation
 ├── db/                     # Database seeding scripts
 │   ├── seed_data.py        # Seeds MongoDB collections
 │   └── seed_elastic.py     # Seeds Elastic index

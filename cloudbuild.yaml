@@ -1,0 +1,43 @@
+substitutions:
+  _REGION: us-central1
+  _SERVICE: pharmaops-agent
+
+steps:
+  - name: gcr.io/cloud-builders/docker
+    args:
+      - build
+      - -t
+      - ${_REGION}-docker.pkg.dev/$PROJECT_ID/pharmaops/pharmaops-agent:$SHORT_SHA
+      - .
+  - name: gcr.io/cloud-builders/docker
+    args:
+      - push
+      - ${_REGION}-docker.pkg.dev/$PROJECT_ID/pharmaops/pharmaops-agent:$SHORT_SHA
+  - name: gcr.io/google.com/cloudsdktool/cloud-sdk
+    entrypoint: gcloud
+    args:
+      - run
+      - deploy
+      - ${_SERVICE}
+      - --image
+      - ${_REGION}-docker.pkg.dev/$PROJECT_ID/pharmaops/pharmaops-agent:$SHORT_SHA
+      - --region
+      - ${_REGION}
+      - --platform
+      - managed
+      - --allow-unauthenticated
+      - --port
+      - "8080"
+      - --memory
+      - 2Gi
+      - --cpu
+      - "2"
+      - --timeout
+      - "900"
+      - --set-env-vars
+      - GOOGLE_LOCATION=us-central1,ENABLE_PARTNER_MCP=true,ENABLE_MONGODB_MCP=true,MONGODB_MCP_READ_ONLY=true
+      - --set-secrets
+      - MONGO_URI=MONGO_URI:latest,MONGO_DB_NAME=MONGO_DB_NAME:latest,GOOGLE_API_KEY=GOOGLE_API_KEY:latest,ELASTIC_URL=ELASTIC_URL:latest,ELASTIC_API_KEY=ELASTIC_API_KEY:latest
+
+images:
+  - ${_REGION}-docker.pkg.dev/$PROJECT_ID/pharmaops/pharmaops-agent:$SHORT_SHA
