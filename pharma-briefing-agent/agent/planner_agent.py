@@ -4,15 +4,11 @@ import re
 
 from google.adk.agents import LlmAgent
 
-from tools.mcp_servers import partner_mcp_toolsets
 from tools.mongo_tools import get_meeting
 
 
 PLANNER_INSTRUCTION = """You are a pharma sales briefing planner. Given a
 meeting_id, use the get_meeting tool to fetch the full meeting context.
-The agent runtime also exposes the official MongoDB MCP server with a
-"mongodb" tool prefix. Use the MCP tools for collection/schema inspection when
-available, then use get_meeting for the canonical joined meeting payload.
 
 Your job is to create the overall execution plan for the other agents in the
 pipeline. Do not write the final briefing. The downstream agents will use your
@@ -196,7 +192,7 @@ def _strip_json_markdown_fence(callback_context, llm_response):
 planner_agent = LlmAgent(
     name="MeetingPlanner",
     model="gemini-3.1-flash-lite",
-    tools=[get_meeting, *partner_mcp_toolsets()],
+    tools=[get_meeting],
     output_key="execution_plan",
     instruction=PLANNER_INSTRUCTION,
     after_model_callback=_strip_json_markdown_fence,

@@ -23,8 +23,8 @@ ENV PORT=8080 \
     PYTHONUNBUFFERED=1 \
     VIRTUAL_ENV=/opt/venv \
     PATH="/opt/venv/bin:${PATH}" \
-    ENABLE_PARTNER_MCP=true \
-    ENABLE_MONGODB_MCP=true \
+    ENABLE_PARTNER_MCP=false \
+    ENABLE_MONGODB_MCP=false \
     MONGODB_MCP_READ_ONLY=true
 
 RUN python3 -m venv /opt/venv

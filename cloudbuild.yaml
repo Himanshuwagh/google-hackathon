@@ -38,7 +38,7 @@ steps:
       - --timeout
       - "900"
       - --set-env-vars
-      - GOOGLE_LOCATION=us-central1,ENABLE_PARTNER_MCP=true,ENABLE_MONGODB_MCP=true,MONGODB_MCP_READ_ONLY=true
+      - GOOGLE_LOCATION=us-central1,ENABLE_PARTNER_MCP=false,ENABLE_MONGODB_MCP=false,MONGODB_MCP_READ_ONLY=true
       - --set-secrets
       - MONGO_URI=MONGO_URI:latest,MONGO_DB_NAME=MONGO_DB_NAME:latest,GOOGLE_API_KEY=GOOGLE_API_KEY:latest,ELASTIC_URL=ELASTIC_URL:latest,ELASTIC_API_KEY=ELASTIC_API_KEY:latest
 

@@ -2,7 +2,6 @@
 
 from google.adk.agents import LlmAgent
 
-from tools.mcp_servers import partner_mcp_toolsets
 from tools.elastic_tools import (
     search_company_docs,
     search_competitive_intel,
@@ -19,11 +18,6 @@ plan from {execution_plan}. Use that plan as the only source for IDs, queries,
 HCP context, therapeutic area, and drug context. Do not invent facts.
 
 Your task is to execute searches, not to write the final briefing.
-The runtime exposes partner MCP tools where configured. MongoDB MCP tools use
-the "mongodb" prefix and can inspect source collections or examples; Elastic
-MCP tools use the "elastic" prefix when ELASTIC_MCP_URL is configured. Use
-partner MCP context for discovery/validation when helpful, but preserve the
-structured search tool outputs in the final JSON.
 
 For EACH drug in the plan:
 1. Call search_company_docs with:
@@ -133,7 +127,6 @@ retriever_agent = LlmAgent(
         search_competitive_intel,
         search_pubmed,
         search_clinical_trials,
-        *partner_mcp_toolsets(include_elastic=True),
     ],
     output_key="retrieved_context",
     instruction=RETRIEVER_INSTRUCTION,
