@@ -17,7 +17,6 @@ if [[ -z "${PROJECT_ID}" ]]; then
 fi
 
 PROJECT_NUMBER="$(gcloud projects describe "${PROJECT_ID}" --format="value(projectNumber)")"
-SERVICE_ACCOUNT="${SERVICE_ACCOUNT:-projects/${PROJECT_ID}/serviceAccounts/${PROJECT_NUMBER}@cloudbuild.gserviceaccount.com}"
 CONNECT_URL="https://console.cloud.google.com/cloud-build/triggers;region=${REGION}/connect?project=${PROJECT_NUMBER}"
 
 args=(
@@ -29,8 +28,11 @@ args=(
   "--repo-name=${REPO_NAME}"
   "--branch-pattern=${BRANCH_PATTERN}"
   "--build-config=${BUILD_CONFIG}"
-  "--service-account=${SERVICE_ACCOUNT}"
 )
+
+if [[ -n "${SERVICE_ACCOUNT:-}" ]]; then
+  args+=("--service-account=${SERVICE_ACCOUNT}")
+fi
 
 if [[ "${INCLUDE_LOGS}" == "true" ]]; then
   args+=(--include-logs-with-status)
