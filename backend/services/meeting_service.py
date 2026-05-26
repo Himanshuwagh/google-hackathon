@@ -8,6 +8,7 @@ from uuid import uuid4
 from zoneinfo import ZoneInfo
 
 from bson import ObjectId
+from pymongo import WriteConcern
 
 from db import COLLECTIONS, get_database
 from models.meeting import NewMeetingRequest
@@ -416,7 +417,9 @@ async def create_meeting(payload: NewMeetingRequest) -> str:
     }
     if briefing_notes:
         document["briefing_notes"] = briefing_notes
-    await db[COLLECTIONS["meetings"]].insert_one(document)
+    await db[COLLECTIONS["meetings"]].with_options(
+        write_concern=WriteConcern(w="majority")
+    ).insert_one(document)
     return meeting_id
 
 

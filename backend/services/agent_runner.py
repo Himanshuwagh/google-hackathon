@@ -251,6 +251,11 @@ async def run(meeting_id: str) -> None:
         trace_events.append(_new_trace_event("AGENT", "Starting briefing pipeline"))
         logger.info("[RUN] Importing agent pipeline module")
 
+        # Brief delay to allow MongoDB Atlas replication to propagate the
+        # newly-created meeting document to secondary nodes before the MCP
+        # server (which opens its own connection) attempts to read it.
+        await asyncio.sleep(2)
+
         run_pipeline_with_metadata = _import_agent_run_pipeline()
         logger.info("[RUN] Running pipeline in threadpool")
         result = await asyncio.wait_for(

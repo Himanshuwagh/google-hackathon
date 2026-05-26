@@ -2,10 +2,17 @@
 
 from __future__ import annotations
 
+import asyncio
+import logging
 from typing import Any
 
 from tools.mongo_mcp_client import get_active_mongodb_mcp
 from tools.mongo_tools import _normalize_drug_ids, _ordered_drugs
+
+logger = logging.getLogger("pharmaops.mcp_mongo_tools")
+
+# Retry settings for newly-created meetings that may not have replicated yet
+_MEETING_RETRY_DELAYS = [1.0, 2.0, 3.0]
 
 
 async def get_meeting(meeting_id: str) -> dict:
@@ -14,9 +21,30 @@ async def get_meeting(meeting_id: str) -> dict:
     This is the canonical read path for briefing generation. It reads the
     meeting, sales rep, HCP, and drug documents through MongoDB MCP and returns
     the same structured context shape used by the planner prompt.
+
+    Includes retry logic to handle MongoDB Atlas replication lag — when a
+    meeting is freshly created, the MCP server may read from a secondary that
+    hasn't received the write yet.
     """
     mcp = get_active_mongodb_mcp()
     meeting = await mcp.find_one("meetings", {"_id": meeting_id})
+
+    # Retry with backoff if not found (handles Atlas replication lag)
+    if not meeting:
+        for attempt, delay in enumerate(_MEETING_RETRY_DELAYS, 1):
+            logger.warning(
+                "[get_meeting] Meeting %s not found on attempt %d, retrying in %.1fs",
+                meeting_id, attempt, delay,
+            )
+            await asyncio.sleep(delay)
+            meeting = await mcp.find_one("meetings", {"_id": meeting_id})
+            if meeting:
+                logger.info(
+                    "[get_meeting] Meeting %s found on retry attempt %d",
+                    meeting_id, attempt,
+                )
+                break
+
     if not meeting:
         return {"status": "not_found", "error": f"Meeting {meeting_id} not found"}
 
