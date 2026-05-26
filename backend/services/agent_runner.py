@@ -6,7 +6,7 @@ import sys
 from datetime import UTC, datetime
 from typing import Any
 
-from starlette.concurrency import run_in_threadpool
+import anyio
 
 from db import get_database
 from log_store import append_log, mark_complete
@@ -17,6 +17,7 @@ logger = logging.getLogger("pharmaops.agent_runner")
 AGENT_RUN_TIMEOUT_SECONDS = int(os.getenv("AGENT_RUN_TIMEOUT_SECONDS", "420"))
 
 PIPELINE_STEP_NAMES = [
+    "MongoDBMCP",
     "MeetingPlanner",
     "InformationRetriever",
     "BriefWriter",
@@ -54,6 +55,7 @@ async def _record_agent_run(
     started_at: datetime,
     result: Any | None = None,
     error: str | None = None,
+    tool_trace: dict[str, Any] | None = None,
 ) -> None:
     db = get_database()
     await db["agent_runs"].insert_one(
@@ -64,6 +66,7 @@ async def _record_agent_run(
             "finished_at": datetime.now(UTC),
             "result": result,
             "error": error,
+            "tool_trace": tool_trace,
         }
     )
 
@@ -91,9 +94,6 @@ def _build_tool_trace(status: str, events: list[dict[str, Any]]) -> dict[str, An
     }
 
     for event in events:
-        if event.get("tag") != "STEP":
-            continue
-
         step = event.get("step")
         phase = event.get("phase")
         if step not in steps:
@@ -104,6 +104,9 @@ def _build_tool_trace(status: str, events: list[dict[str, Any]]) -> dict[str, An
             steps[step]["started_at"] = event.get("recorded_at")
         elif phase == "completed":
             steps[step]["status"] = "done"
+            steps[step]["completed_at"] = event.get("recorded_at")
+        elif phase == "failed":
+            steps[step]["status"] = "failed"
             steps[step]["completed_at"] = event.get("recorded_at")
 
     if status == "error":
@@ -141,15 +144,71 @@ async def _persist_tool_trace(
     )
 
 
+async def _persist_meeting_tool_trace(
+    meeting_id: str,
+    tool_trace: dict[str, Any],
+) -> None:
+    db = get_database()
+    await db["meetings"].update_one(
+        {"_id": meeting_id},
+        {"$set": {"tool_trace": tool_trace}},
+    )
+
+
 async def run(meeting_id: str) -> None:
     logger.info("[RUN] Starting agent pipeline for meeting_id=%s", meeting_id)
     started_at = datetime.now(UTC)
     loop = asyncio.get_running_loop()
     trace_events: list[dict[str, Any]] = []
+    run_finished = False
+
+    def persist_running_trace_later() -> None:
+        if run_finished:
+            return
+        tool_trace = _build_tool_trace("running", list(trace_events))
+        loop.call_soon_threadsafe(
+            lambda: asyncio.create_task(_persist_meeting_tool_trace(meeting_id, tool_trace))
+        )
 
     def emit_step_trace(payload: dict[str, Any]) -> None:
+        if run_finished:
+            return
+        tag = payload.get("tag")
         step = payload.get("step")
         phase = payload.get("phase")
+        if tag in {"MCP_CHECK", "MCP_QUERY"}:
+            action = phase or "event"
+            level = payload.get("level") or ("success" if phase == "completed" else "info")
+            message = payload.get("message") or f"{tag} {action}"
+            logger.info("[RUN] %s: %s", tag, message)
+            event = _new_trace_event(
+                tag,
+                message,
+                level,
+                step=step,
+                phase=phase,
+                collection=payload.get("collection"),
+                count=payload.get("count"),
+                tools_count=payload.get("tools_count"),
+            )
+            trace_events.append(event)
+            persist_running_trace_later()
+            loop.call_soon_threadsafe(
+                partial(
+                    append_log,
+                    meeting_id,
+                    tag,
+                    message,
+                    level,
+                    step=step,
+                    phase=phase,
+                    collection=payload.get("collection"),
+                    count=payload.get("count"),
+                    tools_count=payload.get("tools_count"),
+                )
+            )
+            return
+
         if not step or not phase:
             return
 
@@ -165,6 +224,7 @@ async def run(meeting_id: str) -> None:
                 phase=phase,
             )
         )
+        persist_running_trace_later()
         loop.call_soon_threadsafe(
             partial(
                 append_log,
@@ -178,23 +238,29 @@ async def run(meeting_id: str) -> None:
         )
 
     append_log(meeting_id, "TRIGGER", f"Meeting detected - {meeting_id}")
+    trace_events.append(_new_trace_event("TRIGGER", f"Meeting detected - {meeting_id}"))
     await update_meeting_status(
         meeting_id,
         "agent_processing",
         agent_triggered=True,
     )
+    await _persist_meeting_tool_trace(meeting_id, _build_tool_trace("running", trace_events))
 
     try:
         append_log(meeting_id, "AGENT", "Starting briefing pipeline")
+        trace_events.append(_new_trace_event("AGENT", "Starting briefing pipeline"))
         logger.info("[RUN] Importing agent pipeline module")
 
         run_pipeline_with_metadata = _import_agent_run_pipeline()
         logger.info("[RUN] Running pipeline in threadpool")
         result = await asyncio.wait_for(
-            run_in_threadpool(
-                run_pipeline_with_metadata,
-                meeting_id,
-                trace_callback=emit_step_trace,
+            anyio.to_thread.run_sync(
+                partial(
+                    run_pipeline_with_metadata,
+                    meeting_id,
+                    trace_callback=emit_step_trace,
+                ),
+                abandon_on_cancel=True,
             ),
             timeout=AGENT_RUN_TIMEOUT_SECONDS,
         )
@@ -208,17 +274,26 @@ async def run(meeting_id: str) -> None:
         else:
             logger.warning("[RUN] No briefing_id extracted from pipeline result")
 
-        await _record_agent_run(meeting_id, "success", started_at, result=result)
         trace_events.append(_new_trace_event("DONE", "Briefing ready", level="success"))
+        complete_trace = _build_tool_trace("complete", trace_events)
+        await _record_agent_run(
+            meeting_id,
+            "success",
+            started_at,
+            result=result,
+            tool_trace=complete_trace,
+        )
+        await _persist_meeting_tool_trace(meeting_id, complete_trace)
         if briefing_id:
             await _persist_tool_trace(
                 meeting_id,
                 briefing_id,
-                _build_tool_trace("complete", trace_events),
+                complete_trace,
             )
         append_log(meeting_id, "DONE", "Briefing ready", level="success")
         logger.info("[RUN] Agent run complete for meeting_id=%s", meeting_id)
     except TimeoutError:
+        run_finished = True
         error_text = f"Briefing generation timed out after {AGENT_RUN_TIMEOUT_SECONDS} seconds"
         logger.error("[RUN] Pipeline timed out for meeting_id=%s", meeting_id)
         await update_meeting_status(
@@ -227,10 +302,19 @@ async def run(meeting_id: str) -> None:
             error_message=error_text,
             agent_triggered=True,
         )
-        await _record_agent_run(meeting_id, "timeout", started_at, error=error_text)
         trace_events.append(_new_trace_event("ERROR", error_text, level="error"))
+        error_trace = _build_tool_trace("error", trace_events)
+        await _record_agent_run(
+            meeting_id,
+            "timeout",
+            started_at,
+            error=error_text,
+            tool_trace=error_trace,
+        )
+        await _persist_meeting_tool_trace(meeting_id, error_trace)
         append_log(meeting_id, "ERROR", error_text, level="error")
     except Exception as exc:
+        run_finished = True
         error_text = str(exc)
         logger.error(
             "[RUN] Pipeline failed for meeting_id=%s: %s", meeting_id, error_text, exc_info=True
@@ -241,10 +325,19 @@ async def run(meeting_id: str) -> None:
             error_message=error_text,
             agent_triggered=True,
         )
-        await _record_agent_run(meeting_id, "error", started_at, error=error_text)
         trace_events.append(_new_trace_event("ERROR", error_text, level="error"))
+        error_trace = _build_tool_trace("error", trace_events)
+        await _record_agent_run(
+            meeting_id,
+            "error",
+            started_at,
+            error=error_text,
+            tool_trace=error_trace,
+        )
+        await _persist_meeting_tool_trace(meeting_id, error_trace)
         append_log(meeting_id, "ERROR", error_text, level="error")
     finally:
+        run_finished = True
         mark_complete(meeting_id)
 
 

@@ -4,7 +4,7 @@ import re
 
 from google.adk.agents import LlmAgent
 
-from tools.mongo_tools import get_compliance_rules
+from tools.mcp_mongo_tools import get_compliance_rules
 
 
 COMPLIANCE_INSTRUCTION = """You are a pharma compliance checker. You receive a
@@ -12,7 +12,8 @@ claim quality gate result from {quality_gate_result} and a draft briefing from
 {draft_brief}. Use quality_gate_result.clean_brief as the draft to validate
 when it is present.
 
-Step 1: Call get_compliance_rules to load all active rules.
+Step 1: Call get_compliance_rules to load all active rules through the
+preflighted read-only MongoDB MCP server.
 Step 2: First preserve any blocker flags already present in
 quality_gate_result.flags. If quality_gate_result.passed is false, the final
 result must also have passed=false unless every flagged offending section has

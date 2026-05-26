@@ -11,10 +11,10 @@ web dashboard.
 - **Agent platform:** Google ADK code-first agent runtime, deployed on Google
   Cloud Run. This aligns with Vertex AI Agent Builder's ADK path while keeping
   the existing FastAPI dashboard.
-- **Partner MCP:** The ADK agents load the official MongoDB MCP server through
-  `McpToolset` with the `mongodb` tool prefix. It runs read-only by default for
-  schema/data inspection while deterministic app tools perform controlled
-  writes.
+- **Partner MCP:** The briefing runtime preflights the official read-only
+  MongoDB MCP server once per run and exposes deterministic MCP-backed read
+  tools to the ADK agents. Controlled briefing/status writes still use
+  application tools.
 - **Gemini:** Each agent step is a Gemini-backed `LlmAgent`.
 - **Web platform:** React frontend and FastAPI backend are packaged into one
   Cloud Run service.
@@ -34,7 +34,7 @@ React dashboard
   -> FastAPI on Cloud Run
     -> Google ADK SequentialAgent
       -> Gemini planner / retriever / writer / compliance / action agents
-      -> MongoDB MCP server for partner data inspection
+      -> MongoDB MCP server for partner reads and schema validation
       -> MongoDB Atlas for meetings, compliance rules, briefings, run logs
       -> Elasticsearch for company docs, CRM memory, competitive intel
       -> PubMed and ClinicalTrials.gov for public evidence lookup
@@ -54,6 +54,8 @@ GOOGLE_LOCATION=us-central1
 ENABLE_PARTNER_MCP=true
 ENABLE_MONGODB_MCP=true
 MONGODB_MCP_READ_ONLY=true
+MDB_MCP_READ_ONLY=true
+MDB_MCP_MAX_TIME_M_S=5000
 ```
 
 Optional Elastic MCP endpoint:

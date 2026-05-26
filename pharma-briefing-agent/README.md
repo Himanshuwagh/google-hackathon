@@ -21,10 +21,10 @@ When a new doctor meeting is added to MongoDB, the agent **automatically**:
 
 - The agent is built with Google ADK `SequentialAgent` + Gemini `LlmAgent`
   stages.
-- The ADK runtime loads the official MongoDB MCP server through
-  `tools/mcp_servers.py` using `McpToolset`.
-- MongoDB MCP is read-only by default so the agent can inspect partner data
-  safely. Controlled writes still go through deterministic application tools.
+- The runtime preflights the official MongoDB MCP server once per pipeline run
+  and exposes deterministic MCP-backed read tools to the ADK agents.
+- MongoDB MCP is read-only by default. Controlled briefing/status writes still
+  go through deterministic application tools.
 - The web app is deployed as a single Google Cloud Run service from the root
   `Dockerfile`.
 
@@ -33,7 +33,7 @@ When a new doctor meeting is added to MongoDB, the agent **automatically**:
 | Component | Tool |
 |---|---|
 | AI Runtime | Google ADK + Gemini on Google Cloud Run |
-| Partner MCP | MongoDB MCP Server via ADK `McpToolset` |
+| Partner MCP | MongoDB MCP Server via preflighted stdio wrapper |
 | Database | MongoDB Atlas |
 | Doc Search | Elasticsearch |
 | Evidence | PubMed API, ClinicalTrials.gov API, OpenFDA API |
@@ -71,8 +71,10 @@ pharma-briefing-agent/
 │   ├── writer_agent.py     # Writes briefing
 │   └── compliance_agent.py # UCPMP 2024 compliance check
 ├── tools/                  # Tool functions for agents
-│   ├── mcp_servers.py      # Partner MCP server toolsets for ADK
-│   ├── mongo_tools.py      # Controlled MongoDB read/write
+│   ├── mcp_servers.py      # Partner MCP status helpers
+│   ├── mongo_mcp_client.py # Preflighted MongoDB MCP runtime
+│   ├── mcp_mongo_tools.py  # MCP-backed MongoDB read tools
+│   ├── mongo_tools.py      # Controlled MongoDB writes
 │   ├── elastic_tools.py    # Structured Elastic search
 │   ├── pubmed_tools.py     # PubMed + ClinicalTrials API
 ├── db/                     # Database seeding scripts

@@ -3,10 +3,10 @@ config.py — Centralised Configuration
 Loads all environment variables and connection strings from .env
 
 MCP Server Architecture:
-  - MongoDB and Elasticsearch are accessed via official MCP servers (npm packages)
-  - MCP servers are spawned as stdio subprocesses by Google ADK's McpToolset
+  - MongoDB reads use the official MongoDB MCP server (npm package)
+  - MongoDB MCP is spawned once per briefing run as a stdio subprocess
   - Connection strings are passed as environment variables to the MCP processes
-  - See tools/mcp_servers.py for MCP toolset definitions
+  - Controlled writes use deterministic PyMongo application tools
 """
 
 import os
@@ -18,14 +18,13 @@ load_dotenv(AGENT_DIR / ".env")
 load_dotenv()
 
 # ── MongoDB Atlas ──────────────────────────────────────────────
-# Used by: MCP server (mongodb-mcp-server) at runtime
-#          pymongo in db/seed_data.py for initial data seeding only
+# Used by: MCP server (mongodb-mcp-server) for runtime reads
+#          pymongo for controlled writes and initial data seeding
 MONGO_URI = os.getenv("MONGO_URI", "mongodb+srv://<user>:<pass>@cluster.mongodb.net/")
 MONGO_DB_NAME = os.getenv("MONGO_DB_NAME", "pharma_ops")
 
 # ── Elasticsearch ──────────────────────────────────────────────
-# Used by: MCP server (@elastic/mcp-server-elasticsearch) at runtime
-#          elasticsearch-py in db/seed_elastic.py for initial index seeding only
+# Used by: elasticsearch-py at runtime and for initial index seeding
 # Supports either ELASTIC_CLOUD_ID (Elastic Cloud) or ELASTIC_URL (self-hosted)
 ELASTIC_CLOUD_ID = os.getenv("ELASTIC_CLOUD_ID", "")
 ELASTIC_URL = os.getenv("ELASTIC_URL", "")

@@ -2,10 +2,10 @@
 # PharmaOps Sales Agent — Python Dependencies
 # ============================================================
 
-# Google ADK (Agent Development Kit) — includes McpToolset
+# Google ADK (Agent Development Kit)
 google-adk>=0.3.0
 
-# MCP SDK (required by ADK for MCP server communication)
+# MCP SDK (used by the preflighted MongoDB MCP stdio wrapper)
 mcp>=1.0.0
 
 # Google Cloud
@@ -17,12 +17,11 @@ google-api-python-client>=2.130.0
 google-auth-httplib2>=0.2.0
 google-auth-oauthlib>=1.2.0
 
-# MongoDB — ONLY for db/seed_data.py (one-time data seeding)
-# Runtime access uses MongoDB MCP server (npx mongodb-mcp-server)
+# MongoDB — controlled briefing/status writes and db/seed_data.py
+# Runtime reads use the pinned MongoDB MCP server binary.
 pymongo>=4.7.0
 
-# Elasticsearch — ONLY for db/seed_elastic.py (one-time index seeding)
-# Runtime access uses Elastic MCP server (npx @elastic/mcp-server-elasticsearch)
+# Elasticsearch — structured runtime search and db/seed_elastic.py
 elasticsearch>=8.13.0
 
 # HTTP requests (PubMed, ClinicalTrials, OpenFDA — direct API calls)

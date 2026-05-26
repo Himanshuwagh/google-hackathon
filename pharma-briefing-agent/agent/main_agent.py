@@ -16,6 +16,11 @@ from agent.planner_agent import planner_agent
 from agent.quality_gate_agent import claim_quality_gate
 from agent.retriever_agent import retriever_agent
 from agent.writer_agent import writer_agent
+from tools.mongo_mcp_client import (
+    MongoMcpRuntime,
+    reset_active_mongodb_mcp,
+    set_active_mongodb_mcp,
+)
 from tools.mongo_tools import save_briefing, update_meeting_status
 
 
@@ -23,6 +28,7 @@ APP_NAME = "pharma_briefing_agent"
 USER_ID = "pipeline_user"
 SESSION_ID_PREFIX = "pipeline_session"
 PIPELINE_STEP_NAMES = [
+    "MongoDBMCP",
     "MeetingPlanner",
     "InformationRetriever",
     "BriefWriter",
@@ -154,6 +160,15 @@ def _emit_trace(trace_callback, payload: dict[str, Any]) -> None:
 
 
 async def _run_pipeline_with_metadata_async(meeting_id: str, trace_callback=None) -> dict[str, Any]:
+    async with MongoMcpRuntime(trace_callback=trace_callback) as mongo_mcp:
+        token = set_active_mongodb_mcp(mongo_mcp)
+        try:
+            return await _run_adk_pipeline_with_metadata_async(meeting_id, trace_callback=trace_callback)
+        finally:
+            reset_active_mongodb_mcp(token)
+
+
+async def _run_adk_pipeline_with_metadata_async(meeting_id: str, trace_callback=None) -> dict[str, Any]:
     session_service = InMemorySessionService()
     session_id = f"{SESSION_ID_PREFIX}_{meeting_id}"
 

@@ -23,12 +23,14 @@ ENV PORT=8080 \
     PYTHONUNBUFFERED=1 \
     VIRTUAL_ENV=/opt/venv \
     PATH="/opt/venv/bin:${PATH}" \
-    ENABLE_PARTNER_MCP=false \
-    ENABLE_MONGODB_MCP=false \
-    MONGODB_MCP_READ_ONLY=true
+    ENABLE_PARTNER_MCP=true \
+    ENABLE_MONGODB_MCP=true \
+    MONGODB_MCP_READ_ONLY=true \
+    MDB_MCP_READ_ONLY=true \
+    MDB_MCP_MAX_TIME_M_S=5000
 
 RUN python3 -m venv /opt/venv
-RUN npm install -g mongodb-mcp-server
+RUN npm install -g mongodb-mcp-server@1.10.0
 
 WORKDIR /app
 COPY backend/requirements.txt /app/backend/requirements.txt

@@ -4,6 +4,12 @@ import styles from './ToolTracePanel.module.css';
 
 const AGENT_STEPS = [
   {
+    key: 'mongodb-mcp',
+    name: 'MongoDB MCP',
+    agent: 'MongoDBMCP',
+    description: 'Connected to the read-only MongoDB MCP server and validated database access.',
+  },
+  {
     key: 'planner',
     name: 'Meeting planner',
     agent: 'MeetingPlanner',
@@ -119,7 +125,7 @@ function ToolTracePanel({ meeting, detail, onRefreshMeetings, onTraceComplete })
   }, [decorateEvent, detail?.briefing, meeting.id, onRefreshMeetings, onTraceComplete]);
 
   const briefing = detail?.briefing;
-  const storedTrace = briefing?.tool_trace;
+  const storedTrace = briefing?.tool_trace || detail?.tool_trace;
   const isFailed = detail?.status === 'failed' || meeting.status === 'failed';
 
   const stepStates = useMemo(() => {
@@ -140,8 +146,12 @@ function ToolTracePanel({ meeting, detail, onRefreshMeetings, onTraceComplete })
     }
 
     events.forEach((event) => {
-      if (event.tag === 'STEP' && event.step && event.phase) {
-        states[event.step] = event.phase === 'completed' ? 'done' : 'running';
+      if (event.step && event.phase && ['STEP', 'MCP_CHECK', 'MCP_QUERY'].includes(event.tag)) {
+        states[event.step] = event.phase === 'completed'
+          ? 'done'
+          : event.phase === 'failed'
+            ? 'failed'
+            : 'running';
       }
       if (event.tag === 'ERROR') {
         const runningStep = AGENT_STEPS.find((step) => states[step.agent] === 'running');
@@ -151,7 +161,7 @@ function ToolTracePanel({ meeting, detail, onRefreshMeetings, onTraceComplete })
     return states;
   }, [briefing, events, storedTrace]);
   const hasLiveStepTrace = useMemo(
-    () => Boolean(briefing || storedTrace?.steps || events.some((event) => event.tag === 'STEP' && event.step)),
+    () => Boolean(briefing || storedTrace?.steps || events.some((event) => event.step && event.phase)),
     [briefing, events, storedTrace]
   );
   const effectiveConnectionState = briefing ? 'complete' : connectionState;

@@ -4,11 +4,12 @@ import re
 
 from google.adk.agents import LlmAgent
 
-from tools.mongo_tools import get_meeting
+from tools.mcp_mongo_tools import get_meeting
 
 
 PLANNER_INSTRUCTION = """You are a pharma sales briefing planner. Given a
-meeting_id, use the get_meeting tool to fetch the full meeting context.
+meeting_id, use the get_meeting tool to fetch the full meeting context through
+the preflighted read-only MongoDB MCP server.
 
 Your job is to create the overall execution plan for the other agents in the
 pipeline. Do not write the final briefing. The downstream agents will use your

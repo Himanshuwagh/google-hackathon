@@ -1,24 +1,14 @@
-"""Partner MCP server toolsets for the ADK briefing pipeline.
+"""Partner MCP status helpers for the briefing runtime."""
 
-The deterministic Python tools in this project keep the production payload
-shape stable, while these toolsets expose partner MCP servers directly to the
-ADK agents for schema discovery, data inspection, and judge-visible partner
-integration.
-"""
+from __future__ import annotations
 
+import asyncio
 import os
 
-from google.adk.tools.mcp_tool.mcp_toolset import (
-    McpToolset,
-    StdioConnectionParams,
-    StdioServerParameters,
-    StreamableHTTPConnectionParams,
-)
-
-from config import (
-    ELASTIC_API_KEY,
-    ELASTIC_URL,
-    MONGO_URI,
+from config import ELASTIC_API_KEY, ELASTIC_URL
+from tools.mongo_mcp_client import (
+    build_mongodb_mcp_config,
+    check_mongodb_mcp_status,
 )
 
 
@@ -33,98 +23,49 @@ def _base_enabled() -> bool:
     return _enabled("ENABLE_PARTNER_MCP", True)
 
 
-def mongodb_mcp_toolset() -> McpToolset | None:
-    """Return the official MongoDB MCP server toolset when enabled.
-
-    The server runs read-only by default. The app still writes briefings through
-    deterministic tools so the pipeline cannot accidentally mutate arbitrary
-    collections through generic MCP operations.
-    """
-    if not _base_enabled() or not _enabled("ENABLE_MONGODB_MCP", True):
-        return None
-    if not MONGO_URI:
-        return None
-
-    env = {
-        **os.environ,
-        "MDB_MCP_CONNECTION_STRING": MONGO_URI,
+def _mongodb_status() -> dict:
+    config = build_mongodb_mcp_config()
+    fallback = {
+        "enabled": config.enabled,
+        "configured": config.configured,
+        "connected": False,
+        "read_only": config.read_only,
+        "server": "mongodb-mcp-server",
+        "package": "mongodb-mcp-server@1.10.0",
+        "transport": "stdio",
+        "server_version": None,
+        "tools_count": 0,
+        "last_error": None,
     }
-    if _enabled("MONGODB_MCP_READ_ONLY", True):
-        env["MDB_MCP_READ_ONLY"] = "true"
 
-    args = ["-y", "mongodb-mcp-server"]
-    if _enabled("MONGODB_MCP_READ_ONLY", True):
-        args.append("--readOnly")
+    try:
+        asyncio.get_running_loop()
+    except RuntimeError:
+        return asyncio.run(check_mongodb_mcp_status())
 
-    return McpToolset(
-        connection_params=StdioConnectionParams(
-            server_params=StdioServerParameters(
-                command=os.getenv("MONGODB_MCP_COMMAND", "npx"),
-                args=args,
-                env=env,
-            ),
-            timeout=float(os.getenv("MONGODB_MCP_TIMEOUT", "15")),
-        ),
-        tool_name_prefix="mongodb",
-    )
+    fallback["last_error"] = "Live MCP status check skipped inside running event loop"
+    return fallback
 
 
-def elastic_mcp_toolset() -> McpToolset | None:
-    """Return an Elastic MCP toolset when a remote MCP endpoint is configured.
+def partner_mcp_toolsets(*, include_elastic: bool = False) -> list:
+    """Deprecated compatibility shim.
 
-    Elastic's current MCP server is distributed primarily as a container or
-    streamable-HTTP endpoint. Cloud Run should connect to that endpoint instead
-    of trying to start Docker inside the app container.
+    The briefing pipeline now uses a preflighted deterministic MCP wrapper
+    instead of attaching raw MCP toolsets directly to LLM agents.
     """
-    if not _base_enabled() or not _enabled("ENABLE_ELASTIC_MCP", False):
-        return None
-
-    mcp_url = os.getenv("ELASTIC_MCP_URL")
-    if not mcp_url:
-        return None
-
-    headers: dict[str, str] = {}
-    auth_header = os.getenv("ELASTIC_MCP_AUTH_HEADER")
-    if auth_header:
-        headers["Authorization"] = auth_header
-    elif ELASTIC_API_KEY:
-        headers["Authorization"] = f"ApiKey {ELASTIC_API_KEY}"
-
-    return McpToolset(
-        connection_params=StreamableHTTPConnectionParams(
-            url=mcp_url,
-            headers=headers or None,
-            timeout=float(os.getenv("ELASTIC_MCP_TIMEOUT", "15")),
-        ),
-        tool_name_prefix="elastic",
-    )
-
-
-def partner_mcp_toolsets(*, include_elastic: bool = False) -> list[McpToolset]:
-    """Build the MCP toolset list used by ADK LlmAgents."""
-    toolsets = [toolset for toolset in [mongodb_mcp_toolset()] if toolset is not None]
-    if include_elastic:
-        elastic = elastic_mcp_toolset()
-        if elastic is not None:
-            toolsets.append(elastic)
-    return toolsets
+    del include_elastic
+    return []
 
 
 def partner_mcp_status() -> dict:
     """Non-secret status for health checks and judge-facing diagnostics."""
     return {
         "enabled": _base_enabled(),
-        "mongodb": {
-            "enabled": _base_enabled() and _enabled("ENABLE_MONGODB_MCP", True),
-            "server": "mongodb-mcp-server",
-            "transport": "stdio",
-            "read_only": _enabled("MONGODB_MCP_READ_ONLY", True),
-            "configured": bool(MONGO_URI),
-        },
+        "mongodb": _mongodb_status(),
         "elastic": {
             "enabled": _base_enabled() and _enabled("ENABLE_ELASTIC_MCP", False),
             "server": "Elastic MCP streamable HTTP endpoint",
             "transport": "streamable-http",
-            "configured": bool(os.getenv("ELASTIC_MCP_URL") or ELASTIC_URL),
+            "configured": bool(os.getenv("ELASTIC_MCP_URL") or ELASTIC_URL or ELASTIC_API_KEY),
         },
     }

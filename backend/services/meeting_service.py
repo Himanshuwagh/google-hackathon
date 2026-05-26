@@ -30,6 +30,13 @@ COMPANY_DOCS_PATH = (
 )
 
 
+def _generation_update_statuses(restart_stale_processing: bool) -> list[str]:
+    statuses = ["scheduled", "briefing_ready", "needs_review", "failed"]
+    if restart_stale_processing:
+        statuses.append("agent_processing")
+    return statuses
+
+
 def _display_time(value: datetime) -> str:
     value = _to_display_datetime(value)
     hour = value.hour % 12 or 12
@@ -511,6 +518,7 @@ async def get_meeting_detail(meeting_id: str) -> Optional[dict[str, Any]]:
         "briefing_notes": meeting.get("briefing_notes"),
         "error_message": meeting.get("error_message") or meeting.get("agent_error"),
         "briefing_id": briefing_id,
+        "tool_trace": _serialize(meeting.get("tool_trace")),
         "briefing": briefing,
     }
 
@@ -564,6 +572,7 @@ async def request_briefing_generation(
         meeting.get("agent_triggered"),
     )
 
+    restart_stale_processing = False
     if meeting.get("status") == "agent_processing" and not force:
         processing_started_at = meeting.get("agent_processing_started_at")
         is_stale = True
@@ -578,6 +587,9 @@ async def request_briefing_generation(
             return await get_meeting_detail(meeting_id), False
 
         logger.warning("[REQ_GENERATION] Stale agent_processing state detected; restarting generation")
+        restart_stale_processing = True
+    elif meeting.get("status") == "agent_processing" and force:
+        restart_stale_processing = True
 
     if force:
         logger.info("[REQ_GENERATION] Force regeneration — deleting existing briefings")
@@ -610,7 +622,7 @@ async def request_briefing_generation(
     result = await db[COLLECTIONS["meetings"]].update_one(
         {
             "_id": meeting_id,
-            "status": {"$in": ["scheduled", "briefing_ready", "needs_review", "failed"]},
+            "status": {"$in": _generation_update_statuses(restart_stale_processing)},
         },
         {
             "$set": {
@@ -622,6 +634,7 @@ async def request_briefing_generation(
                 "briefing_id": "",
                 "error_message": "",
                 "agent_error": "",
+                "tool_trace": "",
             },
         },
     )
