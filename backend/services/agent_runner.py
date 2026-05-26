@@ -1,5 +1,6 @@
 import asyncio
 import logging
+import os
 from functools import partial
 import sys
 from datetime import UTC, datetime
@@ -13,6 +14,7 @@ from runtime_config import AGENT_ROOT, configure_environment
 from services.meeting_service import update_meeting_status
 
 logger = logging.getLogger("pharmaops.agent_runner")
+AGENT_RUN_TIMEOUT_SECONDS = int(os.getenv("AGENT_RUN_TIMEOUT_SECONDS", "420"))
 
 PIPELINE_STEP_NAMES = [
     "MeetingPlanner",
@@ -188,10 +190,13 @@ async def run(meeting_id: str) -> None:
 
         run_pipeline_with_metadata = _import_agent_run_pipeline()
         logger.info("[RUN] Running pipeline in threadpool")
-        result = await run_in_threadpool(
-            run_pipeline_with_metadata,
-            meeting_id,
-            trace_callback=emit_step_trace,
+        result = await asyncio.wait_for(
+            run_in_threadpool(
+                run_pipeline_with_metadata,
+                meeting_id,
+                trace_callback=emit_step_trace,
+            ),
+            timeout=AGENT_RUN_TIMEOUT_SECONDS,
         )
 
         briefing_id = _extract_briefing_id(result)
@@ -213,6 +218,18 @@ async def run(meeting_id: str) -> None:
             )
         append_log(meeting_id, "DONE", "Briefing ready", level="success")
         logger.info("[RUN] Agent run complete for meeting_id=%s", meeting_id)
+    except TimeoutError:
+        error_text = f"Briefing generation timed out after {AGENT_RUN_TIMEOUT_SECONDS} seconds"
+        logger.error("[RUN] Pipeline timed out for meeting_id=%s", meeting_id)
+        await update_meeting_status(
+            meeting_id,
+            "failed",
+            error_message=error_text,
+            agent_triggered=True,
+        )
+        await _record_agent_run(meeting_id, "timeout", started_at, error=error_text)
+        trace_events.append(_new_trace_event("ERROR", error_text, level="error"))
+        append_log(meeting_id, "ERROR", error_text, level="error")
     except Exception as exc:
         error_text = str(exc)
         logger.error(

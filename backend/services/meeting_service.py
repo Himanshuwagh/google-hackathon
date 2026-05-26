@@ -1,6 +1,6 @@
 import json
 import logging
-from datetime import UTC, datetime, time
+from datetime import UTC, datetime, time, timedelta
 from functools import lru_cache
 from pathlib import Path
 from typing import Any, Optional
@@ -15,6 +15,7 @@ from models.meeting import NewMeetingRequest
 logger = logging.getLogger("pharmaops.meeting_service")
 
 DISPLAY_TIMEZONE = ZoneInfo("Asia/Kolkata")
+PROCESSING_STALE_AFTER = timedelta(minutes=10)
 REAL_BRIEFING_FILTER = {
     "$or": [
         {"source": "agent_generated"},
@@ -563,9 +564,20 @@ async def request_briefing_generation(
         meeting.get("agent_triggered"),
     )
 
-    if meeting.get("status") == "agent_processing":
-        logger.info("[REQ_GENERATION] Already processing, not re-triggering")
-        return await get_meeting_detail(meeting_id), False
+    if meeting.get("status") == "agent_processing" and not force:
+        processing_started_at = meeting.get("agent_processing_started_at")
+        is_stale = True
+        if processing_started_at:
+            try:
+                is_stale = datetime.now(UTC) - _ensure_datetime(processing_started_at) > PROCESSING_STALE_AFTER
+            except Exception:
+                is_stale = True
+
+        if not is_stale:
+            logger.info("[REQ_GENERATION] Already processing, not re-triggering")
+            return await get_meeting_detail(meeting_id), False
+
+        logger.warning("[REQ_GENERATION] Stale agent_processing state detected; restarting generation")
 
     if force:
         logger.info("[REQ_GENERATION] Force regeneration — deleting existing briefings")
@@ -604,6 +616,7 @@ async def request_briefing_generation(
             "$set": {
                 "status": "agent_processing",
                 "agent_triggered": True,
+                "agent_processing_started_at": datetime.now(UTC),
             },
             "$unset": {
                 "briefing_id": "",
@@ -634,6 +647,10 @@ async def update_meeting_status(
     )
     db = get_database()
     updates: dict[str, Any] = {"status": status}
+    if status == "agent_processing":
+        updates["agent_processing_started_at"] = datetime.now(UTC)
+    elif status in {"briefing_ready", "needs_review", "failed"}:
+        updates["agent_processing_finished_at"] = datetime.now(UTC)
     if briefing_id is not None:
         updates["briefing_id"] = briefing_id
     if error_message is not None:
