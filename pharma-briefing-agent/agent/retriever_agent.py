@@ -48,9 +48,10 @@ Also call search_crm_memory ONCE with the hcp_id from the plan.
 The plan may contain a single drug at meeting_context.drug, a list at drugs, a
 list at drug_plans, or older planner fields such as drug_ids. Normalize these
 forms into per-drug retrieval work. Prefer explicit retrieval_plan queries when
-they are present. Preserve meeting objective, planned_samples,
+they are present. Preserve meeting objective, briefing_notes, planned_samples,
 pending_action_items, and detailing_sequence from the plan in the final output
-so the writer can use them as workflow context.
+so the writer can use them as workflow context. briefing_notes are rep-provided
+guidance only, not clinical evidence.
 
 After all tools return, compile everything into one valid JSON object only:
 {
@@ -58,6 +59,7 @@ After all tools return, compile everything into one valid JSON object only:
   "meeting_id": "...",
   "hcp_id": "...",
   "objective": "...",
+  "briefing_notes": "...",
   "planned_samples": [],
   "pending_action_items": [],
   "detailing_sequence": [],

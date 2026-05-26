@@ -1,7 +1,7 @@
 from datetime import datetime
 from typing import Any, Optional
 
-from pydantic import BaseModel, Field
+from pydantic import BaseModel, Field, field_validator
 
 
 class NewMeetingRequest(BaseModel):
@@ -11,6 +11,17 @@ class NewMeetingRequest(BaseModel):
     meeting_date: datetime
     location: str
     duration_mins: int = 20
+    briefing_notes: Optional[str] = Field(default=None, max_length=1000)
+
+    @field_validator("briefing_notes", mode="before")
+    @classmethod
+    def normalize_briefing_notes(cls, value: Any) -> Optional[str]:
+        if value is None:
+            return None
+        if not isinstance(value, str):
+            return value
+        normalized = value.strip()
+        return normalized or None
 
 
 class NewMeetingResponse(BaseModel):
@@ -44,6 +55,7 @@ class MeetingDetailResponse(BaseModel):
     meeting_time_display: str
     duration_mins: int
     location: Optional[str] = None
+    briefing_notes: Optional[str] = None
     briefing: Optional[dict[str, Any]] = None
 
 
@@ -61,6 +73,7 @@ class MeetingDocument(BaseModel):
     drug_ids: Optional[list[str]] = None
     meeting_date: datetime
     location: Optional[str] = None
+    briefing_notes: Optional[str] = None
     duration_mins: int = 20
     status: str
     briefing_id: Optional[str] = None

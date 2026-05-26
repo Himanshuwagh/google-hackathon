@@ -125,6 +125,22 @@ gcloud builds submit \
   --substitutions _REGION=us-central1,_SERVICE=pharmaops-agent
 ```
 
+Set up automatic deploys from GitHub:
+
+```bash
+./scripts/create_cloud_build_trigger.sh
+```
+
+If Google Cloud reports `Repository mapping does not exist`, connect this
+GitHub repo in Cloud Build first:
+
+```text
+https://console.cloud.google.com/cloud-build/triggers;region=us-central1/connect
+```
+
+Then rerun the script. After the trigger is created, every push to `main`
+will run `cloudbuild.yaml` and deploy the `pharmaops-agent` Cloud Run service.
+
 After deploy, verify:
 
 ```bash

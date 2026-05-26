@@ -94,7 +94,8 @@
 }
 
 .field input,
-.field select {
+.field select,
+.field textarea {
   background: var(--bg-primary);
   border: 1px solid var(--border-light);
   border-radius: 8px;
@@ -108,12 +109,20 @@
   width: 100%;
 }
 
+.field textarea {
+  line-height: 1.45;
+  min-height: 96px;
+  padding: 12px 13px;
+  resize: vertical;
+}
+
 .field select {
   appearance: auto;
 }
 
 .field input:focus,
-.field select:focus {
+.field select:focus,
+.field textarea:focus {
   border-color: var(--accent);
   box-shadow: 0 0 0 3px rgba(45, 90, 142, 0.12);
 }
@@ -212,7 +221,8 @@
 .secondaryBtn:disabled,
 .durationBtn:disabled,
 .field input:disabled,
-.field select:disabled {
+.field select:disabled,
+.field textarea:disabled {
   cursor: not-allowed;
   opacity: 0.58;
 }

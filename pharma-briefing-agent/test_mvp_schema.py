@@ -43,6 +43,7 @@ class FakeDB:
                         "drug_ids": ["drug_a", "drug_b"],
                         "detailing_sequence": ["drug_b", "drug_a"],
                         "objective": "Position portfolio",
+                        "briefing_notes": "Doctor is concerned about cold-chain storage.",
                         "planned_samples": [{"drug_id": "drug_a", "quantity": 10}],
                         "pending_action_items": ["Send safety data"],
                     },
@@ -88,6 +89,7 @@ def test_get_meeting_supports_multi_drug_sequence():
     assert result["drug_ids"] == ["drug_b", "drug_a"]
     assert [drug["_id"] for drug in result["drugs"]] == ["drug_b", "drug_a"]
     assert result["meeting"]["objective"] == "Position portfolio"
+    assert result["meeting"]["briefing_notes"] == "Doctor is concerned about cold-chain storage."
     assert result["meeting"]["planned_samples"][0]["quantity"] == 10
     assert result["meeting"]["pending_action_items"] == ["Send safety data"]
 
@@ -98,6 +100,7 @@ def test_agent_instructions_include_mvp_plus_fields():
         "planned_samples",
         "pending_action_items",
         "detailing_sequence",
+        "briefing_notes",
     ]
 
     for term in required_terms:
@@ -105,6 +108,7 @@ def test_agent_instructions_include_mvp_plus_fields():
         assert term in RETRIEVER_INSTRUCTION
 
     assert "rep_workflow_notes" in WRITER_INSTRUCTION
+    assert "briefing_notes" in WRITER_INSTRUCTION
     assert "evidence_ledger" in WRITER_INSTRUCTION
     assert "Physician Sample - Not for Sale" in WRITER_INSTRUCTION
     assert "sample reminder" in COMPLIANCE_INSTRUCTION.lower()

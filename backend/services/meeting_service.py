@@ -392,6 +392,7 @@ async def create_meeting(payload: NewMeetingRequest) -> str:
     db = get_database()
     meeting_id = f"mtg_{uuid4().hex[:8]}"
     meeting_date = _ensure_datetime(payload.meeting_date)
+    briefing_notes = payload.briefing_notes.strip() if payload.briefing_notes else None
     document = {
         "_id": meeting_id,
         "rep_id": payload.rep_id,
@@ -405,6 +406,8 @@ async def create_meeting(payload: NewMeetingRequest) -> str:
         "agent_triggered": False,
         "briefing_id": None,
     }
+    if briefing_notes:
+        document["briefing_notes"] = briefing_notes
     await db[COLLECTIONS["meetings"]].insert_one(document)
     return meeting_id
 
@@ -504,6 +507,7 @@ async def get_meeting_detail(meeting_id: str) -> Optional[dict[str, Any]]:
         "meeting_time_display": _display_time(meeting_date),
         "duration_mins": meeting.get("duration_mins", 20),
         "location": meeting.get("location"),
+        "briefing_notes": meeting.get("briefing_notes"),
         "error_message": meeting.get("error_message") or meeting.get("agent_error"),
         "briefing_id": briefing_id,
         "briefing": briefing,

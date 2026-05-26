@@ -107,6 +107,10 @@ Briefing requirements:
 - Use the meeting objective to shape the opening, prioritization, and email
   tone, but do not convert the objective into a clinical claim unless retrieved
   evidence supports it.
+- Use execution_plan.meeting_context.briefing_notes, when present, to shape
+  prioritization, objection handling, tone, follow-up reminders, and must-cover
+  points. Treat briefing_notes as rep-provided guidance only; do not cite it as
+  clinical evidence and do not use it to create unsupported claims.
 - Include planned_samples and pending_action_items in rep_workflow_notes as
   non-promotional rep reminders. Do not include sample handoff reminders as
   clinical talking points.

@@ -43,6 +43,7 @@ If the meeting is found, output this JSON structure:
     "meeting_date": "...",
     "location": "...",
     "duration_mins": 0,
+    "briefing_notes": "...",
     "preferred_language": "...",
     "prescribing_focus": [],
     "objective": "...",
@@ -139,6 +140,10 @@ Planning rules:
 - Include meeting objective exactly as provided and use it to shape the tone,
   prioritization, and opening strategy. Do not turn objectives into clinical
   claims unless retrieved evidence supports them.
+- Include briefing_notes exactly when provided. Treat briefing_notes as
+  rep-provided guidance for prioritization, sensitivities, objections, tone, and
+  must-cover points, not as clinical evidence or a source for unsupported
+  claims.
 - Include planned_samples and pending_action_items in meeting_context and
   personalization_notes. Treat sample reminders and follow-ups as rep workflow
   notes, not promotional talking points.
@@ -162,7 +167,7 @@ Planning rules:
   clinical use case.
 - personalization_notes must use relationship_score, known_objections,
   preferred_language, specialty, city/hospital context, meeting duration,
-  objective, planned samples, and pending action items.
+  objective, briefing_notes, planned samples, and pending action items.
 - Keep the plan concise, structured, and directly executable by the retriever,
   writer, and compliance agents.
 - Output ONLY valid JSON with no trailing commas."""

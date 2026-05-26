@@ -36,6 +36,7 @@ const initialForm = (selectedDate) => ({
   time: isSameDate(selectedDate, new Date()) ? nextHalfHour() : '09:30',
   duration: '20',
   location: '',
+  briefingNotes: '',
 });
 
 function AddMeetingModal({ selectedDate, onClose, onCreated }) {
@@ -124,17 +125,23 @@ function AddMeetingModal({ selectedDate, onClose, onCreated }) {
     setIsSubmitting(true);
     try {
       const meetingDate = new Date(`${form.date}T${form.time}:00`);
+      const briefingNotes = form.briefingNotes.trim();
+      const payload = {
+        rep_id: REP_ID,
+        hcp_id: form.hcpId,
+        drug_id: form.drugId,
+        meeting_date: meetingDate.toISOString(),
+        location: form.location.trim(),
+        duration_mins: Number(form.duration),
+      };
+      if (briefingNotes) {
+        payload.briefing_notes = briefingNotes;
+      }
+
       const response = await fetchJson('/meetings', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          rep_id: REP_ID,
-          hcp_id: form.hcpId,
-          drug_id: form.drugId,
-          meeting_date: meetingDate.toISOString(),
-          location: form.location.trim(),
-          duration_mins: Number(form.duration),
-        }),
+        body: JSON.stringify(payload),
       });
 
       onCreated?.({
@@ -271,6 +278,17 @@ function AddMeetingModal({ selectedDate, onClose, onCreated }) {
                 disabled={isSubmitting}
               />
               {fieldError('location') && <em>{fieldError('location')}</em>}
+            </label>
+
+            <label className={styles.field}>
+              <span>Briefing notes</span>
+              <textarea
+                value={form.briefingNotes}
+                onChange={(event) => updateField('briefingNotes', event.target.value)}
+                placeholder="Mention priorities, sensitivities, objections, or must-cover points"
+                maxLength={1000}
+                disabled={isSubmitting}
+              />
             </label>
 
             <div className={styles.footer}>
