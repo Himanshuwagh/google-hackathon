@@ -304,13 +304,11 @@ function BriefingTab({ meeting, onRefreshMeetings, onRegenerateControlChange }) 
       setMessages(prev => [...prev, {
         type: 'a',
         text: response.answer,
-        sources: response.sources || [],
       }]);
     } catch (error) {
       setMessages(prev => [...prev, {
         type: 'a',
         text: error.message || 'Could not answer this question right now.',
-        sources: [],
         isError: true,
       }]);
     } finally {
@@ -766,11 +764,6 @@ function BriefingTab({ meeting, onRefreshMeetings, onRegenerateControlChange }) 
                 {msg.type === 'a' && (
                   <div className={styles.answerBlock}>
                     <div className={`${styles.aText} ${msg.isError ? styles.errorText : ''}`}>{msg.text}</div>
-                    {msg.sources?.length > 0 && (
-                      <div className={styles.sourcesLine}>
-                        Sources: {msg.sources.map(sourceLabel).join(' | ')}
-                      </div>
-                    )}
                   </div>
                 )}
               </div>

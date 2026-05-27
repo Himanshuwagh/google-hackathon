@@ -2,13 +2,6 @@ import { useMemo, useState } from 'react';
 import { fetchJson } from '../api';
 import styles from './AskTab.module.css';
 
-const sourceText = (source) => {
-  const type = source.type || source.source || 'source';
-  const id = source.id || source.source_id || source.pmid || source.nctId;
-  const label = source.label || source.title;
-  return [type, id, label].filter(Boolean).join(' · ');
-};
-
 function AskTab({ meeting }) {
   const [messages, setMessages] = useState([]);
   const [inputValue, setInputValue] = useState('');
@@ -43,13 +36,11 @@ function AskTab({ meeting }) {
       setMessages(prev => [...prev, {
         type: 'a',
         text: response.answer,
-        sources: response.sources || [],
       }]);
     } catch (error) {
       setMessages(prev => [...prev, {
         type: 'a',
         text: error.message || 'Could not answer this question right now.',
-        sources: [],
         isError: true,
       }]);
     } finally {
@@ -81,11 +72,6 @@ function AskTab({ meeting }) {
             {msg.type === 'a' && (
               <div className={styles.answerBlock}>
                 <div className={`${styles.aText} ${msg.isError ? styles.errorText : ''}`}>{msg.text}</div>
-                {msg.sources?.length > 0 && (
-                  <div className={styles.sourcesLine}>
-                    Sources used: {msg.sources.map(sourceText).join(' | ')}
-                  </div>
-                )}
               </div>
             )}
           </div>

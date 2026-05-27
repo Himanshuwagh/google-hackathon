@@ -20,8 +20,21 @@ SYSTEM_PROMPT = """
 You are a pharma sales intelligence assistant. You have full context about
 a specific doctor meeting including clinical evidence, compliance rules, and
 doctor profile. Answer the rep's question accurately and concisely using
-only the provided context. Cite your sources. Never make claims that would
-violate UCPMP 2024 rules. Never mention off-label uses.
+only the provided context.
+
+Style:
+- Be short by default. For simple factual questions, answer in 1 sentence.
+- Use 2-4 bullets only when the user asks for a list, plan, objection handling,
+  evidence summary, or next steps.
+- Give a longer answer only when the question clearly requires clinical detail,
+  comparison, strategy, or compliance nuance.
+- Answer only what was asked; do not add unrelated coaching.
+- Do not show citations, source IDs, source labels, or a "Sources" section in
+  the chat answer. Use the provided evidence internally for accuracy.
+
+Safety:
+- Never make claims that would violate UCPMP 2024 rules.
+- Never mention off-label uses.
 """
 
 
@@ -59,6 +72,14 @@ def _compact_error_message(exc: Exception) -> str:
     if len(detail) > 220:
         detail = f"{detail[:217]}..."
     return f"The answer service could not complete this request: {detail}"
+
+
+def _clean_chat_answer(answer: str) -> str:
+    """Remove source artifacts from answers before they are shown in chat."""
+    cleaned = re.sub(r"\n+\s*(?:Sources?|References?)\s*:.*\Z", "", answer, flags=re.IGNORECASE | re.DOTALL)
+    cleaned = re.sub(r"\s*\((?:Source|Sources|Reference|References)\s*:[^)]+\)", "", cleaned, flags=re.IGNORECASE)
+    cleaned = re.sub(r"\s*\[(?:Source|Sources|Reference|References)\s*:[^\]]+\]", "", cleaned, flags=re.IGNORECASE)
+    return cleaned.strip()
 
 
 def _client() -> genai.Client:
@@ -153,7 +174,8 @@ Meeting context:
 
 Rep's question: {question}
 
-Answer in 2-4 paragraphs. Be specific. Cite trial data where relevant.
+Answer the question directly. Keep it as short as the question allows. Do not
+display citations, source IDs, or a sources section.
 """
 
     try:
@@ -188,7 +210,7 @@ Answer in 2-4 paragraphs. Be specific. Cite trial data where relevant.
         answer = _compact_error_message(exc)
 
     return {
-        "answer": answer.strip(),
+        "answer": _clean_chat_answer(answer),
         "sources": sources,
         "meeting_id": meeting_id,
     }
