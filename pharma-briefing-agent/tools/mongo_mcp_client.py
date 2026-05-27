@@ -10,6 +10,7 @@ from __future__ import annotations
 
 import asyncio
 import json
+import logging
 import os
 import re
 from contextlib import AsyncExitStack
@@ -25,6 +26,7 @@ from mcp.types import CallToolResult
 from config import MONGO_DB_NAME, MONGO_URI
 
 
+logger = logging.getLogger("pharmaops.mongo_mcp_client")
 MONGODB_MCP_PACKAGE = "mongodb-mcp-server@1.10.0"
 MONGODB_MCP_SERVER = "mongodb-mcp-server"
 DEFAULT_MCP_TIMEOUT_SECONDS = 15.0
@@ -179,8 +181,19 @@ def _result_payload(result: CallToolResult) -> Any:
 
 
 def _extract_documents(payload: Any) -> list[dict[str, Any]]:
+    if isinstance(payload, str):
+        parsed = _parse_json_text(payload)
+        if isinstance(parsed, str):
+            return []
+        return _extract_documents(parsed)
+
     if isinstance(payload, list):
-        return [item for item in payload if isinstance(item, dict)]
+        if all(isinstance(item, dict) for item in payload):
+            return payload
+        documents: list[dict[str, Any]] = []
+        for item in payload:
+            documents.extend(_extract_documents(item))
+        return documents
 
     if not isinstance(payload, dict):
         return []
@@ -232,7 +245,10 @@ class MongoMcpRuntime:
         return self
 
     async def __aexit__(self, exc_type, exc, tb) -> None:
-        await self.close()
+        try:
+            await self.close()
+        except Exception as close_error:
+            logger.warning("MongoDB MCP cleanup failed: %s", close_error)
 
     async def start(self) -> None:
         if not self.config.enabled:
@@ -257,10 +273,10 @@ class MongoMcpRuntime:
                 args=self.config.args,
                 env=self.config.env,
             )
-            read_stream, write_stream = await asyncio.wait_for(
-                self._stack.enter_async_context(stdio_client(server)),
-                timeout=self.config.timeout_seconds,
-            )
+            async with asyncio.timeout(self.config.timeout_seconds):
+                read_stream, write_stream = await self._stack.enter_async_context(
+                    stdio_client(server)
+                )
             self._session = await self._stack.enter_async_context(
                 ClientSession(
                     read_stream,
@@ -291,7 +307,10 @@ class MongoMcpRuntime:
 
             await self.find("meetings", {}, limit=1)
         except Exception as exc:
-            await self.close()
+            try:
+                await self.close()
+            except Exception as close_error:
+                logger.warning("MongoDB MCP cleanup failed after startup error: %s", close_error)
             message = f"MongoDB MCP preflight failed: {exc}"
             _emit(
                 self.trace_callback,
