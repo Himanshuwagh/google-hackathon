@@ -10,7 +10,7 @@
             "ACE inhibitor heart failure India",
             "lisinopril renal protection diabetic"
         ],
-        "elastic_doc_tags": ["lisinopril", "ace-inhibitor", "cardiology", "nephrology"],
+        "mongo_doc_tags": ["lisinopril", "ace-inhibitor", "cardiology", "nephrology"],
         "approved_claims": [
             "Reduces systolic BP by avg 10mmHg in 8 weeks (per FDA label)",
             "Indicated for heart failure post-MI (SAVE trial)",
@@ -29,7 +29,7 @@
             "metformin cardiovascular benefit",
             "metformin HbA1c reduction"
         ],
-        "elastic_doc_tags": ["metformin", "biguanide", "endocrinology", "diabetes"],
+        "mongo_doc_tags": ["metformin", "biguanide", "endocrinology", "diabetes"],
         "approved_claims": [
             "Reduces HbA1c by 1.0-1.5% as monotherapy (UKPDS data)",
             "First-line therapy for type 2 diabetes (ADA/EASD guidelines)",
@@ -48,7 +48,7 @@
             "calcium channel blocker outcomes India",
             "amlodipine vs ACE inhibitor comparison"
         ],
-        "elastic_doc_tags": ["amlodipine", "calcium-channel-blocker", "cardiology"],
+        "mongo_doc_tags": ["amlodipine", "calcium-channel-blocker", "cardiology"],
         "approved_claims": [
             "Reduces systolic BP by 12-15mmHg at 5mg dose (ALLHAT trial)",
             "Long half-life allows true once-daily dosing with 24h BP control",
@@ -71,7 +71,7 @@
             "semaglutide-class weight loss HbA1c",
             "GLP-1 GI tolerability titration"
         ],
-        "elastic_doc_tags": [
+        "mongo_doc_tags": [
             "cardioglyde",
             "glp-1",
             "cardiology",
@@ -111,7 +111,7 @@
             "oral kinase inhibitor rash management",
             "OncoTarget vs chemotherapy quality of life"
         ],
-        "elastic_doc_tags": [
+        "mongo_doc_tags": [
             "oncotarget",
             "egfr",
             "oncology",

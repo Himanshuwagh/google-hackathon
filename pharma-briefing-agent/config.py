@@ -23,17 +23,10 @@ load_dotenv()
 MONGO_URI = os.getenv("MONGO_URI", "mongodb+srv://<user>:<pass>@cluster.mongodb.net/")
 MONGO_DB_NAME = os.getenv("MONGO_DB_NAME", "pharma_ops")
 
-# ── Elasticsearch ──────────────────────────────────────────────
-# Used by: elasticsearch-py at runtime and for initial index seeding
-# Supports either ELASTIC_CLOUD_ID (Elastic Cloud) or ELASTIC_URL (self-hosted)
-ELASTIC_CLOUD_ID = os.getenv("ELASTIC_CLOUD_ID", "")
-ELASTIC_URL = os.getenv("ELASTIC_URL", "")
-ELASTIC_API_KEY = os.getenv("ELASTIC_API_KEY", "")
-
-# Three separate indices for different document types (BM25 text search)
-ELASTIC_IDX_COMPANY_DOCS = os.getenv("ELASTIC_IDX_COMPANY_DOCS", "idx_company_docs")
-ELASTIC_IDX_CRM_MEMORY = os.getenv("ELASTIC_IDX_CRM_MEMORY", "idx_crm_memory")
-ELASTIC_IDX_COMPETITIVE_INTEL = os.getenv("ELASTIC_IDX_COMPETITIVE_INTEL", "idx_competitive_intel")
+# ── MongoDB Atlas Retrieval ───────────────────────────────────
+# Used by: company docs, CRM memory, competitive intel, vector retrieval
+GEMINI_EMBEDDING_MODEL = os.getenv("GEMINI_EMBEDDING_MODEL", "gemini-embedding-001")
+GEMINI_EMBEDDING_DIM = int(os.getenv("GEMINI_EMBEDDING_DIM", "768"))
 
 # ── Google Cloud / Gemini ──────────────────────────────────────
 GOOGLE_PROJECT_ID = os.getenv("GOOGLE_PROJECT_ID", "")

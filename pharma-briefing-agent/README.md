@@ -9,7 +9,7 @@ When a new doctor meeting is added to MongoDB, the agent **automatically**:
 
 1. **Detects** the new meeting via MongoDB Change Stream
 2. **Plans** an execution strategy using Gemini
-3. **Retrieves** internal docs from Elastic + live evidence from PubMed/ClinicalTrials.gov
+3. **Retrieves** internal docs, CRM memory, and competitive intel from MongoDB Atlas hybrid search + live evidence from PubMed/ClinicalTrials.gov
 4. **Writes** personalised talking points
 5. **Validates** against India's UCPMP 2024 pharmaceutical marketing law
 6. **Saves** the briefing to MongoDB and exposes the result in the PharmaOps dashboard
@@ -34,8 +34,8 @@ When a new doctor meeting is added to MongoDB, the agent **automatically**:
 |---|---|
 | AI Runtime | Google ADK + Gemini on Google Cloud Run |
 | Partner MCP | MongoDB MCP Server via preflighted stdio wrapper |
+| Agent Memory + Retrieval | MongoDB Atlas operational collections, Atlas Vector Search, and text search |
 | Database | MongoDB Atlas |
-| Doc Search | Elasticsearch |
 | Evidence | PubMed API, ClinicalTrials.gov API, OpenFDA API |
 | Frontend | React on Google Cloud Run |
 
@@ -53,8 +53,8 @@ cp .env.example .env
 # 3. Seed demo data into MongoDB
 python db/seed_data.py
 
-# 4. Seed Elastic index
-python db/seed_elastic.py
+# 4. Seed MongoDB retrieval corpora and indexes
+python db/seed_mongodb_retrieval.py
 
 # 5. Start the agent
 python trigger.py
@@ -67,7 +67,7 @@ pharma-briefing-agent/
 ├── agent/                  # ADK agent definitions
 │   ├── main_agent.py       # SequentialAgent orchestrator
 │   ├── planner_agent.py    # Reads meeting, builds plan
-│   ├── retriever_agent.py  # Queries Elastic + PubMed
+│   ├── retriever_agent.py  # Queries MongoDB Atlas + PubMed
 │   ├── writer_agent.py     # Writes briefing
 │   └── compliance_agent.py # UCPMP 2024 compliance check
 ├── tools/                  # Tool functions for agents
@@ -75,11 +75,11 @@ pharma-briefing-agent/
 │   ├── mongo_mcp_client.py # Preflighted MongoDB MCP runtime
 │   ├── mcp_mongo_tools.py  # MCP-backed MongoDB read tools
 │   ├── mongo_tools.py      # Controlled MongoDB writes
-│   ├── elastic_tools.py    # Structured Elastic search
+│   ├── mongo_retrieval_tools.py # MongoDB Atlas hybrid search
 │   ├── pubmed_tools.py     # PubMed + ClinicalTrials API
 ├── db/                     # Database seeding scripts
 │   ├── seed_data.py        # Seeds MongoDB collections
-│   └── seed_elastic.py     # Seeds Elastic index
+│   └── seed_mongodb_retrieval.py # Seeds MongoDB retrieval collections
 ├── config.py               # Env vars + connection strings
 ├── trigger.py              # MongoDB change stream listener
 └── .env                    # Your credentials (git-ignored)

@@ -527,20 +527,20 @@ def main():
     # Interaction notes & CRM
     new_interactions, new_crm = build_interaction_and_crm()
     interactions = load_json("interaction_notes.json")
-    crm = load_json("elastic_crm_memory.json")
+    crm = load_json("mongo_crm_memory.json")
     interactions.extend(new_interactions)
     crm.extend(new_crm)
     save_json("interaction_notes.json", interactions)
-    save_json("elastic_crm_memory.json", crm)
+    save_json("mongo_crm_memory.json", crm)
 
     # Competitive intel & company docs
-    ci = load_json("elastic_competitive_intel.json")
+    ci = load_json("mongo_competitive_intel.json")
     ci = merge_unique(ci, COMPETITIVE_INTEL, "doc_id")
-    save_json("elastic_competitive_intel.json", ci)
+    save_json("mongo_competitive_intel.json", ci)
 
-    docs = load_json("elastic_company_docs.json")
+    docs = load_json("mongo_company_docs.json")
     docs = merge_unique(docs, COMPANY_DOCS, "doc_id")
-    save_json("elastic_company_docs.json", docs)
+    save_json("mongo_company_docs.json", docs)
 
     # Meetings
     meetings = load_json("meetings.json")

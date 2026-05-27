@@ -11,6 +11,9 @@ web dashboard.
 - **Agent platform:** Google ADK code-first agent runtime, deployed on Google
   Cloud Run. This aligns with Vertex AI Agent Builder's ADK path while keeping
   the existing FastAPI dashboard.
+- **MongoDB Atlas retrieval:** Atlas is the agent memory and retrieval brain:
+  meetings, HCP profiles, clinical documents, CRM memory, competitive intel,
+  compliance rules, vector embeddings, run logs, and briefings live in MongoDB.
 - **Partner MCP:** The briefing runtime preflights the official read-only
   MongoDB MCP server once per run and exposes deterministic MCP-backed read
   tools to the ADK agents. Controlled briefing/status writes still use
@@ -35,8 +38,7 @@ React dashboard
     -> Google ADK SequentialAgent
       -> Gemini planner / retriever / writer / compliance / action agents
       -> MongoDB MCP server for partner reads and schema validation
-      -> MongoDB Atlas for meetings, compliance rules, briefings, run logs
-      -> Elasticsearch for company docs, CRM memory, competitive intel
+      -> MongoDB Atlas for operational data, vector search, memory, compliance, briefings, run logs
       -> PubMed and ClinicalTrials.gov for public evidence lookup
 ```
 
@@ -48,22 +50,12 @@ Store these as Cloud Run environment variables or Secret Manager secrets:
 MONGO_URI
 MONGO_DB_NAME
 GOOGLE_API_KEY
-ELASTIC_URL
-ELASTIC_API_KEY
 GOOGLE_LOCATION=us-central1
 ENABLE_PARTNER_MCP=true
 ENABLE_MONGODB_MCP=true
 MONGODB_MCP_READ_ONLY=true
 MDB_MCP_READ_ONLY=true
 MDB_MCP_MAX_TIME_M_S=5000
-```
-
-Optional Elastic MCP endpoint:
-
-```text
-ENABLE_ELASTIC_MCP=true
-ELASTIC_MCP_URL=https://<elastic-mcp-host>/mcp
-ELASTIC_MCP_AUTH_HEADER="ApiKey <key>"
 ```
 
 ## Deploy To Cloud Run
@@ -102,8 +94,6 @@ Create secrets. Run each command with your real value in the shell variable:
 printf "%s" "$MONGO_URI" | gcloud secrets create MONGO_URI --data-file=-
 printf "%s" "$MONGO_DB_NAME" | gcloud secrets create MONGO_DB_NAME --data-file=-
 printf "%s" "$GOOGLE_API_KEY" | gcloud secrets create GOOGLE_API_KEY --data-file=-
-printf "%s" "$ELASTIC_URL" | gcloud secrets create ELASTIC_URL --data-file=-
-printf "%s" "$ELASTIC_API_KEY" | gcloud secrets create ELASTIC_API_KEY --data-file=-
 ```
 
 Allow the Cloud Run service account to read secrets:
@@ -112,7 +102,7 @@ Allow the Cloud Run service account to read secrets:
 PROJECT_NUMBER=$(gcloud projects describe YOUR_PROJECT_ID --format="value(projectNumber)")
 SERVICE_ACCOUNT="${PROJECT_NUMBER}-compute@developer.gserviceaccount.com"
 
-for SECRET in MONGO_URI MONGO_DB_NAME GOOGLE_API_KEY ELASTIC_URL ELASTIC_API_KEY; do
+for SECRET in MONGO_URI MONGO_DB_NAME GOOGLE_API_KEY; do
   gcloud secrets add-iam-policy-binding "$SECRET" \
     --member="serviceAccount:${SERVICE_ACCOUNT}" \
     --role="roles/secretmanager.secretAccessor"
@@ -179,5 +169,5 @@ Agent package:
 cd pharma-briefing-agent
 pip install -r requirements.txt
 python db/seed_data.py
-python db/seed_elastic.py
+python db/seed_mongodb_retrieval.py
 ```

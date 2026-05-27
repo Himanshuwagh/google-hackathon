@@ -1,8 +1,5 @@
-import json
 import logging
 from datetime import UTC, datetime, time, timedelta
-from functools import lru_cache
-from pathlib import Path
 from typing import Any, Optional
 from uuid import uuid4
 from zoneinfo import ZoneInfo
@@ -23,12 +20,6 @@ REAL_BRIEFING_FILTER = {
         {"generated_by": "pharma_adk_pipeline"},
     ]
 }
-COMPANY_DOCS_PATH = (
-    Path(__file__).resolve().parents[2]
-    / "pharma-briefing-agent"
-    / "data"
-    / "elastic_company_docs.json"
-)
 
 
 def _generation_update_statuses(restart_stale_processing: bool) -> list[str]:
@@ -108,15 +99,14 @@ def _public_drug(drug: Optional[dict[str, Any]]) -> dict[str, Any]:
     }
 
 
-@lru_cache(maxsize=1)
-def _company_document_catalog() -> dict[str, dict[str, Any]]:
-    try:
-        with COMPANY_DOCS_PATH.open(encoding="utf-8") as catalog_file:
-            documents = json.load(catalog_file)
-    except (OSError, json.JSONDecodeError) as exc:
-        logger.warning("Could not load company document catalog for evidence hydration: %s", exc)
+async def _company_document_catalog(doc_ids: list[str]) -> dict[str, dict[str, Any]]:
+    if not doc_ids:
         return {}
-
+    db = get_database()
+    documents = await db["company_docs"].find(
+        {"doc_id": {"$in": doc_ids}},
+        {"embedding": 0},
+    ).to_list(length=None)
     return {
         str(document["doc_id"]): document
         for document in documents
@@ -124,12 +114,24 @@ def _company_document_catalog() -> dict[str, dict[str, Any]]:
     }
 
 
-def _hydrate_briefing_evidence(briefing: dict[str, Any]) -> dict[str, Any]:
+async def _hydrate_briefing_evidence(briefing: dict[str, Any]) -> dict[str, Any]:
     supporting_evidence = briefing.get("supporting_evidence")
     if not isinstance(supporting_evidence, list):
         return briefing
 
-    catalog = _company_document_catalog()
+    internal_doc_ids = [
+        str(evidence.get("doc_id") or evidence.get("source_id") or evidence.get("id"))
+        for evidence in supporting_evidence
+        if isinstance(evidence, dict)
+        and (evidence.get("source") or evidence.get("type")) == "InternalDoc"
+        and (evidence.get("doc_id") or evidence.get("source_id") or evidence.get("id"))
+    ]
+    try:
+        catalog = await _company_document_catalog(internal_doc_ids)
+    except Exception as exc:
+        logger.warning("Could not load MongoDB company document catalog for evidence hydration: %s", exc)
+        catalog = {}
+
     hydrated_items = []
     for evidence in supporting_evidence:
         if not isinstance(evidence, dict):
@@ -496,7 +498,7 @@ async def get_meeting_detail(meeting_id: str) -> Optional[dict[str, Any]]:
         briefing_id = None
     if briefing:
         briefing["briefing_id"] = _briefing_id(briefing)
-        briefing = _serialize(_hydrate_briefing_evidence(briefing))
+        briefing = _serialize(await _hydrate_briefing_evidence(briefing))
 
     logger.info(
         "[GET_DETAIL] Returning: meeting_id=%s, status=%s, has_briefing=%s, briefing_id=%s",

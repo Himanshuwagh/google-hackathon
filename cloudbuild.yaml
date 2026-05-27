@@ -40,7 +40,7 @@ steps:
       - --set-env-vars
       - GOOGLE_LOCATION=us-central1,ENABLE_PARTNER_MCP=true,ENABLE_MONGODB_MCP=true,MONGODB_MCP_READ_ONLY=true,MDB_MCP_READ_ONLY=true,MDB_MCP_MAX_TIME_M_S=5000
       - --set-secrets
-      - MONGO_URI=MONGO_URI:latest,MONGO_DB_NAME=MONGO_DB_NAME:latest,GOOGLE_API_KEY=GOOGLE_API_KEY:latest,ELASTIC_URL=ELASTIC_URL:latest,ELASTIC_API_KEY=ELASTIC_API_KEY:latest
+      - MONGO_URI=MONGO_URI:latest,MONGO_DB_NAME=MONGO_DB_NAME:latest,GOOGLE_API_KEY=GOOGLE_API_KEY:latest
 
 images:
   - ${_REGION}-docker.pkg.dev/$PROJECT_ID/pharmaops/pharmaops-agent:$BUILD_ID

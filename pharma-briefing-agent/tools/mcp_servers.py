@@ -5,7 +5,6 @@ from __future__ import annotations
 import asyncio
 import os
 
-from config import ELASTIC_API_KEY, ELASTIC_URL
 from tools.mongo_mcp_client import (
     build_mongodb_mcp_config,
     check_mongodb_mcp_status,
@@ -47,13 +46,12 @@ def _mongodb_status() -> dict:
     return fallback
 
 
-def partner_mcp_toolsets(*, include_elastic: bool = False) -> list:
+def partner_mcp_toolsets() -> list:
     """Deprecated compatibility shim.
 
     The briefing pipeline now uses a preflighted deterministic MCP wrapper
     instead of attaching raw MCP toolsets directly to LLM agents.
     """
-    del include_elastic
     return []
 
 
@@ -62,10 +60,4 @@ def partner_mcp_status() -> dict:
     return {
         "enabled": _base_enabled(),
         "mongodb": _mongodb_status(),
-        "elastic": {
-            "enabled": _base_enabled() and _enabled("ENABLE_ELASTIC_MCP", False),
-            "server": "Elastic MCP streamable HTTP endpoint",
-            "transport": "streamable-http",
-            "configured": bool(os.getenv("ELASTIC_MCP_URL") or ELASTIC_URL or ELASTIC_API_KEY),
-        },
     }
