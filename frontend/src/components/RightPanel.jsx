@@ -68,7 +68,7 @@ function RightPanel({
             <span className={styles[`statusText-${selectedMeeting.status}`]}>{getStatusText(selectedMeeting)}</span>
           </div>
           <div className={styles.dateTime}>
-            {selectedMeeting.date} · {selectedMeeting.time} ({selectedMeeting.duration})
+            {selectedMeeting.dateLabel || selectedMeeting.date} · {selectedMeeting.time} ({selectedMeeting.duration})
           </div>
         </div>
       </div>

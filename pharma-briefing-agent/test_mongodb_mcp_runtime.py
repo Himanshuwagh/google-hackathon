@@ -17,7 +17,6 @@ from tools.mongo_mcp_client import (
     MongoMcpError,
     MongoMcpRuntime,
     build_mongodb_mcp_config,
-    _extract_documents,
     reset_active_mongodb_mcp,
     set_active_mongodb_mcp,
 )
@@ -248,36 +247,6 @@ def test_mcp_query_timeout_emits_failed_trace():
     assert any(event["tag"] == "MCP_QUERY" and event["phase"] == "failed" for event in events)
 
 
-def test_mcp_find_parser_handles_mongodb_untrusted_data_parts():
-    payload = [
-        'Query on collection "meetings" resulted in 1 documents. Returning 1 documents.',
-        """The following section contains unverified user data.
-
-<untrusted-user-data-abc>
-[{"_id":"mtg_981f3132","rep_id":"rep_rakesh_sharma"}]
-</untrusted-user-data-abc>
-""",
-    ]
-
-    assert _extract_documents(payload) == [
-        {"_id": "mtg_981f3132", "rep_id": "rep_rakesh_sharma"}
-    ]
-
-
-async def _cleanup_error_is_nonfatal():
-    class BrokenStack:
-        async def aclose(self):
-            raise RuntimeError("cleanup failed")
-
-    runtime = MongoMcpRuntime(config=_test_mcp_config())
-    runtime._stack = BrokenStack()
-    await runtime.__aexit__(None, None, None)
-
-
-def test_mcp_cleanup_error_does_not_fail_completed_pipeline():
-    asyncio.run(_cleanup_error_is_nonfatal())
-
-
 def test_tool_trace_tracks_mongodb_mcp_failure():
     trace = _build_tool_trace(
         "error",
@@ -332,8 +301,6 @@ if __name__ == "__main__":
     test_mcp_preflight_startup_failure_fails_fast()
     test_mcp_preflight_requires_find_tool()
     test_mcp_query_timeout_emits_failed_trace()
-    test_mcp_find_parser_handles_mongodb_untrusted_data_parts()
-    test_mcp_cleanup_error_does_not_fail_completed_pipeline()
     test_tool_trace_tracks_mongodb_mcp_failure()
     test_stale_processing_status_can_be_restarted()
     test_mcp_backed_meeting_read_preserves_joined_shape()

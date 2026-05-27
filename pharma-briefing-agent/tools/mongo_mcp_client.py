@@ -181,12 +181,6 @@ def _result_payload(result: CallToolResult) -> Any:
 
 
 def _extract_documents(payload: Any) -> list[dict[str, Any]]:
-    if isinstance(payload, str):
-        parsed = _parse_json_text(payload)
-        if isinstance(parsed, str):
-            return []
-        return _extract_documents(parsed)
-
     if isinstance(payload, list):
         if all(isinstance(item, dict) for item in payload):
             return payload

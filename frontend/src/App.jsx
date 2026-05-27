@@ -59,6 +59,20 @@ const displayDate = (dateKey) => {
   });
 };
 
+const localMeetingDate = (meeting) => {
+  const date = new Date(meeting.meeting_date);
+  return Number.isNaN(date.getTime()) ? null : date;
+};
+
+const localMeetingTime = (meeting) => {
+  const date = localMeetingDate(meeting);
+  if (!date) return meeting.meeting_time_display || '';
+  return date.toLocaleTimeString('en-US', {
+    hour: 'numeric',
+    minute: '2-digit',
+  });
+};
+
 const mapStatus = (status) => {
   switch (status) {
     case 'briefing_ready':
@@ -77,21 +91,26 @@ const mapStatus = (status) => {
   }
 };
 
-const mapMeeting = (meeting) => ({
-  id: meeting.meeting_id,
-  doctor: meeting.hcp_name,
-  specialty: meeting.hcp_specialty,
-  hospital: meeting.hospital,
-  drug: meeting.drug_name,
-  time: meeting.meeting_time_display,
-  duration: `${meeting.duration_mins} min`,
-  date: meeting.meeting_date_key,
-  dateLabel: displayDate(meeting.meeting_date_key),
-  status: mapStatus(meeting.status),
-  rawStatus: meeting.status,
-  briefingId: meeting.briefing_id,
-  errorMessage: meeting.error_message,
-});
+const mapMeeting = (meeting) => {
+  const meetingDate = localMeetingDate(meeting);
+  const dateKey = meetingDate ? formatDateKey(meetingDate) : meeting.meeting_date_key;
+
+  return {
+    id: meeting.meeting_id,
+    doctor: meeting.hcp_name,
+    specialty: meeting.hcp_specialty,
+    hospital: meeting.hospital,
+    drug: meeting.drug_name,
+    time: localMeetingTime(meeting),
+    duration: `${meeting.duration_mins} min`,
+    date: dateKey,
+    dateLabel: displayDate(dateKey),
+    status: mapStatus(meeting.status),
+    rawStatus: meeting.status,
+    briefingId: meeting.briefing_id,
+    errorMessage: meeting.error_message,
+  };
+};
 
 function App() {
   const [selectedMeetingId, setSelectedMeetingId] = useState(() => readParam('meeting'));
