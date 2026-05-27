@@ -437,51 +437,49 @@ function BriefingTab({ meeting, onRefreshMeetings, onRegenerateControlChange }) 
 
         {briefing && (
           <>
-            <section className={styles.overview}>
-              <div className={styles.overviewMain}>
-                <div className={styles.sectionLabel}>Meeting Prep</div>
-                <h2>Briefing strategy</h2>
-                {workflowNotes.objective && (
-                  <div className={styles.objectiveLine}>
-                    <span>Objective</span>
-                    <strong>{workflowNotes.objective}</strong>
+            <section className={styles.strategyPanel}>
+              {workflowNotes.objective && (
+                <div className={styles.objectiveLine}>
+                  <span className={styles.label}>Objective</span>
+                  <strong>{workflowNotes.objective}</strong>
+                </div>
+              )}
+              {briefing.rep_summary_report ? (
+                <div className={styles.summaryBox}>
+                  <div className={styles.label}>Summary</div>
+                  <p>{briefing.rep_summary_report}</p>
+                </div>
+              ) : (
+                talkingPointCount > 0 && (
+                  <div className={styles.summaryBox}>
+                    <p>Talking points, objection responses, and supporting evidence are ready for this meeting.</p>
                   </div>
-                )}
-                {briefing.rep_summary_report ? (
-                  <div className={styles.summaryBox}>{briefing.rep_summary_report}</div>
-                ) : (
-                  talkingPointCount > 0 && (
-                    <div className={styles.summaryBox}>
-                      Talking points, objection responses, and supporting evidence are ready for this meeting.
-                    </div>
-                  )
-                )}
-              </div>
+                )
+              )}
+            </section>
 
-              <div className={styles.signalGrid}>
-                <div className={styles.signalCell}>
-                  <span>Drugs</span>
-                  <strong>{drugSections.length || (talkingPointCount > 0 ? 1 : 0)}</strong>
-                </div>
-                <div className={styles.signalCell}>
-                  <span>Talking points</span>
-                  <strong>{talkingPointCount}</strong>
-                </div>
-                <div className={styles.signalCell}>
-                  <span>Objections</span>
-                  <strong>{objectionCount}</strong>
-                </div>
-                <div className={styles.signalCell}>
-                  <span>Evidence</span>
-                  <strong>{evidence.length}</strong>
-                </div>
-                {generatedAt && (
-                  <div className={`${styles.signalCell} ${styles.generatedSignalCell}`}>
-                    <span>Generated</span>
-                    <strong>{generatedAt}</strong>
-                  </div>
-                )}
+            <section className={styles.metricsStrip}>
+              <div className={styles.metricCell}>
+                <span>Drugs</span>
+                <strong>{drugSections.length || (talkingPointCount > 0 ? 1 : 0)}</strong>
               </div>
+              <div className={styles.metricCell}>
+                <span>Talking points</span>
+                <strong>{talkingPointCount}</strong>
+              </div>
+              <div className={styles.metricCell}>
+                <span>Objections</span>
+                <strong>{objectionCount}</strong>
+              </div>
+              <div className={styles.metricCell}>
+                <span>Evidence</span>
+                <strong>{evidence.length}</strong>
+              </div>
+              {generatedAt && (
+                <div className={styles.generationMeta}>
+                  Generated · {generatedAt}
+                </div>
+              )}
             </section>
 
             {warnings.length > 0 && (

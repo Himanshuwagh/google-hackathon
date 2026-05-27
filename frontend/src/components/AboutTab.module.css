@@ -1,24 +1,24 @@
 .container {
   width: min(1120px, 100%);
   margin: 0 auto;
-  padding: 32px 32px 96px;
+  padding: 16px 20px 48px;
   display: flex;
   flex-direction: column;
-  gap: 24px;
+  gap: 16px;
 }
 
 .message {
   border: 1px solid var(--border-light);
   background-color: var(--bg-card);
-  border-radius: 8px;
+  border-radius: 6px;
   color: var(--text-secondary);
-  font-size: 16px;
-  padding: 20px;
+  font-size: 14px;
+  padding: 14px;
 }
 
 .profileHeader {
   border-bottom: 1px solid var(--border-light);
-  padding-bottom: 24px;
+  padding-bottom: 12px;
 }
 
 .eyebrow,
@@ -27,8 +27,8 @@
 .signal span,
 .prepCell span {
   color: var(--text-tertiary);
-  font-size: 13px;
-  font-weight: 600;
+  font-size: 11px;
+  font-weight: 700;
   letter-spacing: 0.08em;
   text-transform: uppercase;
 }
@@ -40,11 +40,11 @@
 }
 
 .signal {
-  min-height: 94px;
+  min-height: 60px;
   border: 1px solid var(--border-light);
-  border-radius: 8px;
+  border-radius: 6px;
   background-color: var(--bg-card);
-  padding: 14px 16px;
+  padding: 10px 12px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -53,7 +53,7 @@
 
 .signal strong {
   color: var(--text-primary);
-  font-size: 18px;
+  font-size: 14px;
   font-weight: 600;
   line-height: 1.35;
   overflow-wrap: anywhere;
@@ -62,59 +62,59 @@
 .layout {
   display: grid;
   grid-template-columns: minmax(0, 1.45fr) minmax(300px, 0.75fr);
-  gap: 16px;
+  gap: 12px;
 }
 
 .contextSection,
 .visitSection {
   border: 1px solid var(--border-light);
-  border-radius: 8px;
+  border-radius: 6px;
   background-color: var(--bg-card);
-  padding: 22px;
+  padding: 12px 14px;
   box-shadow: var(--shadow-card);
 }
 
 .sectionHeading {
   display: flex;
   flex-direction: column;
-  gap: 4px;
-  margin-bottom: 20px;
+  gap: 2px;
+  margin-bottom: 12px;
 }
 
 .sectionHeading h3 {
   color: var(--text-primary);
   font-family: inherit;
-  font-size: 21px;
+  font-size: 15px;
   font-weight: 600;
   line-height: 1.35;
 }
 
 .contextGroups {
   display: grid;
-  gap: 20px;
+  gap: 14px;
 }
 
 .contextGroup {
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 6px;
 }
 
 .chipRow {
   display: flex;
   flex-wrap: wrap;
-  gap: 8px;
+  gap: 6px;
 }
 
 .focusChip {
   max-width: 100%;
-  border: 1px solid rgba(45, 90, 142, 0.16);
-  border-radius: 6px;
+  border: 1px solid rgba(37, 99, 235, 0.15);
+  border-radius: 4px;
   background-color: var(--accent-light);
   color: var(--accent);
-  font-size: 15px;
+  font-size: 13px;
   font-weight: 600;
-  padding: 7px 10px;
+  padding: 4px 8px;
   text-transform: capitalize;
   overflow-wrap: anywhere;
 }
@@ -122,26 +122,26 @@
 .concernList {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(min(220px, 100%), 1fr));
-  gap: 10px;
+  gap: 8px;
 }
 
 .concernItem {
-  min-height: 54px;
+  min-height: 36px;
   border-left: 3px solid var(--status-processing);
-  border-radius: 0 6px 6px 0;
+  border-radius: 0 4px 4px 0;
   background-color: var(--status-processing-bg);
   color: var(--text-primary);
   display: flex;
   align-items: center;
-  font-size: 16px;
+  font-size: 13px;
   font-weight: 500;
   line-height: 1.45;
-  padding: 10px 12px;
+  padding: 8px 10px;
 }
 
 .emptyValue {
   color: var(--text-secondary);
-  font-size: 16px;
+  font-size: 13px;
 }
 
 .visitFacts {
@@ -151,9 +151,9 @@
 
 .visitFacts div {
   display: grid;
-  gap: 5px;
+  gap: 4px;
   border-top: 1px solid var(--border-light);
-  padding: 13px 0;
+  padding: 8px 0;
 }
 
 .visitFacts div:first-child {
@@ -167,7 +167,7 @@
 
 .visitFacts dd {
   color: var(--text-primary);
-  font-size: 17px;
+  font-size: 14px;
   font-weight: 600;
   line-height: 1.45;
   margin: 0;
@@ -176,7 +176,7 @@
 
 .prepStrip {
   border: 1px solid var(--border-light);
-  border-radius: 8px;
+  border-radius: 6px;
   background-color: var(--bg-secondary);
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -184,13 +184,13 @@
 }
 
 .prepCell {
-  min-height: 94px;
+  min-height: 60px;
   border-left: 1px solid var(--border-light);
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  gap: 10px;
-  padding: 16px 18px;
+  gap: 6px;
+  padding: 10px 12px;
 }
 
 .prepCell:first-child {
@@ -199,7 +199,7 @@
 
 .prepCell strong {
   color: var(--text-primary);
-  font-size: 17px;
+  font-size: 14px;
   font-weight: 600;
   line-height: 1.4;
   text-transform: capitalize;
@@ -214,7 +214,7 @@
 
 @media (max-width: 720px) {
   .container {
-    padding: 24px 20px 88px;
+    padding: 12px 14px 40px;
   }
 
   .signalGrid,

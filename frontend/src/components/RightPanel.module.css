@@ -15,29 +15,30 @@
   justify-content: center;
   height: 100%;
   text-align: center;
+  padding: 24px;
 }
 
 .emptyState h2 {
-  font-size: 37px;
+  font-size: 24px;
   color: var(--text-primary);
-  margin-bottom: 16px;
+  margin-bottom: 10px;
 }
 
 .emptyState p {
-  font-size: 21px;
+  font-size: 15px;
   color: var(--text-secondary);
-  margin-bottom: 32px;
-  line-height: 1.6;
+  margin-bottom: 20px;
+  line-height: 1.5;
 }
 
 .viewBtn {
   background-color: var(--bg-dark);
   border-radius: 999px;
   color: var(--text-inverse);
-  font-size: 16px;
+  font-size: 13px;
   font-weight: 600;
-  min-height: 44px;
-  padding: 0 18px;
+  min-height: 36px;
+  padding: 0 16px;
   transition: background-color 150ms ease, transform 150ms ease;
 }
 
@@ -46,92 +47,104 @@
   transform: translateY(-1px);
 }
 
-/* Header Strip */
-.headerStrip {
-  padding: 24px 32px;
+/* Header Panel */
+.headerPanel {
+  padding: 12px 16px 0;
   border-bottom: 1px solid var(--border-light);
+  background-color: var(--bg-card);
   display: flex;
-  gap: 20px;
-  justify-content: space-between;
-  align-items: flex-end;
+  flex-direction: column;
+  gap: 8px;
 }
 
-.headerMain {
-  min-width: 0;
+.headerTop {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
 }
 
-.headerMain h1 {
-  font-size: 29px;
+.doctorLine {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.doctorLine h1 {
+  font-size: 20px;
+  font-weight: 600;
   color: var(--text-primary);
-  margin-bottom: 4px;
+  margin: 0;
+}
+
+.statusBadge {
+  display: inline-flex;
+  align-items: center;
+  font-size: 11px;
+  font-weight: 700;
+  padding: 2px 8px;
+  border-radius: 4px;
+  line-height: 1.4;
+  text-transform: uppercase;
+  border: 1px solid transparent;
+}
+
+.statusBadge.status-ready {
+  background-color: var(--status-ready-bg);
+  color: var(--status-ready);
+  border-color: rgba(22, 163, 74, 0.15);
+  animation: pulse 2s ease-out 1;
+}
+
+.statusBadge.status-processing {
+  background-color: var(--status-processing-bg);
+  color: var(--status-processing);
+  border-color: rgba(217, 119, 6, 0.15);
+}
+
+.statusBadge.status-waiting {
+  background-color: var(--status-waiting-bg);
+  color: var(--status-waiting);
+  border-color: rgba(75, 85, 99, 0.15);
+}
+
+.statusBadge.status-failed {
+  background-color: var(--status-failed-bg);
+  color: var(--status-failed);
+  border-color: rgba(220, 38, 38, 0.15);
 }
 
 .detailsRow {
-  font-size: 17px;
+  font-size: 13px;
   color: var(--text-secondary);
   overflow-wrap: anywhere;
 }
 
-.headerRight {
-  flex-shrink: 0;
-  text-align: right;
-}
-
-.statusWrap {
-  display: flex;
-  align-items: center;
-  justify-content: flex-end;
-  gap: 8px;
-  margin-bottom: 4px;
-}
-
-.statusDot {
-  width: 10px;
-  height: 10px;
-  border-radius: 50%;
-}
-
-.status-ready { background-color: var(--status-ready); animation: pulse 2s ease-out 1; }
-.status-processing { background-color: var(--status-processing); }
-.status-waiting { background-color: var(--status-waiting); }
-.status-failed { background-color: var(--status-failed); }
-
-.statusText-ready { color: var(--status-ready); font-size: 17px; font-weight: 500; }
-.statusText-processing { color: var(--status-processing); font-size: 17px; font-weight: 500; }
-.statusText-waiting { color: var(--status-waiting); font-size: 17px; font-weight: 500; }
-.statusText-failed { color: var(--status-failed); font-size: 17px; font-weight: 500; }
-
-.dateTime {
-  font-size: 17px;
-  color: var(--text-secondary);
-}
-
 @keyframes pulse {
   0% { transform: scale(1); }
-  50% { transform: scale(1.3); }
+  50% { transform: scale(1.05); }
   100% { transform: scale(1); }
 }
 
-/* Tab Row */
-.tabRow {
-  padding: 0 32px;
+/* Header Bottom & Tabs */
+.headerBottom {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  border-bottom: 1px solid var(--border-light);
+  margin-top: 2px;
 }
 
 .tabGroup {
   display: flex;
-  gap: 8px;
+  gap: 4px;
 }
 
 .tab {
-  font-size: 17px;
-  padding: 12px 16px;
+  font-size: 13px;
+  padding: 8px 12px;
   color: var(--text-secondary);
   border-bottom: 2px solid transparent;
   transition: color 150ms ease, border-color 150ms ease;
+  font-weight: 500;
 }
 
 .tab:hover {
@@ -141,23 +154,24 @@
 .tab.activeTab {
   color: var(--text-primary);
   border-bottom-color: var(--accent);
-  font-weight: 500;
+  font-weight: 700;
 }
 
 .regenerateBtn {
   display: inline-flex;
   align-items: center;
-  gap: 7px;
-  border: 1px solid var(--border-light);
+  gap: 5px;
+  border: 1px solid var(--border);
   background-color: var(--bg-card);
   color: var(--text-primary);
-  font-size: 14px;
-  padding: 6px 11px;
+  font-size: 12px;
+  padding: 4px 10px;
   border-radius: 999px;
   font-weight: 600;
   cursor: pointer;
-  box-shadow: 0 6px 16px rgba(26, 25, 22, 0.08);
+  box-shadow: var(--shadow-card);
   transition: background-color 150ms ease, border-color 150ms ease, opacity 150ms ease, transform 150ms ease;
+  margin-bottom: 4px;
 }
 
 .regenerateBtn:hover:not(:disabled) {
@@ -318,61 +332,45 @@
 }
 
 @media (max-width: 860px) {
-  .headerStrip {
-    align-items: flex-start;
-    flex-direction: column;
-    padding: 20px;
+  .headerPanel {
+    padding: 12px 14px 0;
   }
 
-  .headerRight {
-    text-align: left;
-  }
-
-  .statusWrap {
-    justify-content: flex-start;
-  }
-
-  .tabRow {
-    gap: 12px;
-    padding: 0 20px;
+  .doctorLine {
+    flex-wrap: wrap;
   }
 }
 
 @media (max-width: 560px) {
   .emptyState {
-    padding: 32px 20px;
+    padding: 24px 16px;
   }
 
   .emptyState h2 {
-    font-size: 31px;
+    font-size: 20px;
   }
 
   .emptyState p {
+    font-size: 14px;
+  }
+
+  .doctorLine h1 {
     font-size: 18px;
   }
 
-  .headerMain h1 {
-    font-size: 26px;
-  }
-
-  .detailsRow,
-  .dateTime,
-  .statusText-ready,
-  .statusText-processing,
-  .statusText-waiting,
-  .statusText-failed {
-    font-size: 15px;
+  .detailsRow {
+    font-size: 12px;
   }
 
   .tab {
-    font-size: 16px;
-    padding-left: 12px;
-    padding-right: 12px;
+    font-size: 12px;
+    padding-left: 8px;
+    padding-right: 8px;
   }
 
   .regenerateBtn {
-    min-height: 34px;
-    padding-left: 9px;
-    padding-right: 9px;
+    font-size: 11px;
+    padding-left: 8px;
+    padding-right: 8px;
   }
 }

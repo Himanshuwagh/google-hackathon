@@ -1,44 +1,44 @@
 :root {
   /* Backgrounds */
-  --bg-primary: #F7F5F0;      /* warm off-white — not blinding white */
-  --bg-secondary: #EFECE5;    /* slightly deeper warm grey */
-  --bg-card: #FAFAF7;         /* card surfaces */
-  --bg-dark: #1A1916;         /* dark panel (sidebar, agent log) */
+  --bg-primary: #F8FAFC;      /* cool slate off-white */
+  --bg-secondary: #F1F5F9;    /* slightly deeper cool grey */
+  --bg-card: #FFFFFF;         /* clean card surfaces */
+  --bg-dark: #0F172A;         /* dark panel (sidebar, topbar, agent log) */
 
   /* Text */
-  --text-primary: #1A1916;    /* near-black, warm */
-  --text-secondary: #6B6860;  /* muted body text */
-  --text-tertiary: #9E9B94;   /* labels, timestamps */
-  --text-inverse: #F7F5F0;    /* text on dark backgrounds */
+  --text-primary: #0F172A;    /* slate-900 */
+  --text-secondary: #475569;  /* slate-600 */
+  --text-tertiary: #94A3B8;   /* slate-400 */
+  --text-inverse: #F8FAFC;    /* text on dark backgrounds */
 
-  /* Status colours — muted, not garish */
-  --status-ready: #2D6A4F;       /* deep forest green */
-  --status-ready-bg: #D8EDDF;
-  --status-processing: #7B5E00;  /* amber-brown */
-  --status-processing-bg: #FDF0C0;
-  --status-failed: #8B2E2E;      /* deep red */
-  --status-failed-bg: #F5DADA;
-  --status-waiting: #4A4A4A;
-  --status-waiting-bg: #E8E8E5;
+  /* Status colours — cleaner enterprise values */
+  --status-ready: #16A34A;       /* emerald green */
+  --status-ready-bg: #DCFCE7;
+  --status-processing: #D97706;  /* amber/orange */
+  --status-processing-bg: #FEF3C7;
+  --status-failed: #DC2626;      /* clear red */
+  --status-failed-bg: #FEE2E2;
+  --status-waiting: #4B5563;     /* gray-600 */
+  --status-waiting-bg: #F3F4F6;
 
   /* Accent */
-  --accent: #2D5A8E;          /* slate blue — trustworthy, not flashy */
-  --accent-light: #E8F0F8;
+  --accent: #2563EB;          /* blue-600 - crisp, modern enterprise accent */
+  --accent-light: #EFF6FF;
 
   /* Borders */
-  --border: #DDD9CF;
-  --border-light: #E8E5DC;
+  --border: #E2E8F0;          /* slate-200 */
+  --border-light: #F1F5F9;    /* slate-100 */
 
   /* Agent log specific */
-  --log-bg: #141412;
-  --log-text: #C8C4B8;
-  --log-accent: #6FCF97;      /* green terminal output */
-  --log-warn: #F2C94C;
-  --log-error: #EB5757;
+  --log-bg: #0F172A;
+  --log-text: #E2E8F0;
+  --log-accent: #22C55E;      /* terminal green */
+  --log-warn: #F59E0B;
+  --log-error: #EF4444;
 
   /* Shadows */
-  --shadow-card: 0 1px 3px rgba(26,25,22,0.06), 0 1px 2px rgba(26,25,22,0.04);
-  --shadow-elevated: 0 4px 12px rgba(26,25,22,0.08);
+  --shadow-card: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  --shadow-elevated: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -4px rgba(0, 0, 0, 0.1);
 }
 
 * {
@@ -55,7 +55,12 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
-h1, h2, h3, h4, h5, h6, .serif {
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'DM Sans', sans-serif;
+  font-weight: 600;
+}
+
+.serif {
   font-family: 'DM Serif Display', serif;
   font-weight: 400;
 }

@@ -7,28 +7,28 @@
 }
 
 .briefingTab.chatOpen {
-  padding-right: 452px;
+  padding-right: 420px;
 }
 
 .stateMessage {
   background-color: var(--bg-card);
   border: 1px solid var(--border-light);
-  border-radius: 8px;
+  border-radius: 6px;
   box-shadow: var(--shadow-card);
   color: var(--text-secondary);
   display: flex;
   flex-direction: column;
-  font-size: 16px;
-  gap: 6px;
+  font-size: 14px;
+  gap: 4px;
   line-height: 1.5;
-  margin: 32px;
+  margin: 20px;
   max-width: 560px;
-  padding: 20px;
+  padding: 16px;
 }
 
 .stateMessage strong {
   color: var(--text-primary);
-  font-size: 19px;
+  font-size: 16px;
   font-weight: 600;
 }
 
@@ -39,8 +39,8 @@
   margin: 0 auto;
   display: flex;
   flex-direction: column;
-  gap: 28px;
-  padding: 28px 32px 64px;
+  gap: 16px;
+  padding: 16px 20px 48px;
   scrollbar-gutter: stable;
   scrollbar-width: thin;
 }
@@ -48,27 +48,27 @@
 .section {
   display: flex;
   flex-direction: column;
-  gap: 14px;
+  gap: 10px;
 }
 
 .sectionHeading {
   display: flex;
   flex-direction: column;
-  gap: 3px;
+  gap: 2px;
 }
 
 .sectionHeading h3,
 .sideSection h3 {
   color: var(--text-primary);
   font-family: inherit;
-  font-size: 22px;
+  font-size: 15px;
   font-weight: 600;
   line-height: 1.35;
 }
 
 .sectionLabel {
   color: var(--text-tertiary);
-  font-size: 12px;
+  font-size: 11px;
   font-weight: 700;
   letter-spacing: 0.08em;
   text-transform: uppercase;
@@ -76,10 +76,10 @@
 
 .groupLabel,
 .drugEyebrow,
-.objectiveLine span,
-.signalCell span {
+.objectiveLine .label,
+.summaryBox .label {
   color: var(--text-tertiary);
-  font-size: 12px;
+  font-size: 11px;
   font-weight: 700;
   letter-spacing: 0.08em;
   text-transform: uppercase;
@@ -89,11 +89,11 @@
 .statusPanel {
   background-color: var(--bg-card);
   border: 1px solid var(--border-light);
-  border-radius: 8px;
+  border-radius: 6px;
   color: var(--text-secondary);
-  font-size: 17px;
-  line-height: 1.6;
-  padding: 18px 20px;
+  font-size: 14px;
+  line-height: 1.5;
+  padding: 12px 14px;
 }
 
 .statusPanel {
@@ -101,13 +101,13 @@
   box-shadow: var(--shadow-card);
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 6px;
   max-width: 760px;
 }
 
 .statusPanel strong {
   color: var(--text-primary);
-  font-size: 19px;
+  font-size: 16px;
   font-weight: 600;
   line-height: 1.35;
 }
@@ -120,12 +120,12 @@
   background-color: var(--bg-dark);
   border-radius: 6px;
   color: var(--text-inverse);
-  font-size: 14px;
+  font-size: 13px;
   font-weight: 600;
   line-height: 1;
   margin-top: 4px;
-  min-height: 38px;
-  padding: 0 13px;
+  min-height: 32px;
+  padding: 0 12px;
   transition: background-color 150ms ease, opacity 150ms ease;
 }
 
@@ -138,126 +138,117 @@
   opacity: 0.55;
 }
 
-.overview {
-  border-bottom: 1px solid var(--border-light);
-  display: grid;
-  gap: 18px;
-  grid-template-columns: minmax(0, 1.55fr) minmax(280px, 0.72fr);
-  padding-bottom: 28px;
-}
-
-.overviewMain {
+.strategyPanel {
   display: flex;
   flex-direction: column;
-  gap: 14px;
-  min-width: 0;
-}
-
-.overviewMain h2 {
-  color: var(--text-primary);
-  font-family: inherit;
-  font-size: 29px;
-  font-weight: 600;
-  line-height: 1.2;
+  gap: 10px;
+  width: 100%;
 }
 
 .objectiveLine {
   align-items: flex-start;
   background-color: var(--bg-secondary);
   border: 1px solid var(--border-light);
-  border-radius: 8px;
+  border-radius: 6px;
   display: flex;
   flex-direction: column;
-  gap: 5px;
-  padding: 12px 14px;
+  gap: 2px;
+  padding: 8px 12px;
 }
 
 .objectiveLine strong {
   color: var(--text-primary);
-  font-size: 16px;
+  font-size: 14px;
   font-weight: 600;
-  line-height: 1.45;
+  line-height: 1.4;
 }
 
 .summaryBox {
   border-left: 3px solid var(--accent);
   background-color: var(--bg-card);
-  border-radius: 0 8px 8px 0;
+  border-radius: 0 6px 6px 0;
   color: var(--text-secondary);
-  font-size: 16px;
-  line-height: 1.6;
-  max-width: 78ch;
-  padding: 16px 18px;
+  font-size: 14px;
+  line-height: 1.5;
+  max-width: 80ch;
+  padding: 10px 14px;
+  border: 1px solid var(--border-light);
+  border-left-width: 3px;
+  box-shadow: var(--shadow-card);
+}
+
+.summaryBox p {
+  margin: 0;
   white-space: pre-wrap;
 }
 
-.signalGrid {
-  align-content: start;
-  display: grid;
-  gap: 10px;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-}
-
-.signalCell {
-  background-color: var(--bg-card);
-  border: 1px solid var(--border-light);
-  border-radius: 8px;
-  box-shadow: var(--shadow-card);
+.metricsStrip {
   display: flex;
-  flex-direction: column;
-  gap: 10px;
-  justify-content: space-between;
-  min-height: 86px;
-  min-width: 0;
-  padding: 14px 15px;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 16px;
+  padding: 8px 12px;
+  background-color: var(--bg-secondary);
+  border: 1px solid var(--border-light);
+  border-radius: 6px;
+  width: 100%;
 }
 
-.signalCell strong {
+.metricCell {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+  color: var(--text-secondary);
+}
+
+.metricCell span {
+  color: var(--text-tertiary);
+  font-weight: 700;
+  text-transform: uppercase;
+  font-size: 11px;
+  letter-spacing: 0.05em;
+}
+
+.metricCell strong {
   color: var(--text-primary);
-  font-size: 18px;
-  font-weight: 600;
-  line-height: 1.35;
-  overflow-wrap: anywhere;
-  text-transform: capitalize;
+  font-weight: 700;
+  font-size: 14px;
 }
 
-.generatedSignalCell {
-  grid-column: 1 / -1;
-  min-height: 74px;
-}
-
-.generatedSignalCell strong {
-  font-size: 16px;
-  text-transform: none;
+.generationMeta {
+  margin-left: auto;
+  font-size: 12px;
+  color: var(--text-tertiary);
 }
 
 .reviewStrip {
   background-color: var(--status-processing-bg);
-  border: 1px solid rgba(123, 94, 0, 0.18);
-  border-radius: 8px;
+  border: 1px solid rgba(217, 119, 6, 0.15);
+  border-radius: 6px;
   display: flex;
   flex-direction: column;
-  gap: 12px;
-  padding: 16px 18px;
+  gap: 8px;
+  padding: 10px 12px;
 }
 
 .reviewList {
   display: grid;
-  gap: 8px;
+  gap: 6px;
 }
 
 .reviewItem {
   border-left: 2px solid var(--status-processing);
   color: var(--text-primary);
-  font-size: 15px;
-  line-height: 1.5;
-  padding-left: 10px;
+  font-size: 13px;
+  line-height: 1.45;
+  padding-left: 8px;
 }
 
 .prepLayout {
   align-items: start;
   display: grid;
-  gap: 24px;
+  gap: 16px;
   grid-template-columns: minmax(0, 1.65fr) minmax(300px, 0.85fr);
 }
 
@@ -265,95 +256,96 @@
 .prepAside {
   display: flex;
   flex-direction: column;
-  gap: 24px;
+  gap: 16px;
   min-width: 0;
 }
 
 .drugStack {
   display: flex;
   flex-direction: column;
-  gap: 24px;
+  gap: 16px;
 }
 
 .drugPanel {
   border-top: 1px solid var(--border-light);
   display: flex;
   flex-direction: column;
-  gap: 16px;
-  padding-top: 18px;
+  gap: 10px;
+  padding-top: 12px;
 }
 
 .drugHeader {
-  align-items: flex-start;
+  align-items: center;
   display: flex;
-  gap: 16px;
+  gap: 12px;
   justify-content: space-between;
 }
 
 .drugHeader h4 {
   color: var(--text-primary);
   font-family: inherit;
-  font-size: 21px;
+  font-size: 14px;
   font-weight: 600;
   line-height: 1.35;
-  margin-top: 3px;
+  margin-top: 1px;
 }
 
 .drugHeader > span {
   background-color: var(--accent-light);
-  border: 1px solid rgba(45, 90, 142, 0.16);
+  border: 1px solid rgba(37, 99, 235, 0.15);
   border-radius: 999px;
   color: var(--accent);
   flex-shrink: 0;
-  font-size: 13px;
+  font-size: 11px;
   font-weight: 700;
   line-height: 1;
-  padding: 7px 10px;
+  padding: 4px 8px;
 }
 
 .pointList {
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 8px;
 }
 
 .pointCard {
   background-color: var(--bg-card);
   border: 1px solid var(--border-light);
-  border-radius: 8px;
+  border-radius: 6px;
   box-shadow: var(--shadow-card);
   display: flex;
-  gap: 14px;
+  gap: 10px;
   min-width: 0;
-  padding: 16px;
+  padding: 10px 12px;
 }
 
 .pointNumber {
   align-items: center;
   background-color: var(--bg-secondary);
   border: 1px solid var(--border-light);
-  border-radius: 8px;
+  border-radius: 6px;
   color: var(--text-primary);
   display: flex;
-  flex: 0 0 36px;
-  font-size: 15px;
+  flex: 0 0 26px;
+  font-size: 12px;
   font-weight: 700;
-  height: 36px;
+  height: 26px;
   justify-content: center;
   line-height: 1;
+  width: 26px;
 }
 
 .pointContent {
   flex: 1;
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 6px;
   min-width: 0;
 }
 
 .pointLabel {
   color: var(--text-tertiary);
-  font-size: 12px;
+  font-size: 11px;
   font-weight: 700;
   letter-spacing: 0.08em;
   text-transform: uppercase;
@@ -361,61 +353,61 @@
 
 .pointText {
   color: var(--text-primary);
-  font-size: 16px;
+  font-size: 14px;
   font-weight: 500;
-  line-height: 1.6;
+  line-height: 1.5;
 }
 
 .pointSource {
   color: var(--text-tertiary);
-  font-size: 13px;
-  line-height: 1.45;
+  font-size: 11px;
+  line-height: 1.4;
   overflow-wrap: anywhere;
 }
 
 .numberRow {
   display: flex;
   flex-wrap: wrap;
-  gap: 6px;
+  gap: 4px;
 }
 
 .numberChip {
   background-color: var(--bg-secondary);
   border: 1px solid var(--border-light);
-  border-radius: 6px;
+  border-radius: 4px;
   color: var(--text-secondary);
-  font-size: 12px;
+  font-size: 11px;
   font-weight: 700;
   line-height: 1.3;
   max-width: 100%;
-  padding: 4px 7px;
+  padding: 2px 6px;
   overflow-wrap: anywhere;
 }
 
 .objectionGroup {
   background-color: var(--bg-secondary);
-  border-radius: 8px;
+  border-radius: 6px;
   display: flex;
   flex-direction: column;
-  gap: 10px;
-  padding: 14px;
+  gap: 8px;
+  padding: 10px;
 }
 
 .objectionBox {
   background-color: var(--status-processing-bg);
   border-left: 3px solid var(--status-processing);
-  border-radius: 0 8px 8px 0;
+  border-radius: 0 6px 6px 0;
   color: var(--text-primary);
   display: flex;
   flex-direction: column;
-  gap: 8px;
-  font-size: 15px;
-  line-height: 1.55;
-  padding: 14px 15px;
+  gap: 4px;
+  font-size: 13px;
+  line-height: 1.45;
+  padding: 10px 12px;
 }
 
 .objectionPrompt {
-  font-size: 16px;
+  font-size: 13px;
   font-weight: 700;
   text-transform: capitalize;
 }
@@ -425,73 +417,73 @@
 }
 
 .objectionSources {
-  border-top: 1px solid rgba(123, 94, 0, 0.16);
+  border-top: 1px solid rgba(217, 119, 6, 0.15);
   color: var(--text-secondary);
-  font-size: 12px;
-  line-height: 1.45;
-  padding-top: 8px;
+  font-size: 11px;
+  line-height: 1.4;
+  padding-top: 6px;
   overflow-wrap: anywhere;
 }
 
 .generalObjectionGrid {
   display: grid;
-  gap: 12px;
+  gap: 10px;
   grid-template-columns: repeat(auto-fit, minmax(min(320px, 100%), 1fr));
 }
 
 .sideSection {
   background-color: var(--bg-card);
   border: 1px solid var(--border-light);
-  border-radius: 8px;
+  border-radius: 6px;
   box-shadow: var(--shadow-card);
   display: flex;
   flex-direction: column;
-  gap: 16px;
-  padding: 19px;
+  gap: 12px;
+  padding: 12px 14px;
 }
 
 .workflowBlock {
   border-top: 1px solid var(--border-light);
   display: flex;
   flex-direction: column;
-  gap: 9px;
-  padding-top: 14px;
+  gap: 6px;
+  padding-top: 10px;
 }
 
 .workflowBlock p {
   color: var(--text-primary);
-  font-size: 15px;
+  font-size: 13px;
   font-weight: 600;
-  line-height: 1.55;
+  line-height: 1.45;
 }
 
 .reminderList {
   display: grid;
-  gap: 8px;
+  gap: 6px;
 }
 
 .reminderItem {
   border-left: 2px solid var(--accent);
   color: var(--text-primary);
-  font-size: 15px;
-  line-height: 1.5;
-  padding-left: 10px;
+  font-size: 13px;
+  line-height: 1.45;
+  padding-left: 8px;
 }
 
 .transitionList {
   counter-reset: transition;
   display: grid;
-  gap: 10px;
+  gap: 8px;
 }
 
 .transitionList li {
   color: var(--text-primary);
   counter-increment: transition;
   display: grid;
-  font-size: 15px;
-  gap: 10px;
-  grid-template-columns: 24px 1fr;
-  line-height: 1.5;
+  font-size: 13px;
+  gap: 8px;
+  grid-template-columns: 20px 1fr;
+  line-height: 1.45;
 }
 
 .transitionList li::before {
@@ -501,32 +493,32 @@
   color: var(--text-secondary);
   content: counter(transition);
   display: flex;
-  font-size: 12px;
+  font-size: 11px;
   font-weight: 700;
-  height: 24px;
+  height: 20px;
   justify-content: center;
   line-height: 1;
-  width: 24px;
+  width: 20px;
 }
 
 /* Evidence Grid */
 .evidenceGrid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(min(320px, 100%), 1fr));
-  gap: 16px;
+  gap: 10px;
 }
 
 .evidenceCard {
-  min-height: 230px;
   background-color: var(--bg-card);
   border: 1px solid var(--border-light);
-  border-radius: 8px;
-  padding: 18px 20px;
+  border-radius: 6px;
+  padding: 12px;
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 8px;
   box-shadow: var(--shadow-card);
   transition: border-color 150ms ease, box-shadow 150ms ease, transform 150ms ease;
+  min-height: auto;
 }
 
 .evidenceCard:hover {
@@ -539,54 +531,54 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 10px;
+  gap: 8px;
 }
 
 .evidenceKind {
   width: fit-content;
   max-width: 100%;
-  border: 1px solid rgba(45, 90, 142, 0.16);
-  border-radius: 6px;
+  border: 1px solid rgba(37, 99, 235, 0.15);
+  border-radius: 4px;
   background-color: var(--accent-light);
   color: var(--accent);
-  font-size: 13px;
+  font-size: 11px;
   font-weight: 700;
   letter-spacing: 0.08em;
   line-height: 1.3;
-  padding: 5px 8px;
+  padding: 3px 6px;
   text-transform: uppercase;
 }
 
 .evidenceAction {
   color: var(--text-tertiary);
-  font-size: 13px;
+  font-size: 11px;
   font-weight: 600;
 }
 
 .evidenceTitle {
-  font-size: 18px;
+  font-size: 14px;
   font-weight: 600;
   color: var(--text-primary);
-  line-height: 1.4;
+  line-height: 1.35;
 }
 
 .evidenceDesc {
-  font-size: 15px;
+  font-size: 13px;
   color: var(--text-secondary);
-  line-height: 1.55;
+  line-height: 1.45;
 }
 
 .evidenceMeta {
-  font-size: 15px;
+  font-size: 12px;
   color: var(--text-primary);
-  line-height: 1.45;
+  line-height: 1.4;
   margin-top: auto;
 }
 
 .traceDetails {
   background-color: var(--bg-card);
   border: 1px solid var(--border-light);
-  border-radius: 8px;
+  border-radius: 6px;
   overflow: hidden;
 }
 
@@ -595,8 +587,8 @@
   cursor: pointer;
   display: flex;
   align-items: center;
-  gap: 10px;
-  padding: 12px 16px;
+  gap: 8px;
+  padding: 10px 14px;
   background-color: var(--bg-secondary);
   user-select: none;
 }
@@ -606,8 +598,8 @@
 }
 
 .traceChevron {
-  width: 10px;
-  height: 10px;
+  width: 8px;
+  height: 8px;
   border-right: 2px solid var(--text-tertiary);
   border-bottom: 2px solid var(--text-tertiary);
   transform: rotate(-45deg);
@@ -619,14 +611,14 @@
 }
 
 .traceSummaryText {
-  font-size: 14px;
+  font-size: 13px;
   font-weight: 600;
   color: var(--text-primary);
 }
 
 .traceSummaryHint {
   margin-left: auto;
-  font-size: 13px;
+  font-size: 12px;
   color: var(--text-tertiary);
 }
 
@@ -637,7 +629,7 @@
 .closeBtn {
   background: none;
   border: none;
-  font-size: 24px;
+  font-size: 20px;
   color: var(--text-secondary);
   cursor: pointer;
   line-height: 1;
@@ -647,11 +639,10 @@
   color: var(--text-primary);
 }
 
-
 /* Minimal Ask Bar (Search-like) */
 .askBarContainer {
   flex: 0 0 auto;
-  padding: 16px 32px 20px;
+  padding: 8px 20px 12px;
   display: flex;
   justify-content: center;
   background: linear-gradient(transparent, var(--bg-primary) 28%);
@@ -662,11 +653,11 @@
 .askForm {
   display: flex;
   background-color: var(--bg-card);
-  border-radius: 40px;
+  border-radius: 24px;
   box-shadow: var(--shadow-elevated);
   width: 100%;
   max-width: 600px;
-  height: 56px;
+  height: 44px;
   overflow: hidden;
   border: 1px solid var(--border-light);
   align-items: stretch;
@@ -677,9 +668,9 @@
   flex: 1;
   border: none;
   background: transparent;
-  padding: 0 24px;
+  padding: 0 16px;
   font-family: inherit;
-  font-size: 16px;
+  font-size: 14px;
   color: var(--text-primary);
   outline: none;
 }
@@ -691,13 +682,13 @@
 .askSubmitBtn {
   background-color: var(--bg-dark);
   color: var(--text-inverse);
-  width: 64px;
+  width: 48px;
   border: none;
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
-  border-radius: 0 40px 40px 0;
+  border-radius: 0 24px 24px 0;
   transition: background-color 0.2s;
 }
 
@@ -712,13 +703,13 @@
 
 .askChatDock {
   position: fixed;
-  top: 70px;
+  top: 52px;
   right: 0;
   bottom: 0;
   width: 420px;
   background-color: var(--bg-card);
   border-left: 1px solid var(--border);
-  box-shadow: -8px 0 28px rgba(26,25,22,0.12);
+  box-shadow: -8px 0 28px rgba(15, 23, 42, 0.08);
   display: flex;
   flex-direction: column;
   overflow: hidden;
@@ -729,35 +720,35 @@
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
-  gap: 16px;
-  padding: 20px 20px 16px;
+  gap: 12px;
+  padding: 14px 16px;
   border-bottom: 1px solid var(--border-light);
   background-color: var(--bg-secondary);
 }
 
 .chatHeader h3 {
   margin: 0;
-  font-size: 16px;
+  font-size: 14px;
   color: var(--text-primary);
 }
 
 .chatHeader p {
   color: var(--text-secondary);
-  font-size: 13px;
+  font-size: 12px;
   margin-top: 2px;
 }
 
 .chatHeaderActions {
   align-items: center;
   display: flex;
-  gap: 8px;
+  gap: 6px;
 }
 
 .clearChatBtn {
   color: var(--text-secondary);
-  font-size: 13px;
+  font-size: 12px;
   font-weight: 500;
-  padding: 4px 8px;
+  padding: 2px 6px;
 }
 
 .clearChatBtn:hover {
@@ -766,52 +757,52 @@
 
 .chatMessages {
   flex: 1;
-  padding: 20px;
+  padding: 16px;
   display: flex;
   flex-direction: column;
-  gap: 18px;
+  gap: 12px;
   overflow-y: auto;
 }
 
 .messagePair {
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 8px;
 }
 
 .questionBlock {
   background-color: var(--bg-secondary);
-  padding: 14px;
-  border-radius: 8px;
+  padding: 10px 12px;
+  border-radius: 6px;
   align-self: flex-end;
   max-width: 88%;
 }
 
 .qLabel {
-  font-size: 12px;
+  font-size: 11px;
   text-transform: uppercase;
   color: var(--text-tertiary);
-  margin-bottom: 4px;
+  margin-bottom: 2px;
 }
 
 .qText {
-  font-size: 16px;
+  font-size: 14px;
   color: var(--text-primary);
 }
 
 .answerBlock {
   background-color: var(--bg-primary);
-  padding: 14px;
-  border-radius: 8px;
+  padding: 10px 12px;
+  border-radius: 6px;
   border: 1px solid var(--border-light);
   align-self: flex-start;
   max-width: 94%;
 }
 
 .aText {
-  font-size: 16px;
+  font-size: 14px;
   color: var(--text-primary);
-  line-height: 1.6;
+  line-height: 1.5;
   white-space: pre-wrap;
 }
 
@@ -820,33 +811,33 @@
 }
 
 .sourcesLine {
-  font-size: 13px;
+  font-size: 12px;
   color: var(--text-tertiary);
-  margin-top: 12px;
+  margin-top: 8px;
   border-top: 1px solid var(--border-light);
-  padding-top: 8px;
+  padding-top: 6px;
 }
 
 .thinkingText {
   color: var(--text-tertiary);
   font-style: italic;
-  font-size: 14px;
+  font-size: 13px;
   align-self: flex-start;
 }
 
 .emptyChat {
   background-color: var(--bg-primary);
   border: 1px solid var(--border-light);
-  border-radius: 8px;
+  border-radius: 6px;
   color: var(--text-secondary);
-  font-size: 15px;
-  line-height: 1.5;
-  padding: 14px;
+  font-size: 13px;
+  line-height: 1.45;
+  padding: 10px 12px;
 }
 
 .chatDockInput {
   background: linear-gradient(transparent, var(--bg-card) 28%);
-  padding: 18px 16px 20px;
+  padding: 12px 14px;
 }
 
 .chatDockInput .askForm {
@@ -856,12 +847,12 @@
 
 @media (max-width: 1199px) {
   .askBarContainer {
-    padding-left: 20px;
-    padding-right: 20px;
+    padding-left: 16px;
+    padding-right: 16px;
   }
 
   .briefingTab.chatOpen {
-    padding-right: 32px;
+    padding-right: 0;
   }
 
   .askChatDock {
@@ -870,42 +861,26 @@
 }
 
 @media (max-width: 1040px) {
-  .overview,
   .prepLayout {
     grid-template-columns: 1fr;
   }
 
-  .signalGrid {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
+  .metricsStrip {
+    flex-direction: row;
+    justify-content: flex-start;
   }
 }
 
 @media (max-width: 720px) {
   .content {
-    gap: 24px;
-    padding: 24px 20px 48px;
-  }
-
-  .briefingTab.chatOpen {
-    padding-right: 0;
-  }
-
-  .overviewMain h2 {
-    font-size: 26px;
-  }
-
-  .signalGrid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-
-  .signalCell {
-    min-height: 82px;
+    gap: 12px;
+    padding: 12px 14px 40px;
   }
 
   .drugHeader {
     align-items: stretch;
     flex-direction: column;
-    gap: 10px;
+    gap: 8px;
   }
 
   .drugHeader > span {
@@ -914,26 +889,27 @@
 
   .pointCard {
     flex-direction: column;
+    gap: 6px;
   }
 
   .evidenceCard,
   .sideSection {
-    padding: 16px;
+    padding: 10px 12px;
   }
 
   .askBarContainer {
-    padding-bottom: 16px;
+    padding-bottom: 12px;
   }
 
   .askForm {
-    height: 52px;
+    height: 40px;
   }
 
   .askInput {
-    padding: 0 16px;
+    padding: 0 12px;
   }
 
   .askSubmitBtn {
-    width: 56px;
+    width: 40px;
   }
 }
