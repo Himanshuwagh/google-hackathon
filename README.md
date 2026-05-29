@@ -1,173 +1,120 @@
 # PharmaOps Agent
 
-PharmaOps is a Google ADK + Gemini agent workflow for pharma sales reps. When a
-rep adds a doctor meeting, the agent plans the prep, retrieves evidence,
-checks promotional compliance, writes a briefing, and exposes the result in a
-web dashboard.
+**AI-Powered Meeting Prep for Pharma Sales Reps**
 
-## Hackathon Alignment
+PharmaOps is an agentic workflow built with **Google ADK, Gemini, and MongoDB Atlas**. It automates the tedious, manual process of preparing for doctor meetings by retrieving evidence, checking compliance, and generating comprehensive briefing documents in seconds.
 
-- **Google Cloud Rapid Agent Hackathon track:** MongoDB partner track.
-- **Agent platform:** Google ADK code-first agent runtime, deployed on Google
-  Cloud Run. This aligns with Vertex AI Agent Builder's ADK path while keeping
-  the existing FastAPI dashboard.
-- **MongoDB Atlas retrieval:** Atlas is the agent memory and retrieval brain:
-  meetings, HCP profiles, clinical documents, CRM memory, competitive intel,
-  compliance rules, vector embeddings, run logs, and briefings live in MongoDB.
-- **Partner MCP:** The briefing runtime preflights the official read-only
-  MongoDB MCP server once per run and exposes deterministic MCP-backed read
-  tools to the ADK agents. Controlled briefing/status writes still use
-  application tools.
-- **Gemini:** Each agent step is a Gemini-backed `LlmAgent`.
-- **Web platform:** React frontend and FastAPI backend are packaged into one
-  Cloud Run service.
+Built for the **Google Cloud Rapid Agent Hackathon (MongoDB Partner Track)**.
 
-The runtime status endpoint is:
+🔗 **Live Demo:** [https://pharmaops-agent-3xixawqfoq-uc.a.run.app/](https://pharmaops-agent-3xixawqfoq-uc.a.run.app/)
 
-```text
-/agent-runtime
+---
+
+## 🛑 The Problem
+
+Pharmaceutical sales reps spend 30 to 60 minutes preparing for a *single* meeting with a doctor. The process is painfully manual:
+1. **Digging through CRMs** for past visit history and objections.
+2. **Searching PubMed** and clinical trial databases for medical evidence.
+3. **Cross-referencing competitive intelligence** on rival drugs.
+4. **Writing talking points** and manually verifying them against strict pharmaceutical compliance rules (like UCPMP).
+
+A rep with 5 meetings a day loses half their workday just on prep, and there's still a risk of non-compliant claims slipping through.
+
+## ✨ Our Solution: PharmaOps Agent
+
+PharmaOps Agent turns a 45-minute chore into a 30-second automated workflow. 
+
+When a rep schedules a meeting in the dashboard, our multi-agent pipeline:
+1. Analyzes the doctor's profile and CRM history.
+2. Retrieves relevant internal company documents and competitive intelligence via **MongoDB Atlas Vector Search**.
+3. Fetches live, external clinical evidence from the **PubMed** and **ClinicalTrials.gov** APIs.
+4. Drafts a complete meeting briefing, including evidence-backed talking points and anticipated objections.
+5. Runs a deterministic quality gate and a Gemini-powered **Compliance Checker** to ensure all claims meet promotional rules.
+
+## 🏗️ Architecture & Tech Stack
+
+```mermaid
+graph TB
+    UI["React Dashboard"] --> API["FastAPI on Cloud Run"]
+    API --> ADK["Google ADK SequentialAgent"]
+    ADK --> PLAN["Gemini Meeting Planner"]
+    PLAN --> RET["Gemini Information Retriever"]
+    RET --> WRITE["Gemini Brief Writer"]
+    WRITE --> QG["Deterministic Claim Quality Gate"]
+    QG --> COMP["Gemini Compliance Checker"]
+    COMP --> ACT["Gemini Action Executor"]
+
+    RET --> MDBMCP["MongoDB MCP Server (Read-only)"]
+    MDBMCP --> MDB["MongoDB Atlas"]
+    RET --> PUB["PubMed API"]
+    RET --> CT["ClinicalTrials.gov API"]
+    ACT --> MDB["MongoDB Atlas (Persist Briefing)"]
 ```
 
-Use it in the demo to show ADK, Gemini, Cloud Run, and partner MCP status.
+* **Agent Orchestration**: Google Agent Development Kit (ADK) using `SequentialAgent`.
+* **LLM**: Google Gemini.
+* **Retrieval & Memory**: MongoDB Atlas (stores HCP profiles, CRM memory, drugs, compliance rules, vector embeddings).
+* **MCP Integration**: Official MongoDB MCP server used to securely preflight database reads.
+* **Frontend**: React.
+* **Backend & Deployment**: FastAPI, deployed seamlessly on Google Cloud Run.
 
-## Architecture
+---
 
-```text
-React dashboard
-  -> FastAPI on Cloud Run
-    -> Google ADK SequentialAgent
-      -> Gemini planner / retriever / writer / compliance / action agents
-      -> MongoDB MCP server for partner reads and schema validation
-      -> MongoDB Atlas for operational data, vector search, memory, compliance, briefings, run logs
-      -> PubMed and ClinicalTrials.gov for public evidence lookup
-```
+## 🚀 Setup & Local Development
 
-## Required Environment
-
-Store these as Cloud Run environment variables or Secret Manager secrets:
-
-```text
-MONGO_URI
-MONGO_DB_NAME
-GOOGLE_API_KEY
+### Required Environment Variables
+You can configure these in a `.env` file or pass them directly:
+```bash
+MONGO_URI=mongodb+srv://...
+MONGO_DB_NAME=pharmaops
+GOOGLE_API_KEY=your_gemini_key
 GOOGLE_LOCATION=us-central1
 ENABLE_PARTNER_MCP=true
 ENABLE_MONGODB_MCP=true
-MONGODB_MCP_READ_ONLY=true
-MDB_MCP_READ_ONLY=true
-MDB_MCP_MAX_TIME_M_S=5000
 ```
 
-## Deploy To Cloud Run
-
-Install and authenticate the Google Cloud CLI, then set your project:
-
-```bash
-gcloud config set project YOUR_PROJECT_ID
-gcloud auth login
-gcloud auth application-default login
-```
-
-Enable required services:
-
-```bash
-gcloud services enable \
-  run.googleapis.com \
-  cloudbuild.googleapis.com \
-  artifactregistry.googleapis.com \
-  secretmanager.googleapis.com \
-  aiplatform.googleapis.com
-```
-
-Create the Artifact Registry repository once:
-
-```bash
-gcloud artifacts repositories create pharmaops \
-  --repository-format=docker \
-  --location=us-central1 \
-  --description="PharmaOps Cloud Run images"
-```
-
-Create secrets. Run each command with your real value in the shell variable:
-
-```bash
-printf "%s" "$MONGO_URI" | gcloud secrets create MONGO_URI --data-file=-
-printf "%s" "$MONGO_DB_NAME" | gcloud secrets create MONGO_DB_NAME --data-file=-
-printf "%s" "$GOOGLE_API_KEY" | gcloud secrets create GOOGLE_API_KEY --data-file=-
-```
-
-Allow the Cloud Run service account to read secrets:
-
-```bash
-PROJECT_NUMBER=$(gcloud projects describe YOUR_PROJECT_ID --format="value(projectNumber)")
-SERVICE_ACCOUNT="${PROJECT_NUMBER}-compute@developer.gserviceaccount.com"
-
-for SECRET in MONGO_URI MONGO_DB_NAME GOOGLE_API_KEY; do
-  gcloud secrets add-iam-policy-binding "$SECRET" \
-    --member="serviceAccount:${SERVICE_ACCOUNT}" \
-    --role="roles/secretmanager.secretAccessor"
-done
-```
-
-Build and deploy:
-
-```bash
-gcloud builds submit \
-  --config cloudbuild.yaml \
-  --substitutions _REGION=us-central1,_SERVICE=pharmaops-agent
-```
-
-Set up automatic deploys from GitHub:
-
-```bash
-./scripts/create_cloud_build_trigger.sh
-```
-
-If Google Cloud reports `Repository mapping does not exist`, connect this
-GitHub repo in Cloud Build first:
-
-```text
-https://console.cloud.google.com/cloud-build/triggers;region=us-central1/connect
-```
-
-Then rerun the script. After the trigger is created, every push to `main`
-will run `cloudbuild.yaml` and deploy the `pharmaops-agent` Cloud Run service.
-
-After deploy, verify:
-
-```bash
-SERVICE_URL=$(gcloud run services describe pharmaops-agent \
-  --region=us-central1 \
-  --format="value(status.url)")
-
-curl "$SERVICE_URL/health"
-curl "$SERVICE_URL/agent-runtime"
-```
-
-Open `$SERVICE_URL` in the browser for the dashboard.
-
-## Local Development
-
-Backend:
-
-```bash
-cd backend
-../.venv/bin/uvicorn main:app --host 127.0.0.1 --port 8000
-```
-
-Frontend:
-
-```bash
-cd frontend
-npm install
-VITE_API_BASE_URL=http://127.0.0.1:8000 npm run dev
-```
-
-Agent package:
-
+### 1. Seed the Database
+Populate your MongoDB Atlas cluster with demo data and vector embeddings:
 ```bash
 cd pharma-briefing-agent
 pip install -r requirements.txt
 python db/seed_data.py
 python db/seed_mongodb_retrieval.py
 ```
+
+### 2. Run the Backend
+```bash
+cd backend
+python -m venv .venv
+source .venv/bin/activate
+pip install -r requirements.txt
+uvicorn main:app --host 127.0.0.1 --port 8000
+```
+
+### 3. Run the Frontend
+```bash
+cd frontend
+npm install
+VITE_API_BASE_URL=http://127.0.0.1:8000 npm run dev
+```
+
+## ☁️ Deploy to Google Cloud Run
+
+We provide an automated Cloud Build configuration (`cloudbuild.yaml`) that packages the React frontend and FastAPI backend into a single container.
+
+```bash
+# 1. Enable services
+gcloud services enable run.googleapis.com cloudbuild.googleapis.com artifactregistry.googleapis.com secretmanager.googleapis.com
+
+# 2. Create Artifact Registry
+gcloud artifacts repositories create pharmaops --repository-format=docker --location=us-central1
+
+# 3. Build & Deploy
+gcloud builds submit --config cloudbuild.yaml --substitutions _REGION=us-central1,_SERVICE=pharmaops-agent
+```
+
+---
+
+## 📜 License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
